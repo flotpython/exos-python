@@ -1,4 +1,4 @@
-# this is the source for the table of contents 
+# this is the source for the table of contents
 # of the flotpython-exos-python book
 format: jb-book
 root: README
@@ -6,71 +6,71 @@ parts:
 - caption: exercices basiques
   chapters:
   # str, ints, binary computations
-  - file: python-exos/basic/EXO-ipsplit-nb
+  - file: exos/basic/EXO-ipsplit-nb
   # lists, side effects
-  - file: python-exos/basic/EXO-skimlist-readme-nb
+  - file: exos/basic/EXO-skimlist-readme-nb
   # strs and formatting
-  - file: python-exos/basic/EXO-invoice-nb
+  - file: exos/basic/EXO-invoice-nb
   # dicts
-  - file: python-exos/basic/README-agenda-nb
+  - file: exos/basic/README-agenda-nb
   # basic counts, requires dicts
-  - file: python-exos/basic/README-adnpercents-nb
+  - file: exos/basic/README-adnpercents-nb
   # filesystem / pathlib
-  - file: python-exos/basic/EXO-files-sortby-nb
-  - file: python-exos/basic/EXO-randomdate-readme-nb
-  - file: python-exos/basic/EXO-wordcounts-readme-nb
+  - file: exos/basic/EXO-files-sortby-nb
+  - file: exos/basic/EXO-randomdate-readme-nb
+  - file: exos/basic/EXO-wordcounts-readme-nb
 - caption: howtos
   chapters:
-  - file: python-howtos/encodings/HOWTO-encodings-nb
-  - file: python-howtos/requests/HOWTO-requests-nb
-  - file: python-howtos/adnwalk/HOWTO-adnwalk-nb
-  - file: python-howtos/subprocesses/HOWTO-subprocesses-nb
+  - file: howtos/encodings/HOWTO-encodings-nb
+  - file: howtos/requests/HOWTO-requests-nb
+  - file: howtos/adnwalk/HOWTO-adnwalk-nb
+  - file: howtos/subprocesses/HOWTO-subprocesses-nb
 - caption: TPs basiques
   chapters:
   # ascii, utf8, binary, as well as various file formats
   # like pickle, json, yaml, csv
-  - file: python-tps/files-formats/README-files-formats-nb
-  - file: python-tps/watson/README-watson-nb
+  - file: tps/files-formats/README-files-formats-nb
+  - file: tps/watson/README-watson-nb
   # using dicts for indexing and sets for creating groups
-  - file: python-tps/parse-people/README-parse-people-nb
+  - file: tps/parse-people/README-parse-people-nb
   # using dicts for structs and for indexing
-  - file: python-tps/indexing-structs/README-indexing-structs-nb
+  - file: tps/indexing-structs/README-indexing-structs-nb
   # itertools
-  - file: python-tps/queens/README-queens-nb
+  - file: tps/queens/README-queens-nb
 - caption: TPs classes
   chapters:
-  - glob: python-tps/students-grades/README*
-  - glob: python-tps/auctions/README*
-  - glob: python-tps/unicode-boxes/README*
-  - glob: python-tps/expressions-lang/README*
+  - glob: tps/students-grades/README*
+  - glob: tps/auctions/README*
+  - glob: tps/unicode-boxes/README*
+  - glob: tps/expressions-lang/README*
 - caption: TPs graphes
   chapters:
-  - glob: python-tps/graph-bfs-dfs/README*
-  - glob: python-tps/graph-shortest-path/README*
-  - file: python-tps/metro/README-metro-nb
-  - glob: python-tps/pagerank-thrones/README*
-  - glob: python-tps/puzzle8/README-*
+  - glob: tps/graph-bfs-dfs/README*
+  - glob: tps/graph-shortest-path/README*
+  - file: tps/metro/README-metro-nb
+  - glob: tps/pagerank-thrones/README*
+  - glob: tps/puzzle8/README-*
 - caption: TPs visu & games
   chapters:
-  - glob: python-tps/snake/README*
+  - glob: tps/snake/README*
   # unfinished business
   # - "python-tps/flappybird-wip/README*.md"
-  - glob: python-tps/boids/README*
-  - glob: python-tps/chatbot/README*
-  - glob: python-tps/redis/README*
-  - glob: python-tps/motus/README*
-  - glob: python-tps/dobble/README*
+  - glob: tps/boids/README*
+  - glob: tps/chatbot/README*
+  - glob: tps/redis/README*
+  - glob: tps/motus/README*
+  - glob: tps/dobble/README*
 - caption: lecture de code
   chapters:
-  - file: python-reading/snake/snake
+  - file: reading/snake/snake
 - caption: "avanc\xE9s"
   chapters:
-  - file: python-exos/advanced/EXO-attributes-proxy-nb
-  - file: python-exos/advanced/EXO-attributes-dynprop-nb
+  - file: exos/advanced/EXO-attributes-proxy-nb
+  - file: exos/advanced/EXO-attributes-dynprop-nb
 - caption: sample code
   chapters:
-  - glob: python-samples/*
+  - glob: samples/*
 - caption: WIP
   chapters:
-  - file: python-tps/subprocesses-howto
-  - glob: python-tps/webscraper-wip/README*
+  - file: tps/subprocesses-howto
+  - glob: tps/webscraper-wip/README*
