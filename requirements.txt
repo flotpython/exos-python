@@ -3,26 +3,19 @@
 numpy
 pandas
 matplotlib
-mpld3
-bokeh
-jupyter-bokeh
-plotly
-vispy
-seaborn
-pygal
-networkx
-autograd
-k3d
+# mpld3
+# bokeh
+# jupyter-bokeh
+
+# seaborn
+# pygal
+# networkx
+# autograd
+# k3d
 graphviz
-geopandas
-# problematic
-# keplergl
-scikit-learn
 folium
-vega_datasets
-dash
 streamlit
-gradio
+# gradio
 
 # tooling
 jupyterlab

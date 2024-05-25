@@ -12,8 +12,6 @@ RUN true \
  && pip install jupyterlab-courselevels \
  && pip install nbautoeval ipythontutor \
  && pip install numpy pandas matplotlib ipywidgets ipympl \
- && pip install mpld3 bokeh jupyter-bokeh plotly folium vispy seaborn pygal networkx mypy autograd k3d \
+ && pip install folium \
  && apt-get install -y graphviz && pip install graphviz \
- && pip install geopandas keplergl \
- && pip install scikit-learn \
  && true
