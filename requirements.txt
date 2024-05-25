@@ -1,0 +1,44 @@
+# contents
+
+numpy
+pandas
+matplotlib
+mpld3
+bokeh
+jupyter-bokeh
+plotly
+vispy
+seaborn
+pygal
+networkx
+autograd
+k3d
+graphviz
+geopandas
+# problematic
+# keplergl
+scikit-learn
+folium
+vega_datasets
+dash
+streamlit
+gradio
+
+# tooling
+jupyterlab
+jupytext
+jupyterlab-myst
+ipywidgets
+ipympl
+# for some unknown reason, without this
+# I am getting version jupyterlab-widgets==1.1.5
+# which breaks interactive plots
+jupyterlab-widgets>=3.0
+jupyterlab-courselevels
+jupyterlab-gridwidth
+
+# for vs-code
+ipykernel
+
+# for updating nbhosting toc from jupyter book
+ruamel.yaml

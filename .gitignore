@@ -1,0 +1,10 @@
+.ipynb_checkpoints/
+__pycache__/
+.vscode/
+.macnb/
+_build
+WIP
+teacher
+file*xx
+book-python/
+book-ds/

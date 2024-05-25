@@ -1,0 +1,3 @@
+POSITIVE bien super content contente
+NEGATIVE mal triste marre
+EXIT bye quit exit

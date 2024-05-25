@@ -1,0 +1,25 @@
+/*
+  jlab-courselevels
+  for jupyter-book
+  these will work fine with code cells
+  however markdown cells do not produce
+  are treated differently by jupyter-book
+  and as of now tis approach won't work
+  with markdown cells
+*/
+.cell.tag_level_basic {
+    background-color: #c7e8c7;
+    padding: 10px 0px;
+}
+.cell.tag_level_intermediate {
+    background-color: #cfcfe9;
+    padding: 10px 0px;
+}
+.cell.tag_level_advanced {
+    background-color: #f7d1d1;
+    padding: 10px 0px;
+}
+.cell.tag_framed_cell {
+    border: 3px ridge #400;
+    padding: 10px 0px;
+}
