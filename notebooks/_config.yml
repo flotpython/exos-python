@@ -34,6 +34,7 @@ execute:
   exclude_patterns:
   # consider only filenames that start with an uppercase
     - "[a-z]**/[a-z]*"
+    - "**/.teacher/[a-z]*"
 
 parse:
   myst_enable_extensions:
