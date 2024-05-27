@@ -13,6 +13,10 @@ kernelspec:
 
 # le jeu de dobble
 
++++
+
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-dobble.zip>`
+
 +++ {"cell_style": "split"}
 
 Le sujet ici consiste à analyser le contenu du jeu 'dobble'.
