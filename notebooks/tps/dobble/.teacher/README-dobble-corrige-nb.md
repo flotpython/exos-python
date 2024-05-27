@@ -54,23 +54,39 @@ une fois que vous avez construit vos solutions pour ces 3 valeurs de N, écrivez
 
 **notes**
 
+* je vous impose de créer 3 classes pour représenter respectivement un symbole, une carte, et le paquet de cartes
 * il vous faut imaginer un format pour entrer vos solutions; allez au + simple, je vous recommande quelque chose dans le genre de une ligne par carte
 * pour ces premiers essais, je vous conseille de prendre des nombres comme symboles
-* je vous impose de créer 3 classes pour représenter respectivement un symbole, une carte, et le paquet de cartes
+* par exemple, voici une façon possible de représenter, dans un fichier texte, une solution pour N=3  
+  votre code est censé *parser* un fichier de ce genre (attention, dans la suite on utilisera du texte plutôt que des nombres)
+  ```{literalinclude} data/cards03.txt
+  ```
 
 ```{code-cell} ipython3
 # quelque chose comme ça
+# à vous de rendre ceci utilisable
 
 from pathlib import Path
 
 
 class Symbol:
+    """
+    chacun des symboles dessinés sur les cartes
+    """
     pass
+
 
 class Card:
+    """
+    le modèle pour chaque carte du jeu
+    """
     pass
 
+
 class Deck:
+    """
+    le paquet de cartes
+    """
     def __init__(self, filename):
         pass
     def check_unique(self):
@@ -84,10 +100,14 @@ class Deck:
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-begin
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 SHOW_FREQUENCIES = False
 
 # un symbole est représenté par une chaine
@@ -120,6 +140,8 @@ class Symbol:
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # une carte est un ensemble de symboles
 class Card(set):
     """
@@ -142,6 +164,8 @@ class Card(set):
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 from itertools import combinations
 
 class Deck:
@@ -198,21 +222,26 @@ class Deck:
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-end
 ```
 
 ```{code-cell} ipython3
 # should return True
+
 Deck("data/cards02.txt").check_unique()
 ```
 
 ```{code-cell} ipython3
 # should return True
+
 Deck("data/cards03.txt").check_unique()
 ```
 
 ```{code-cell} ipython3
 # should return False and print an error message
+
 Deck("data/cards03-broken.txt").check_unique()
 ```
 
@@ -225,6 +254,8 @@ combien trouvez-vous de cartes et de symboles pour ces petites valeurs de N ?
 ajoutez les méthodes qui vont bien dans vos classes
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-cell
 
 # of course it's simpler to just edit the classes above
@@ -259,6 +290,8 @@ def conjecture(deck):
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-cell
 
 # n + (n-1)**2 = n**2 -n +1
@@ -300,16 +333,24 @@ GAMES = G8, G10 = (Deck(f"data/game{i:02}.txt") for i in (8, 10))
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-begin
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 conjecture(G8)
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 conjecture(G10)
 ```
+
++++ {"tags": ["level_basic"]}
 
 s'il y a effectivement dualité, la propriété de départ:
 
@@ -322,6 +363,8 @@ se traduit dans le dual en
 (dans tous les cas, il ne peut pas être sur deux cartes)
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # on cherche les couples de symboles qui n'apparaissent pas du tout
 def missing_symbol_pairs(deck):
     for (s1, s2) in combinations(deck.symbols, r=2):
@@ -332,26 +375,38 @@ def missing_symbol_pairs(deck):
 Deck.missing_symbol_pairs = missing_symbol_pairs
 ```
 
++++ {"tags": ["level_basic"]}
+
 ### game 08 has 2 missing cards
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 Deck("data/game08.txt").missing_symbol_pairs()
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # which allows us to fill the game with 2 new cards
 G8_complete = Deck("data/game08-complete.txt")
 G8_complete.missing_symbol_pairs()
 conjecture(G8_complete)
 ```
 
++++ {"tags": ["level_basic"]}
+
 ### game 10 has 3 missing cards
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 Deck("data/game10.txt").missing_symbol_pairs()
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # which allows us to fill the game with 3 new cards
 G10_complete = Deck("data/game10-complete.txt")
 G10_complete.missing_symbol_pairs()
@@ -359,6 +414,8 @@ conjecture(G10_complete)
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-end
 ```
 
@@ -389,7 +446,7 @@ sauriez-vous aménager votre code pour produire un diagramme similaire avec `dat
 import matplotlib.pyplot as plt
 # with ipympl (which needs to be pip install'ed) 
 # we can run on jupyter or vscode
-%matplotlib ipympl
+# %matplotlib ipympl
 ```
 
 ```{code-cell} ipython3
@@ -397,10 +454,14 @@ import matplotlib.pyplot as plt
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-begin
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # would need to be extended if n > 6
 
 def is_in(n, card):
@@ -448,6 +509,8 @@ def color(deck, x, y, debug=False):
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # here again we are just adding methods in the Deck class
 
 def expected(self):
@@ -511,64 +574,89 @@ def draw_map(self, figsize=(8, 8)):
         plt.plot(xs([step, step]),
                  ys([-0.5, self.expected()-0.5]),
                  'k-', linewidth=0.5)
-    # save as svg
-    plt.savefig(Path(self.filename).with_suffix('.svg'))
+    # save as svg, but in the media/ folder
+    output = path(self.filename.replace("data/", "media/")).with_suffix('.svg'))
+    plt.savefig(output)
     
 Deck.draw_map = draw_map    
 ```
 
 ```{code-cell} ipython3
+:tags: [level_basic]
+
 # prune-end
 ```
 
 ```{code-cell} ipython3
-# puis
+# une fois que c'est fait vous pouvez appeler
+
+# Deck("data/cards04.txt").draw_map()
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell
+
+Deck("data/cards04.txt").draw_map()
+```
+
+```{code-cell} ipython3
+# ou encore
+
+# Deck("data/cards06.txt").draw_map()
+```
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-cell
+
 Deck("data/cards06.txt").draw_map()
 ```
 
----
-
-```{code-cell} ipython3
-# prune-begin
-```
-
-## trash
-
-+++
+pour information vous devriez obtenir quelque chose comme ceci
 
 ```{image} media/cards04.svg
 :align: center
+:width: 300px
+```
+
+```{image} media/cards06.svg
+:align: center
+:width: 400px
 ```
 
 ```{code-cell} ipython3
-# la liste des symboles, un peu mise en forme
-columns = 4
-colwidth = 16
+:tags: [level_basic]
 
-def list_symbols(deck):
-    for i, symbol in enumerate(deck.symbols):
-        print(f"{symbol:>{colwidth}s} [{symbol.frequency:02}]", end="")
-        if (i+1) % columns == 0:
-            print()
-Deck.list_symbols = list_symbols
+# prune-begin
 
-Deck("data/game08.txt").list_symbols()
+# à terminer un jour...
 ```
+
++++ {"tags": ["level_basic"]}
 
 ## produire automatiquement un jeu
 
-+++
++++ {"tags": ["level_basic"]}
 
 TODO
 
 écrire un code qui produise automatiquement un jeu pour N=7, soit de 43 cartes
 
-+++
++++ {"tags": ["level_basic"]}
 
 ## retrouver l'ordre
 
-+++
++++ {"tags": ["level_basic"]}
 
 TODO
 
 est-ce que c'est faisable de prendre un jeu dans le désordre (genre les deux `game*.txt`) et de réordonner les cartes et symboles pour que le dessin ressemble à ce qu'on vient de voir pour N=5 ou N=6
+
+```{code-cell} ipython3
+:tags: [level_basic]
+
+# prune-end
+```

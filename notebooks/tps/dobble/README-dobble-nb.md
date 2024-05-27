@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.1
+    jupytext_version: 1.16.2
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -52,23 +52,39 @@ une fois que vous avez construit vos solutions pour ces 3 valeurs de N, écrivez
 
 **notes**
 
+* je vous impose de créer 3 classes pour représenter respectivement un symbole, une carte, et le paquet de cartes
 * il vous faut imaginer un format pour entrer vos solutions; allez au + simple, je vous recommande quelque chose dans le genre de une ligne par carte
 * pour ces premiers essais, je vous conseille de prendre des nombres comme symboles
-* je vous impose de créer 3 classes pour représenter respectivement un symbole, une carte, et le paquet de cartes
+* par exemple, voici une façon possible de représenter, dans un fichier texte, une solution pour N=3  
+  votre code est censé *parser* un fichier de ce genre (attention, dans la suite on utilisera du texte plutôt que des nombres)
+  ```{literalinclude} data/cards03.txt
+  ```
 
 ```{code-cell} ipython3
 # quelque chose comme ça
+# à vous de rendre ceci utilisable
 
 from pathlib import Path
 
 
 class Symbol:
+    """
+    chacun des symboles dessinés sur les cartes
+    """
     pass
+
 
 class Card:
+    """
+    le modèle pour chaque carte du jeu
+    """
     pass
 
+
 class Deck:
+    """
+    le paquet de cartes
+    """
     def __init__(self, filename):
         pass
     def check_unique(self):
@@ -83,16 +99,19 @@ class Deck:
 
 ```{code-cell} ipython3
 # should return True
+
 Deck("data/cards02.txt").check_unique()
 ```
 
 ```{code-cell} ipython3
 # should return True
+
 Deck("data/cards03.txt").check_unique()
 ```
 
 ```{code-cell} ipython3
 # should return False and print an error message
+
 Deck("data/cards03-broken.txt").check_unique()
 ```
 
@@ -171,7 +190,7 @@ sauriez-vous aménager votre code pour produire un diagramme similaire avec `dat
 import matplotlib.pyplot as plt
 # with ipympl (which needs to be pip install'ed) 
 # we can run on jupyter or vscode
-%matplotlib ipympl
+# %matplotlib ipympl
 ```
 
 ```{code-cell} ipython3
@@ -179,8 +198,25 @@ import matplotlib.pyplot as plt
 ```
 
 ```{code-cell} ipython3
-# puis
-Deck("data/cards06.txt").draw_map()
+# une fois que c'est fait vous pouvez appeler
+
+# Deck("data/cards04.txt").draw_map()
 ```
 
----
+```{code-cell} ipython3
+# ou encore
+
+# Deck("data/cards06.txt").draw_map()
+```
+
+pour information vous devriez obtenir quelque chose comme ceci
+
+```{image} media/cards04.svg
+:align: center
+:width: 300px
+```
+
+```{image} media/cards06.svg
+:align: center
+:width: 400px
+```
