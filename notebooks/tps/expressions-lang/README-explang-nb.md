@@ -20,9 +20,11 @@ nbhosting:
   title: 'TP: langage d''expressions'
 ---
 
-+++ {"tags": ["raises-exception"]}
-
 # un petit langage d'expressions
+
++++
+
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-expressions-lang.zip>`
 
 +++
 

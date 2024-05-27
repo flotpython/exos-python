@@ -20,9 +20,11 @@ nbhosting:
   title: 'TP: langage d''expressions'
 ---
 
-+++ {"tags": ["raises-exception"]}
-
 # un petit langage d'expressions
+
++++
+
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-expressions-lang.zip>`
 
 +++
 
@@ -381,7 +383,7 @@ pour réaliser cette deuxième partie:
   * `Assignment`: qui fait dans notre langage office à la fois de déclaration et d'affectation d'une variable
   * `Expressions`: qui va nous permettre de grouper plusieurs expressions en une suite logique
   
-voyez les quelques exemples ci-dessous pour une illustration  
+voyez les quelques exemples ci-dessous pour une illustration
 
 ```{code-cell} ipython3
 # copiez votre code de la v1 ici, et modifiez-le 
