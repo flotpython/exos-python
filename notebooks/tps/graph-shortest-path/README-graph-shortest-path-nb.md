@@ -32,6 +32,10 @@ nbhosting:
 
 +++
 
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-graph-shortest-path.zip>`
+
++++
+
 ## introduction
 
 +++
