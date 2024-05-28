@@ -31,6 +31,7 @@ pour faire cet exercice localement sur votre ordinateur, {download}`commencez pa
 ## rappel
 
 On rappelle qu'en programmation, on distingue entre :
+
 * les expressions, qui sont des fragments de programme qui **s'évaluent** et qui retournent un résultat,
 * et les instructions, qui **s'exécutent**, ayant pour résultat de changer l'état du programme, sans pour autant retourner une valeur.
 
@@ -151,8 +152,6 @@ Pour vous convaincre que vous avez bien répondu à la question, nous fournisson
 *****
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # vous écrivez votre code ici
 
 class Integer:
@@ -184,64 +183,46 @@ class Divide:
 et ensuite vous évaluez ces cellules pour tester votre code
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # should print 10
 tree = Integer(10); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # -10
 tree = Negative(Integer(10)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 30
 tree = Plus(Integer(10), Integer(20)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 60
 tree = Plus(Integer(10), Integer(20), Integer(30)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 24
 tree = Multiply(Integer(2), Integer(3), Integer(4)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 0.5
 tree = Divide(Integer(10), Integer(20)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 200
 tree = Multiply(Integer(10), Integer(20)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # 6000
 tree = Multiply(Integer(10), Integer(20), Integer(30)); print(tree.eval())
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 tree = Multiply(
     Plus(Multiply(Integer(10), Integer(2)), Integer(30)),
     Multiply(Negative(Integer(4)), Integer(25)))
@@ -250,8 +231,6 @@ assert tree.eval() == -5000
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 tree = Plus(Multiply(Integer(10), Integer(2)), 
             Negative(Negative(Integer(30))),
             Minus(Integer(100), Integer(50)))
@@ -260,8 +239,6 @@ assert tree.eval() == 100
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 tree = Multiply(
     Plus(Integer(30), Integer(40), Integer(50)),
         Minus(Integer(20), Integer(15)))
@@ -270,8 +247,6 @@ assert tree.eval() == 600
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 tree = Negative(
     Plus(Float(10), Negative(Integer(20))))
 
@@ -279,15 +254,11 @@ assert tree.eval() == 10.
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 tree = Divide(Integer(10), Integer(4))
 assert tree.eval() == 2.5
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # ces cellules devraient toutes afficher OK
 try:
     Plus()
@@ -296,8 +267,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 try:
     Divide()
 except TypeError:
@@ -305,8 +274,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 try:
     Negative(Integer(1), Integer(1))
 except TypeError:
@@ -314,8 +281,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 # ces cellules devraient toutes afficher OK
 try:
     Multiply(Integer(1))
@@ -324,8 +289,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 try:
     Plus(Integer(1))
 except TypeError:
@@ -333,8 +296,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 try:
     Divide(Integer(10), Integer(20), Integer(30))
 except TypeError:
@@ -342,8 +303,6 @@ except TypeError:
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 try:
     Negative(Integer(10), Integer(20))
 except TypeError:
@@ -396,8 +355,6 @@ class Expressions:
 et si tout marche bien vous pouvez exécuter la suite sans erreur:
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 program1 = Expressions(
     Assignment("a", Integer(10)),
     Assignment("b", Integer(20)),
@@ -408,8 +365,6 @@ assert program1.eval({}) == 30
 ```
 
 ```{code-cell} ipython3
-:tags: [raises-exception]
-
 """
 a = 2 + (b := 2) # env = {'a': 4, 'b': 2}
 b = a * b        # env = {'a': 4, 'b': 8}
