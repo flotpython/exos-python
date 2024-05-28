@@ -19,10 +19,13 @@ language_info:
   pygments_lexer: ipython3
 nbhosting:
   title: "m\xE9tro parisien"
-version: '1.0'
 ---
 
++++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
+
 # le réseau du métro parisien
+
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-metro.zip>`
 
 +++
 
@@ -57,11 +60,13 @@ on vous a préparé deux jeux de données qui décrivent le métro parisien
 
 ```{code-cell} ipython3
 # a few constants
+
 data = Path("data")
 ```
 
 ```{code-cell} ipython3
-# load data
+# load the data
+
 stations  = pd.read_csv(data / "stations.txt", index_col="station_id")
 hops =      pd.read_csv(data / "hops.txt")
 ```
@@ -115,9 +120,9 @@ Il y a deux algorithmes standard pour parcourir un graphe à partir de l'un de s
 
 +++
 
-intuitivement, en partant de cet échantillon (ici un simple arbre) :
+intuitivement, en partant de cet échantillon (ici un simple DAG - *Directed Acyclic Graph*) :
 
-```{image} example.svg
+```{image} media/example.svg
 :align: center
 ```
 
@@ -145,22 +150,21 @@ v111 v121 v122 v211 v212 v222
 pour simplifier au maximum les deux algorithmes de parcours que l'on veut implémenter, on peut les décrire informellement de la façon suivante :
 
 * en entrée on nous passe le sommet qui sert de point de départ `start`
-* on initialise un ensemble vide de sommets `scanned`  
-  qui contiendra tous les sommets qu'on a déjà parcourus
+* on initialise un ensemble vide de sommets `scanned`, qui contiendra tous les sommets qu'on a déjà parcourus
 * on initialise une file d'attente `waiting_area`, dans laquelle on met `start`
 * le parcours consiste alors à faire, tant que `waiting_area` n'est pas vide :
   * prendre (et enlever) un élément `next` de `waiting_area`  
-    l'afficher (ou en faire ce que le parcours doit en faire)
+  * l'afficher (ou en faire ce que le parcours doit en faire)
   * ajouter `next` dans `scanned` pour matérialiser le fait qu'on y est déjà passé
-  * pour tous les voisins de `waiting_area` qui ne sont pas encore dans `scanned`, les ajouter dans `waiting_area`
+  * pour tous les voisins de `waiting_area` qui ne sont pas encore dans `scanned`:  
+    les ajouter dans `waiting_area`
 
 +++
 
-ce qui est assez remarquable, c'est que les deux ordres de parcours (DFS et BFS) peuvent être toutes les deux réalisés avec ce même algorithme, la seule chose qui change entre les deux étant l'ordre dans lequel `waiting_area` "rend" les choses qu'on y insère
+ce qui est assez remarquable, c'est que les **deux ordres de parcours** (DFS et BFS) peuvent être toutes les deux réalisés **avec ce même algorithme**, la seule chose qui change entre les deux étant l'ordre dans lequel `waiting_area` "rend" les choses qu'on y insère; ainsi
 
-ainsi si `waiting_area` est une FILO (first-in-last-out), l'algorithme ci-dessus fait un parcours DFS
-
-et inversement si `waiting_area` est une FIFO (first-in-first-out), alors on parcourt le graphe en BFS
+- si `waiting_area` est une FILO (first-in-last-out), l'algorithme ci-dessus fait un parcours DFS
+- et inversement si `waiting_area` est une FIFO (first-in-first-out), alors on parcourt le graphe en BFS
 
 c'est ce que nous visualiserons à la fin de ce TP
 
@@ -277,7 +281,7 @@ def scan(start_node, storage):
 
 +++ {"cell_style": "split"}
 
-pour résumer les besoins sur les classes `Graph` et `Node` :
+pour résumer les besoins sur les classes `Graph` et `Node`, on va vouloir être en mesure d'écrire ce genre de choses:
 
 ```python3
 
@@ -306,15 +310,17 @@ for neighbour, line in node.iter_edges():
 et on peut ajouter quelques fonctions de confort
 
 ```python3
+# le nombre de noeuds
+len(graph) 
 
-len(graph) # le nombre de noeuds
+# le nombre d'arêtes dans un graphe
+graph.nb_edges() 
 
-graph.nb_edges()
+# trouver un noeud dans le graphe
+graph.find_node_from_station_id(station_id)
 
-graph.find_node_from_station_id(
-    station_id)
-
-node.nb_edges()
+# le nombre d'arêtes 
+node.nb_edges() 
 
 ```
 
@@ -348,18 +354,21 @@ du coup, voici comment utiliser les objets de type `Station`
 
 
 # si je cherche par exemple la station dont l'id vaut 2152
+
 station_sample = stations.loc[2152]
 station_sample
 ```
 
 ```{code-cell} ipython3
 # pour accéder aux positions géographiques c'est simple
+
 station_sample.latitude
 ```
 
 ```{code-cell} ipython3
 # par contre pour accéder au station_id, qui sert d'index,
 # c'est différent
+
 try:
     station_sample.station_id
 except Exception as exc:
@@ -368,6 +377,7 @@ except Exception as exc:
 
 ```{code-cell} ipython3
 # il faut utiliser l'attribut name (ça n'est pas très logique d'ailleurs !)
+
 station_sample.name
 ```
 
@@ -379,6 +389,7 @@ station_sample.name
 :cell_style: split
 
 # quel est le type de cet objet
+
 type(station_sample)
 ```
 
@@ -386,6 +397,7 @@ type(station_sample)
 :cell_style: split
 
 # définissons un type pour les type hints
+
 Station = pd.Series
 ```
 
@@ -409,18 +421,22 @@ class Node:
     drawing the graph on a map
     """
     def __init__(self, station: "Station"):
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
 
     def add_edge(self, neighbour: "Node", line):
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def nb_edges(self):
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def iter_neighbours(self):
         "iterates (neighbour, line) over neighbours"
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     # we will also need these 2 attributes (so, refer to: properties)
     # node.latitude
@@ -440,37 +456,43 @@ class Graph:
     as essentially a set of nodes (thus of stations)
     """
     def __init__(self):
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def add_node(self, station):
         """
         insert a station in graph; duplicates are simply ignored
         """
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def find_node_from_station_id(self, station_id):
         """
         spot a node from a specific station id
         """
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def add_edge(self, from_station_id, to_station_id, line):
         """
         insert an edge - both ends must exist already
         """
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def iter_nodes(self):
         """
         an iterator on nodes
         """
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     def iter_edges(self):
         """
         iterates over triples (node_from, node_to, line)
         """
-        pass # votre code ..
+        # votre code ici ..
+        pass 
 
     # ... ajoutez ce dont vous avez besoin
 ```
@@ -780,15 +802,15 @@ build_map(metro)
 
 +++
 
-vous avez peut-être utilisé un ensemble pour mémoriser dans la fonction `scan()` les sommets parcourus; en tous cas c'est assez logique d'y penser.
+vous avez peut-être utilisé un ensemble pour mémoriser dans la fonction `scan()` les sommets parcourus; en tous cas c'est assez logique d'y penser
 
-je signale à ce sujet que par défaut, les instances de classe peuvent effectivement être insérée dans un ensemble; ce qui peut sembler un peu contredire ce qu'on a pu dire au sujet des types prédéfinis, à savoir qu'un ensemble ne peut contenir que des objets immutables
+je signale à ce sujet que par défaut, une instance de classe peut être insérée dans un ensemble; ce qui peut sembler contredire un peu ce qu'on a vu au sujet des types prédéfinis, à savoir qu'un ensemble ne peut contenir que des objets immutables
 
 en fait par défaut, lorsqu'on insère une instance dans un ensemble, ce qui sert de clé pour le hachage c'est le résultat de `id()`, c'est-à-dire en gros l'adresse de l'instance
 
 dans le cas qui nous intéresse ici, on a créé des instances de `Node`, on peut effectivement les mettre dans un ensemble sans trop de précaution, il y a des chances pour que ça fonctionne tout seul (typiquement si on crée une seule instance de `Node` par station de métro)
 
-mais bon, si on veut être propre, il est intéressant de redéfinir 2 dunder (sur la classe `Node` donc) pour que les recherches dans l'ensemble soient pertinentes; [il s'agit des dunder `__hash__` et `__eq__` ](https://docs.python.org/3/glossary.html#term-hashable) que je vous invite à implémenter si vous ne l'avez pas fait.
+mais bon, si on veut être propre (*don't program by coincidence...*), il est intéressant de redéfinir 2 dunder (sur la classe `Node` donc) pour que les recherches dans l'ensemble soient pertinentes; [il s'agit des dunder `__hash__` et `__eq__` ](https://docs.python.org/3/glossary.html#term-hashable) que je vous invite à implémenter si vous ne l'avez pas fait.
 
 +++
 
