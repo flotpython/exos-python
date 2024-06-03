@@ -3,17 +3,27 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.2
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
 ---
 
 # puzzle 8 : a.k.a. "taquin"
 
 initially designed as a 3h assignment for a 4-people team
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
 
 +++
 
