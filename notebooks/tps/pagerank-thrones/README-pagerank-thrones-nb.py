@@ -8,12 +8,9 @@
 #       toggle_output: true
 #       toggle_output_all: true
 #   jupytext:
-#     notebook_metadata_filter: ipub,language_info
 #     text_representation:
 #       extension: .py
 #       format_name: percent
-#       format_version: '1.3'
-#       jupytext_version: 1.16.2
 #   kernelspec:
 #     display_name: Python 3 (ipykernel)
 #     language: python
@@ -113,7 +110,7 @@
 #    1. running the simulation **several times** with different lifespans - ranging from several hops to a few thousands -
 #    2. we can experimentally check if we indeed obtain consistent results, i.e. constant results for all characters
 
-# %% [markdown] slideshow={"slide_type": ""}
+# %% [markdown] slideshow={"slide_type": ""} tags=[]
 # *****
 
 # %% [markdown]
