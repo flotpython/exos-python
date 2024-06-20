@@ -1,0 +1,4 @@
+# ARTEFACTS
+artefacts:
+	find . -name ARTEFACTS | xargs update-artefacts.sh
+.PHONY: artefacts

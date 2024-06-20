@@ -1,0 +1,6 @@
+# EXEC
+exec:
+	execute-all-notebooks.sh -v
+exec-clean:
+	execute-all-notebooks.sh -x -c -v
+.PHONY: exec exec-clean

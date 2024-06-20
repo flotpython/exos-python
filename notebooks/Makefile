@@ -16,15 +16,6 @@ include Makefile.style
 include Makefile.prune
 include Makefile.toc
 
-# ARTEFACTS
-artefacts:
-	find . -name ARTEFACTS | xargs update-artefacts.sh
-.PHONY: artefacts
-
-
-# EXEC
-exec:
-	execute-all-notebooks.sh -v
-exec-clean:
-	execute-all-notebooks.sh -x -c -v
-.PHONY: exec exec-clean
+# specific to exos
+include Makefile.artefacts
+include Makefile.exec
