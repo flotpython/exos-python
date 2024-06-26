@@ -64,28 +64,6 @@ particular, keep in mind that the only place where your work is likely to be
 saved is .. in the brower itself; so for example using another browser, or *a
 fortiori* another computer, will likely make you lose your work
 
-### a browser-based REPL
-
-
-`````{admonition} browser-hosted IPython console
-:class: seealso dropdown
-
-````{div}
-```{replite}
-:kernel: python
-:theme: JupyterLab Light
-:width: 100%
-:height: 90vh
-:prompt: click to start a console
-:prompt_color: yellow
-
-# please be patient ...
-print("welcome to Python in the browser")
-
-```
-````
-`````
-
 ### a browser-based JupyterLab
 
 `````{admonition} browser-hosted Jupyter Lab
@@ -99,6 +77,27 @@ print("welcome to Python in the browser")
 :height: 90vh
 :prompt: click to start a JuptyerLab
 :prompt_color: pink
+
+# please be patient ...
+print("welcome to Python in the browser")
+
+```
+````
+`````
+
+### a browser-based REPL
+
+`````{admonition} browser-hosted IPython console
+:class: seealso dropdown
+
+````{div}
+```{replite}
+:kernel: python
+:theme: JupyterLab Light
+:width: 100%
+:height: 90vh
+:prompt: click to start a console
+:prompt_color: yellow
 
 # please be patient ...
 print("welcome to Python in the browser")
