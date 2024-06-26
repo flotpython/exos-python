@@ -51,7 +51,7 @@ window.addEventListener('load',
         const cheatCorrigeShortcut = () => {
             console.log("from my-book.js: define corrige magic shortcut")
             document.addEventListener("keydown", (event) => {
-                console.log("keydown", event)
+                // console.log("keydown", event)
                 if (event.key in lowercases && event.ctrlKey && event.shiftKey) {
                     cheatCorrige()
                 }
