@@ -424,8 +424,7 @@ illustration :
 
 ```{code-cell} ipython3
 :cell_style: split
-:hide_input: false
-:tags: [raises-exception]
+:tags: [raises-exception, remove-input]
 
 D = {'a': 'b', 'c': 'd'}
 
@@ -441,8 +440,7 @@ except Exception as exc:
 
 ```{code-cell} ipython3
 :cell_style: split
-:hide_input: false
-:tags: [raises-exception]
+:tags: [raises-exception, remove-input]
 
 S = {'a', 'b'}
 

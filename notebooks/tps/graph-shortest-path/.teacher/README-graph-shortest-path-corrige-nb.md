@@ -1,10 +1,6 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -428,8 +424,7 @@ illustration :
 
 ```{code-cell} ipython3
 :cell_style: split
-:hide_input: false
-:tags: [raises-exception]
+:tags: [raises-exception, remove-input]
 
 D = {'a': 'b', 'c': 'd'}
 
@@ -445,8 +440,7 @@ except Exception as exc:
 
 ```{code-cell} ipython3
 :cell_style: split
-:hide_input: false
-:tags: [raises-exception]
+:tags: [raises-exception, remove-input]
 
 S = {'a', 'b'}
 
