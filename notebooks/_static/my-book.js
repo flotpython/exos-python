@@ -47,7 +47,8 @@ window.addEventListener('load',
         // the 'key' property seems to always refer to the lowercase character
         // on a  qwerty I have / being the lowercase and ? the uppercase
         // on an azerty I have , being the lowercase and ? the uppercase
-        const lowercases = { '/': true, ',': true }
+        // on a qwerty linux,  ? is the lowercase and / the uppercase
+        const lowercases = { '/': true, ',': true, '?': true }
         const cheatCorrigeShortcut = () => {
             console.log("from my-book.js: define corrige magic shortcut")
             document.addEventListener("keydown", (event) => {
