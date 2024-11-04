@@ -66,7 +66,7 @@ Commencez par créer et activer un environnement dédié au TP:
 
 ```bash
 # on commence par créer un environnement "snake"
-(base) $ conda create -n snake python=3.11
+(base) $ conda create -n snake python=3.12
 # puis on l'active
 (base) $ conda activate snake
 # votre terminal doit indiquer le nom d'environnement:
@@ -450,13 +450,13 @@ Voici un très rapide résumé des commandes pour gérer ses environnements virt
 * pour voir dans quel environnement on se trouve (normalement vous avez ça aussi dans le *prompt*)
 
   ```bash
-  echo echo $CONDA_DEFAULT_ENV
+  echo $CONDA_DEFAULT_ENV
   ```
 
 * pour créer un nouvel environnement
 
   ```bash
-  conda create -n un-nouveau python=3.11
+  conda create -n un-nouveau python=3.12
   ```
 
   (le fait de spécifier la version de Python est optionnel, mais recommandé)
@@ -484,7 +484,7 @@ La seule chose à savoir c'est que, lorsque vous tapez une commande `git`, pour
 trouver le "bon" dépôt, on utilise assez naturellement l'algo suivant:
 
 > on regarde si le dossier courant est un dépôt git, si oui on a trouvé, sinon on
-regarde dans le dossier parent, et ainsi de suite
+  regarde dans le dossier parent, et ainsi de suite
 
 Donc c'est assez simple, mais surtout au tout début,
 faites juste attention à ne pas ajouter vos fichiers dans le mauvais dépôt
