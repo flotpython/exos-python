@@ -1,42 +1,21 @@
 """
-le fond d'écran, et le serpent peut contenir plusieurs cases
+v1 : pareil mais au moins on peut sortir du programme
+avec la touche 'q', ou avec la souris en fermant la fenêtre
 """
 
 from random import randint
 import pygame as pg
 
-W, H = 20, 20
-X, Y = 30, 30
-
-WHITE = (240, 240, 240)
-BLACK = (255, 255, 255)
-SNAKE_COLOR = (128, 128, 0)
-
-snake = [
-    (10, 15),
-    (11, 15),
-    (12, 15),
-]
-
-
 pg.init()
-screen = pg.display.set_mode((X*W, Y*H))
+screen = pg.display.set_mode((400, 300))
 clock = pg.time.Clock()
 
-
-def draw_tile(x, y, color):
-    """
-    x and y in tiles coordinates
-    translate into pixel coordinates for painting
-    """
-    rect = pg.Rect(x*W, y*H, W, H)
-    pg.draw.rect(screen, color, rect)
-
-
+# on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
 running = True
 while running:
 
     clock.tick(1)
+
     # on itère sur tous les évênements qui ont eu lieu depuis le précédent appel
     # ici donc tous les évènements survenus durant la seconde précédente
     for event in pg.event.get():
@@ -50,16 +29,11 @@ while running:
             if event.key == pg.K_q:
                 running = False
 
-    # on dessine le damier
-    screen.fill(WHITE)
-    for x in range(X):
-        for y in range(Y):
-            if (x+y) % 2 == 0:
-                draw_tile(x, y, BLACK)
+    # xxx ici c'est discutable, car si on tape 'q'
+    # on va quand même changer de couleur avant de sortir...
 
-    for x, y in snake:
-        draw_tile(x, y, SNAKE_COLOR)
-
+    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+    screen.fill(random_color)
     pg.display.update()
 
 

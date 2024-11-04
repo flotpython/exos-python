@@ -1,4 +1,6 @@
-# on peut changer la direction du serpent avec les fleches
+"""
+on peut changer la direction du serpent avec les fleches
+"""
 
 from random import randint
 import pygame as pg
@@ -17,7 +19,7 @@ DIRECTIONS = {
     'LEFT':  (-1, 0),
 }
 
-DIRECTION = DIRECTIONS['RIGHT']
+direction = DIRECTIONS['RIGHT']
 
 snake = [
     (10, 15),
@@ -77,18 +79,18 @@ while running:
         # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_DOWN:
-                DIRECTION = DIRECTIONS['DOWN']
+                direction = DIRECTIONS['DOWN']
             elif event.key == pg.K_UP:
-                DIRECTION = DIRECTIONS['UP']
+                direction = DIRECTIONS['UP']
             elif event.key == pg.K_RIGHT:
-                DIRECTION = DIRECTIONS['RIGHT']
+                direction = DIRECTIONS['RIGHT']
             elif event.key == pg.K_LEFT:
-                DIRECTION = DIRECTIONS['LEFT']
+                direction = DIRECTIONS['LEFT']
             # si la touche est "Q" on veut quitter le programme
             elif event.key == pg.K_q:
                 running = False
 
-    move_snake(snake, DIRECTION)
+    move_snake(snake, direction)
     draw_background()
     for x, y in snake:
         draw_tile(x, y, SNAKE_COLOR)

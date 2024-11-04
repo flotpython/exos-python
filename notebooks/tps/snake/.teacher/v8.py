@@ -1,6 +1,8 @@
-# on affiche le score (la taille du serpent) dans la bannière
-# game over si le serpent se marche dessus
-# game over si on sort du cadre
+"""
+on affiche le score (la taille du serpent) dans la bannière
+game over si le serpent se marche dessus
+game over si on sort du cadre
+"""
 
 from random import randint
 import pygame as pg
@@ -20,10 +22,7 @@ DIRECTIONS = {
     'LEFT':  (-1, 0),
 }
 
-### en toute rigueur les variables
-# DIRECTION et FRUIT devraient être en minuscules
-
-DIRECTION = DIRECTIONS['RIGHT']
+direction = DIRECTIONS['RIGHT']
 
 snake = [
     (10, 15),
@@ -31,7 +30,7 @@ snake = [
     (12, 15),
 ]
 
-FRUIT = (10, 10)
+fruit = (10, 10)
 
 
 pg.init()
@@ -66,16 +65,16 @@ def quit(snake, reason):
     exit()
 
 def move_snake(snake, direction):
-    global FRUIT
+    global fruit
     # the new first piece is based on the current first piece
     head = snake[-1]
     # compute it
     x, y = head
     dx, dy = direction
     new_head = (x+dx , y+dy)
-    if new_head == FRUIT:
-        snake.append(FRUIT)
-        FRUIT = (randint(0, X-1), randint(0, Y-1))
+    if new_head == fruit:
+        snake.append(fruit)
+        fruit = (randint(0, X-1), randint(0, Y-1))
         pg.display.set_caption(f"Score: {len(snake)}")
     elif new_head in snake:
         quit(snake, "self-bite")
@@ -103,22 +102,22 @@ while running:
         # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
         elif event.type == pg.KEYDOWN:
             if event.key == pg.K_DOWN:
-                DIRECTION = DIRECTIONS['DOWN']
+                direction = DIRECTIONS['DOWN']
             elif event.key == pg.K_UP:
-                DIRECTION = DIRECTIONS['UP']
+                direction = DIRECTIONS['UP']
             elif event.key == pg.K_RIGHT:
-                DIRECTION = DIRECTIONS['RIGHT']
+                direction = DIRECTIONS['RIGHT']
             elif event.key == pg.K_LEFT:
-                DIRECTION = DIRECTIONS['LEFT']
+                direction = DIRECTIONS['LEFT']
             # si la touche est "Q" on veut quitter le programme
             elif event.key == pg.K_q:
                 running = False
 
-    move_snake(snake, DIRECTION)
+    move_snake(snake, direction)
     draw_background()
     for x, y in snake:
         draw_tile(x, y, SNAKE_COLOR)
-    draw_tile(*FRUIT, FRUIT_COLOR)
+    draw_tile(*fruit, FRUIT_COLOR)
 
     pg.display.update()
 

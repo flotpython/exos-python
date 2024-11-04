@@ -1,12 +1,7 @@
 ---
 jupyter:
   jupytext:
-    cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
     main_language: bash
-    notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-      -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
-      -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-      -toc
     text_representation:
       extension: .md
       format_name: markdown
@@ -15,7 +10,9 @@ jupyter:
     language: python
     name: python3
   language_info:
-    name: ''
+    name: python
+    nbconvert_exporter: python
+    pygments_lexer: ipython3
 ---
 
 # Le snake
@@ -57,6 +54,7 @@ fonctionne.
 
 Mais avant de pouvoir commencer, un peu de préparation...
 
+
 ## On s'installe (optionnel)
 
 _Ce qui suit suppose que vous avez installé Python avec `conda` et que vous avez
@@ -83,6 +81,7 @@ $ conda init bash
 
 Reportez-vous plus bas pour une liste des commandes qui nous permettent de gérer
 les environnements virtuels conda.
+
 
 ## Prérequis
 
@@ -116,41 +115,8 @@ un notebook**, ça ne fonctionne pas
 vous allez rencontrer des problèmes mystérieux de kernel qui
 meurt, si vous essayez.
 
-```python
-# v0 : on repeint l'écran à une période de 1 seconde
-# et on a du mal à sortir du programme
-
-# les imports standard en premier
-from random import randint
-
-import pygame as pg
-
-# on initialise pygame et on crée une fenêtre de 400x300 pixels
-pg.init()
-screen = pg.display.set_mode((400, 300))
-
-# on crée aussi un objet "horloge"
-clock = pg.time.Clock()
-
-# enfin on boucle à l'infini pour faire le rendu de chaque image
-while True:
-    # l'objet "clock" permet de limiter le nombre d'images par secondes
-    # ici pour cette démo on demande 1 image par seconde
-    clock.tick(1)
-
-    # il faut traiter les événements a minima
-    # pour que la fenêtre s'affiche
-    for event in pg.event.get():
-        pass
-
-    # on génère une couleur (Rouge, Vert, Bleu) au hasard
-    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-    # et on colorie l'écran avec cette couleur
-    screen.fill(random_color)
-
-    # enfin on met à jour la fenêtre avec tous les changements
-    pg.display.update()
-```
+````{literalinclude} v0.py
+````
 
 Vous pouvez désormais exécuter le programme avec:
 
@@ -165,13 +131,14 @@ le terminal.
 Nous avons une version qui marchouille; du coup on en fait quoi ?
 > un commit bien sûr
 
+
 ## Astuces vs-code
 
 **Astuce #1** : il est **fortement recommandé** d'installer l'extension de
 vs-code pour Python
 
 **Astuce #2** : on a créé un environnement virtuel;
-du coup il est opportun d'indiquer à vs-code qu'il faut utiliser `snake` -
+du coup il est opportun d'indiquer à vs-code qu'il faut utiliser l'environnement conda `snake` -
 plutôt que `base`
 pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
 
@@ -196,6 +163,7 @@ sur la qualité de votre code, regardez la zone en bas à gauche
 :align: center
 ```
 
+
 ## Un petit détail
 
 Il faut savoir que c'est l'appel à `pg.display.update()` qui produit réellement
@@ -210,53 +178,18 @@ milliseconde, il faut s'efforcer, pour une bonne fluidité du jeu, de n'appeler
 `update()` que le minimum, pour nous ici **une fois par itération de la
 boucle** (une fois par frame, quoi)
 
+
 ## Continuons (v1)
 
 Afin d'avoir un comportement plus "normal", nous devons instruire Pygame en lui
 disant comment réagir aux clicks sur le clavier ou sur la fenêtre:
 
-```python
-# v1 : pareil mais au moins on peut sortir du programme
-# avec la touche 'q', ou avec la souris en fermant la fenêtre
-
-from random import randint
-import pygame as pg
-
-pg.init()
-screen = pg.display.set_mode((400, 300))
-clock = pg.time.Clock()
-
-# on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
-running = True
-while running:
-
-    clock.tick(1)
-
-    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
-    screen.fill(random_color)
-    pg.display.update()
-
-    # on itère sur tous les évênements qui ont eu lieu depuis le précédent appel
-    # ici donc tous les évènements survenus durant la seconde précédente
-    for event in pg.event.get():
-        # chaque évênement à un type qui décrit la nature de l'évênement
-        # un type de pg.QUIT signifie que l'on a cliqué sur la "croix" de la fenêtre
-        if event.type == pg.QUIT:
-            running = False
-        # un type de pg.KEYDOWN signifie que l'on a appuyé une touche du clavier
-        elif event.type == pg.KEYDOWN:
-            # si la touche est "Q" on veut quitter le programme
-            if event.key == pg.K_q:
-                running = False
-
-
-# Enfin on rajoute un appel à pg.quit()
-# Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows
-pg.quit()
+```{literalinclude} v1.py
 ```
 
 et on n'oublie pas de faire un commit...
 
+<!-- #region -->
 ## Le damier
 
 Nous allons commencer par construire notre plateau de jeu ainsi:
@@ -288,7 +221,9 @@ pg.draw.rect(screen, color, rect)
 ```
 
 une fois que ça marche, vous faites quoi ?
+<!-- #endregion -->
 
+<!-- #region -->
 ## Un serpent fixe
 
 À partir de maintenant, on va garder le damier comme fond d'écran (même si les
@@ -313,6 +248,7 @@ totalement arbitraire et pas du tout imposé) :
 ```{image} media/serpent.png
 :align: center
 ```
+<!-- #endregion -->
 
 ## Un serpent qui bouge
 
@@ -337,6 +273,7 @@ Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade...
 :align: center
 ```
 
+
 ## Le fruit
 
 Il faut maintenant faire manger notre serpent.
@@ -354,6 +291,7 @@ On va procéder comme suit:
 ```{image} media/manger.gif
 :align: center
 ```
+
 
 ## Épilogue
 
@@ -378,18 +316,21 @@ Fin de la partie obligatoire
 ***
 ***
 
-# Options
+
+## Options
 
 Pour les rapides, je vous invite à aborder les sujets suivants (dans l'ordre qui
 vous inspire le plus):
 
-## Variables globales
+
+### Variables globales
 
 De manière générale, les variables globales sont considérées comme néfastes à la
 réutilisabilité du code; retouchez votre code pour minimiser le nombre de
 variables globales.
 
-## Ligne de commande
+
+### Ligne de commande
 
 On aimerait pouvoir passer sur la ligne de commande les paramètres du jeu; par
 exemple, le nombre de cases du tableau en hauteur et largeur, la taille d'une
@@ -397,7 +338,8 @@ case en pixels, ...
 
 Indice: cherchez le module `argparse` dans la documentation Python.
 
-## Vitesse de réaction
+
+### Vitesse de réaction
 
 Ralentissez le jeu à 4 images/secondes; êtes-vous satisfait de la vitesse de
 réaction ? dit autrement, est-ce qu'il arrive que le serpent tourne trop tard ?
@@ -411,7 +353,8 @@ Toujours à cette vitesse lente, que constatez-vous au tout début du jeu ? est-
 que c'est grave ? si on voulait vraiment le corriger (pas forcément utile en
 pratique hein), comment on pourrait faire ?
 
-## Asynchronisme
+
+### Asynchronisme
 
 À ce stade nous avons un jeu à une seule vitesse; la boucle principale est
 entièrement cadencée par le `clock.tick(n)`, et la vitesse du serpent est
@@ -425,7 +368,8 @@ Modifiez votre code pour pouvoir paramétrer deux fréquences séparément :
 * la fréquence de rafraichissement de l'écran (en frame / seconde)
 * la fréquence de déplacement du serpent (en case / seconde)
 
-# Notes à propos des environnements virtuels
+
+## Notes à propos des environnements virtuels
 
 Voici un très rapide résumé des commandes pour gérer ses environnements virtuels
 
@@ -470,7 +414,7 @@ Voici un très rapide résumé des commandes pour gérer ses environnements virt
   **remarquez** comment il n'y a pas de `env` pour `create`, mais il en faut un pour `remove` ...
 
 
-# Note à propos des dépôts git imbriqués
+## Note à propos des dépôts git imbriqués
 
 Si vous avez reçu ce TP depuis un dépôt git (celui de votre cours d'info), ce
 qu'on vous invite à faire c'est finalement de créer un dépôt git ... à

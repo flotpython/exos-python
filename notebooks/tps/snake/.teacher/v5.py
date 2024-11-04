@@ -1,6 +1,8 @@
-# le serpent avance toujours vers la droite
-# les mouvements hors du cadre sont admis
-# on ressort de l'autre coté de la grille
+"""
+le serpent avance toujours vers la droite
+les mouvements hors du cadre sont admis
+on ressort de l'autre coté de la grille
+"""
 
 from random import randint
 import pygame as pg

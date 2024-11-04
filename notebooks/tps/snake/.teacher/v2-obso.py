@@ -1,5 +1,7 @@
-# on ajoute un carré fixe - le début du serpent
-# historique - ne correspond plus à aucune étape de l'énoncé
+"""
+on ajoute un carré fixe - le début du serpent
+historique - ne correspond plus à aucune étape de l'énoncé
+"""
 
 from random import randint
 import pygame as pg

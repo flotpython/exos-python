@@ -1,4 +1,6 @@
-# le fond d'écran en damier
+"""
+le fond d'écran en damier
+"""
 
 from random import randint
 import pygame as pg
