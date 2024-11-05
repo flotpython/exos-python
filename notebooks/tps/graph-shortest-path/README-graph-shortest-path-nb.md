@@ -16,6 +16,10 @@ nbhosting:
   title: algos de graphe
 ---
 
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
 # TP - algos de base sur les graphes
 
 +++

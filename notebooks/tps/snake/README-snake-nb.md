@@ -15,6 +15,9 @@ jupyter:
     pygments_lexer: ipython3
 ---
 
+Licence CC BY-NC-ND, Thierry Parmentelat
+
+
 # Le snake
 
 pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-snake.zip>`
@@ -26,6 +29,7 @@ nouveau best-seller.
 **avertissement** ce document n'est pas un notebook (et le code ne va pas
 marcher dans un notebook non plus); on peut le lire avec jupyter mais c'est
 sous-optimal, le mieux est le lire avec vs-code, ou en HTML statique.
+
 
 ## Objectifs et démarche
 

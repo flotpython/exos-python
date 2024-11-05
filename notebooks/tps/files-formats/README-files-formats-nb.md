@@ -14,6 +14,9 @@ jupyter:
     pygments_lexer: ipython3
 ---
 
+Licence CC BY-NC-ND, Thierry Parmentelat
+
+
 # fichiers et formats
 
 {download}`Commencez par télécharger le zip<./ARTEFACTS-files-formats.zip>`
