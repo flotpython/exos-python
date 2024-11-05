@@ -1,4 +1,18 @@
-Joseph Charpentier 12
-Pierre Dupont-Aignan 16     
-Kevin Marcel Gotlib 18 
-    Annie    Ernaux  20
+# on a le droit de mettre des commentaires
+
+# et des lignes vides
+
+# les entrées on deux mots
+Kevin-Marcel Gotlib 
+    18 
+
+# et des fois de la ponctuation
+Joseph . Charpentier 
+    12
+
+Pierre ... Dupont-Aignan 
+    16     
+
+# c'est vraiment un format très sale
+    Annie    Ernaux  : 
+    20

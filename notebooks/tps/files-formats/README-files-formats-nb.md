@@ -1,11 +1,6 @@
 ---
 jupyter:
   jupytext:
-    cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted,-editable
-    notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version,
-      -jupytext.text_representation.format_version,-language_info.version, -language_info.codemirror_mode.version,
-      -language_info.codemirror_mode,-language_info.file_extension, -language_info.mimetype,
-      -toc, -rise, -version
     text_representation:
       extension: .md
       format_name: markdown
@@ -28,6 +23,7 @@ jupyter:
 
 - les fichiers et l'OS; comment ouvrir, pourquoi fermer ?
 - différents formats de fichier usuels
+  - texte simple sans accent, typiquement en anglais (ASCII)
   - texte standard (utf-8)
   - pickle (ouille ça pique, c'est du binaire)
   - json (on se sent un peu mieux)
@@ -51,7 +47,7 @@ c'est quoi l'OS ?
 - parmi lesquelles, entre autres, la **notion de "fichier"**
 
 ```{image} operating_system_placement.png
-:align: center
+:align: right
 :width: 250px
 ```
 
@@ -70,7 +66,7 @@ c'est quoi l'OS ?
 
 ### ouverture d'un fichier
 
-```
+```python
 f = open("hello.txt")
 ```
 
@@ -78,8 +74,9 @@ f = open("hello.txt")
 - pensez à consulter la documentation (comment on la trouve ?)
 - que peut-on faire de `f` ?
 - que pensez-vous de cette version alternative ?
-  ```
+  ```python
   # ça marche aussi; quelle différence ?
+  
   f = open("hello.txt", encoding="utf-8")
   ```
 
@@ -87,7 +84,7 @@ f = open("hello.txt")
 ### les types
 
 - analyser les types des différents objets
-  ```
+  ```python
   type("hello.txt")
   type(f)
   ```
@@ -132,9 +129,12 @@ du coup si vous faites un `print(line)` (essayez..) vous allez avoir une ligne b
 
 une autre approche consisterait à utiliser `line.rstrip()` qui enlève l'éventuel *newline*;  
 je dis éventuel car la dernière ligne ne contient pas toujours ce fameux *newline*; le monde est compliqué parfois...
+
+**exercice**: dans *vs-code*, allez enlever le dernier *newline* (mettez vous à la fin du fichier et faites un *Delete*)  
+et refaites tourner les 3 lignes ci-dessus; vous pouvez aussi regarder ce que donne `cat hello.txt` dans le terminal.
 ````
 
-
+<!-- #region -->
 ## contenu des fichiers texte
 
 on va regarder dans les yeux deux fichiers texte:
@@ -154,7 +154,7 @@ faites pareil avec `bonjour.txt`
 
 - que constatez-vous ?
 - voyez aussi <https://www.utf8-chartable.de/>  
-
+<!-- #endregion -->
 
 ## un fichier binaire
 
@@ -171,8 +171,8 @@ faites pareil avec `tiny.pickle`
 
 un fichier peut contenir 
 
-- du texte (qu'il faut alors décoder) pour obtenir un `str`
-- du binaire - on obtient alors des `bytes`, et du coup pas besoin de décoder *of course...*
+- du texte (qu'il faut alors décoder, généralement avec `encoding='UTF-8'`), on obtient alors un `str`
+- du binaire - on obtient alors des `bytes`; dans ce cas on n'a pas besoin de fournir un encodage pour lire le fichier *of course...* - par contre c'est souvent l'application, ou une librairie, qui va se taper le décodage, plus ou moins *à la main* selon les cas.
 ````
 
 
@@ -182,7 +182,7 @@ Tout le monde ne crée pas sa propre structure (on dit aussi format) de fichier 
 Il existe des formats ***standard*** qui permettent une interaction entre les programmes, et même différents langages de programmation !
 
 
-## le format pickle
+### le format pickle
 
 c'est le format *intégré* de Python:
 
@@ -204,7 +204,7 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 - inspectez les types des objets dans la donnée
 
 
-### écriture
+#### pickle : écriture
 
 - partez de ce que vous venez de lire
 - modifiez certaines des données
@@ -213,7 +213,7 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 - et relisez-le pour vérifier que "ça marche"
 
 
-## autre format: json
+### autre format: json
 
 à vous de jouer
 
@@ -223,16 +223,16 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 - est-ce qu'on peut y mettre un ensemble ? ou un tuple ?
 
 
-## encore un: yaml
+### encore un: yaml
 
 - trouvez la doc de `PyYAML`
 - lisez le fichier `tiny.yaml`
 - comment peut-on comparer avec JSON ?
 
 
-## et aussi: les csv
+### et aussi: les csv
 
-on recommence:
+on recommence (c'est optionnel, si vous savez déjà lire un csv avec pandas)...
 
 - lisez la documentation du module `csv`  
   google `python module csv`
@@ -278,7 +278,7 @@ pour cela, 2 armes
 ````
 
 
-## exercice: écrivez un programme
+### exercice: écrivez un programme
 
 * qui lit sans fin le texte entré dans le terminal
 * regarde si le texte commence par un `q`
@@ -300,7 +300,7 @@ ne pas utiliser `input()`, mais plutôt `sys.stdin`
   lancez votre programme avec `python -u mycode.py`
 ````
 
-
+<!-- #region -->
 ## épilogue: les *regexps*, en deux mots
 
 sans transition..
@@ -312,7 +312,7 @@ sans transition..
   * pour indiquer 'un nombre quelconque de fois' telle ou telle autre *regexp*
 
 
-###  exemple de *regexp*
+ exemple de *regexp*
 
 `ab((cd)|(ef))*` décrit un ensemble qui
 
@@ -324,7 +324,8 @@ sans transition..
 ````{admonition} avertissement
 
 > Some people, when confronted with a problem, think
-“I know, I'll use regular expressions.”   Now they have two problems.
+“I know, I'll use regular expressions.”  Now they have two problems.
 
 <http://regex.info/blog/2006-09-15/247>
 ````
+<!-- #endregion -->
