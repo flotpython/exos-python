@@ -26,8 +26,6 @@ pour faire cet exercice localement sur votre ordinateur, {download}`commencez pa
 
 ## introduction
 
-+++
-
 dans ce TP nous allons
 
 * étudier quelques algorithmes de base des graphes
@@ -43,8 +41,6 @@ comme nous n'avons pas encore étudié les classes, nous allons nous restreindre
 +++
 
 ## *disclaimer*
-
-+++
 
 les problèmes abordés dans ce TP, et notamment le calcul du plus court chemin, sont trés classiques; notre objectif ici est juste de **découvrir le sujet**, et de prendre ce prétexte pour utiliser les dictionnaires et ensembles dans un contexte moins factice que les exercices, **sans essayer de produire une implémentation optimale** - loin s'en faut, comme on le verra bien dans la dernière partie d'ailleurs.
 
@@ -90,7 +86,10 @@ graph_as_list = [
 
 +++ {"cell_style": "split"}
 
-<img src="media/graph.png" width="300px" />
+```{image} media/graph.png
+:width: 300
+:align: center
+```
 
 +++
 
@@ -125,7 +124,10 @@ graph_as_matrix = (
 
 +++ {"cell_style": "split"}
 
-<img src="media/graph.png" width="300px" />
+```{image} media/graph.png
+:width: 300
+:align: center
+```
 
 +++
 
@@ -149,7 +151,10 @@ my_graph = ...
 
 +++ {"cell_style": "split"}
 
-<img src="media/graph.png" width="300px" />
+```{image} media/graph.png
+:width: 300
+:align: center
+```
 
 +++
 
@@ -180,7 +185,10 @@ ce qui donnerait (par exemple) pour notre graphe témoin :
 
 +++ {"cell_style": "split"}
 
-<img src="media/graph.png" width="300px" />
+```{image} media/graph.png
+:width: 300
+:align: center
+```
 
 +++
 
@@ -204,7 +212,10 @@ pour éviter les inconvénients des listes et des matrices, on va représenter u
 
 +++ {"cell_style": "split"}
 
-<img src="media/graph.png" width="300px" />
+```{image} media/graph.png
+:width: 300
+:align: center
+```
 
 ```{code-cell} ipython3
 :cell_style: split
@@ -574,7 +585,9 @@ digression, mais 
 
 +++ {"cell_style": "split"}
 
-<img src="media/endless-loop.png" />
+```{image} media/endless-loop.png
+:align: center
+```
 
 +++ {"cell_style": "center"}
 
