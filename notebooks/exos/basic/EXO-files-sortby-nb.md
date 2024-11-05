@@ -1,9 +1,5 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -81,7 +77,8 @@ et qui renvoie une liste d'objets de type `Path`, qui correspondent aux fichiers
 ````{admonition} paramètres keyword-only
 
 dans la correction, nous allons utiliser un trait qui s'appelle les paramètres *keyword-only*  
-car autant le premier paramètre a un rôle parfaitement clair, autant les deux autres sont relativement accessoires; aussi pour être sûr de ne pas se tromper, on va **imposer à l'appelant de les nommer**  
+car autant le premier paramètre a un rôle parfaitement clair, autant les deux autres sont relativement accessoires;  
+aussi pour être sûr de ne pas se tromper, on va **imposer à l'appelant de les nommer**  
 cela signifie qu'on ne pourra pas appeler
 
   ```python
@@ -207,7 +204,7 @@ path.parts
 ```
 
 ```{code-cell} ipython3
-# ou encore 
+# ou encore
 
 list(path.parents)
 ```
