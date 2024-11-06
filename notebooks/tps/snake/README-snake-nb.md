@@ -20,40 +20,55 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 
 # Le snake
 
-pour réaliser ce TP localement sur votre ordi, {download}`commencez par télécharger le zip<./ARTEFACTS-snake.zip>`
+````{admonition} pas besoin de zip
+pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML, qui contient le code de démarrage
+````
 
 Le but de ce TP est de réaliser un petit jeu en Python. L'objectif est de vous
 apprendre à concevoir et réaliser un programme complet, et non de réaliser le
 nouveau best-seller.
 
-**avertissement** ce document n'est pas un notebook (et le code ne va pas
-marcher dans un notebook non plus); on peut le lire avec jupyter mais c'est
-sous-optimal, le mieux est le lire avec vs-code, ou en HTML statique.
+Gardez en tête que votre objectif est de réaliser un **programme qui marche**, et
+pas un programme parfait.
 
-
+<!-- #region -->
 ## Objectifs et démarche
 
-Gardez en tête que votre objectif est de réaliser un **programme qui marche** et
-pas un programme parfait.  
-Aussi on va commencer par se créer un dossier vierge, et l'initialiser **comme un
-dépôt `git`** (on fait comment déjà ?)
+on va commencer par se créer un dossier vierge
 
 ```bash
 $ mkdir mysnake
 $ cd mysnake
-$ # et là on crée un dépôt git avec ??
 ```
 
-Et ensuite, on va bien faire attention de **committer chaque fois** qu'on aura
-**une version qui marche**  
-c'est-à-dire dans ce TP très guidé, **un commit par
-étape** en gros !
+````{admonition} un dépôt git
 
-Et comme ça quand on aura un bug on pourra se concentrer sur **ce qui a changé**
-depuis la version qui marchait
+si vous êtes déjà dans un dépôt git (par exemple le dépôt pour rendre vos devoirs), pas de souci;  
+dans le cas contraire (ou si vous êtes dans un dépôt de cours), il vous faut
+initialiser le dossier `mysnake` **comme un dépôt `git`** (on fait comment déjà ?)
+````
+<!-- #endregion -->
+
+## Mode d'emploi
+
+Votre travail se passe exclusivement **dans un seul fichier `snake.py`**,
+que vous allez d'abord créer avec vs-code - à partir du code de démarrage -
+puis modifier (et le moins possible d'ailleurs) à chaque étape
+
+````{admonition} pas de Jupyter
+:class: warning 
+
+le code ne va pas fonctionner dans un notebook Jupyter !  
+vous êtes invités à travailler directement dans vs-code - et c'est l'occasion d'apprendre à s'en servir un peu mieux
+````
+
+Et ensuite, on va bien faire attention de **committer chaque fois** qu'on aura **une version qui marche**  
+c'est-à-dire dans ce TP très guidé, **un commit par étape** en gros !
+
+Et comme ça quand on aura un bug on pourra se concentrer sur **ce qui a changé** depuis la version qui marchait
 
 Enfin si vous créez votre dépôt à l'intérieur d'un autre dépôt (de cours par
-exemple), reportez-vous à la toute dernière section pour comprendre comment `ca
+exemple), reportez-vous à la toute dernière section pour comprendre comment ça
 fonctionne.
 
 Mais avant de pouvoir commencer, un peu de préparation...
@@ -69,14 +84,19 @@ Commencez par créer et activer un environnement dédié au TP:
 ```bash
 # on commence par créer un environnement "snake"
 (base) $ conda create -n snake python=3.12
+
 # puis on l'active
 (base) $ conda activate snake
+
 # votre terminal doit indiquer le nom d'environnement:
 (snake) $
 ```
 
-**NOTE** si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le
-prompt de bash pour vous rappeler en permanence dans quel environnement on se
+````{admonition} le prompt doit vous montrer l'environnement actif
+:class: danger
+
+si vous ne voyez pas, comme montré ici, le `(snake)` affiché dans le
+*prompt* de bash pour vous rappeler en permanence dans quel environnement on se
 trouve, il vous faut taper ceci avant de relancer un terminal
 
 ```bash
@@ -85,8 +105,9 @@ $ conda init bash
 
 Reportez-vous plus bas pour une liste des commandes qui nous permettent de gérer
 les environnements virtuels conda.
+````
 
-
+<!-- #region -->
 ## Prérequis
 
 Installez ensuite la dernière version du module `pygame` avec `pip`:
@@ -105,9 +126,10 @@ soyez patient lors du premier lancement, la librairie initialise des tas de chos
 
 Sachez aussi que vous pouvez aussi voir la version installée d'une librairie avec
 
-```bash
-(snake) pip show snake
 ```
+(snake) pip show pygame
+```
+<!-- #endregion -->
 
 ## Code de démarrage (v0)
 
@@ -191,18 +213,23 @@ disant comment réagir aux clicks sur le clavier ou sur la fenêtre:
 ```{literalinclude} v1.py
 ```
 
+- lisez bien ce code
+- éventuellement regardez la différence avec la v0
+  - pour cela dans vs-code il y a la fonction *File: Compare active file with ...*
+- et faites-le tourner pour voir le changement de comportement
+
 et on n'oublie pas de faire un commit...
 
 <!-- #region -->
-## Le damier
+## Le damier (v2)
 
 Nous allons commencer par construire notre plateau de jeu ainsi:
 
 - le plateau de jeu est découpé en 30x30 cases
 - chaque case fait 20 pixels de côté
 
-Pour valider le bon fonctionnement de ce plateau de jeu, écrivez un programme
-qui dessine un grille (vous pouvez ben sûr choisir d'autres couleurs):
+pour la v2 vous devez remplacer dans la v1 le code qui affiche (la couleur ranfom) 
+pour obtenir le damier ci-dessous (vous pouvez bien sûr choisir d'autres couleurs):
 
 ```{image} media/damier.png
 :align: center
@@ -213,22 +240,35 @@ pour cela, vous pouvez utiliser la méthode
 qui dessine un rectangle:
 
 ```python
+# une recette pour dessiner un rectangle:
+
 # les coordonnées de rectangle que l'on dessine
-x = 100 # coordonnée x (colonnes) en pixels
-y = 100 # coordonnée y (lignes) en pixels
-width = 30 # largeur du rectangle en pixels
-height = 30 # hauteur du rectangle en pixels
+x, y = 100, 200            # les coordonnées du coin du rectangle (en pixels)
+
+# la taille du rectangle
+width, height = 20, 20     # largeur et hauteur du rectangle, toujours en pixels
+
+# on crée un objet 'Rect'
 rect = pg.Rect(x, y, width, height)
-# appel à la méthode draw.rect()
-color = (255, 0, 0) # couleur rouge
+
+# la couleur de remplissage
+color = (255, 0, 0)        # couleur rouge
+
+# et on le dessine comme ceci dans l'écran virtuel
 pg.draw.rect(screen, color, rect)
 ```
 
+````{admonition} conseils
+- il peut être utile d'écrire une fonction qui afficher tout le damier
+- il peut être utile de se définir des variables pour le nombre de tuiles et les dimensions des tuiles
+````
+
 une fois que ça marche, vous faites quoi ?
+
 <!-- #endregion -->
 
 <!-- #region -->
-## Un serpent fixe
+## Un serpent fixe (v3)
 
 À partir de maintenant, on va garder le damier comme fond d'écran (même si les
 illustrations ne le montrent pas)
@@ -254,16 +294,23 @@ totalement arbitraire et pas du tout imposé) :
 ```
 <!-- #endregion -->
 
-## Un serpent qui bouge
+## Un serpent qui bouge (v4)
 
-Ensuite, nous allons faire bouger le serpent.
-C'est en fait très simple:
+Ensuite, nous allons faire bouger le serpent. C'est en fait très simple:
+
 - nous créons un vecteur de "direction"
   ```python
   direction = (1, 0)
   ```
 - à chaque itération de la boucle, nous pouvons déplacer le serpent dans cette
   direction en "ajoutant" ce vecteur à la position de la tête du serpent
+
+dans la v4 donc, le serpent avance vers la droite à chaque itération, mais on ne peut pas encore le controler
+
+n'oubliez pas de *commit*
+
+
+## On peut contrôler la direction (v5)
 
 Une fois que le serpent bouge, ajouter les commandes pour se déplacer dans les 4
 directions, en cliquant sur les flèches (par exemple le code renvoyé par la
@@ -278,7 +325,7 @@ Aussi on peut commencer à envisager d'accélérer un peu le jeu à ce stade...
 ```
 
 
-## Le fruit
+## Le fruit (v6)
 
 Il faut maintenant faire manger notre serpent.
 On va procéder comme suit:
@@ -297,7 +344,7 @@ On va procéder comme suit:
 ```
 
 
-## Épilogue
+## Épilogue (v7)
 
 Il nous reste deux petits changements pour avoir un serpent complètement fonctionnel:
 
@@ -417,7 +464,7 @@ Voici un très rapide résumé des commandes pour gérer ses environnements virt
 
   **remarquez** comment il n'y a pas de `env` pour `create`, mais il en faut un pour `remove` ...
 
-
+<!-- #region -->
 ## Note à propos des dépôts git imbriqués
 
 Si vous avez reçu ce TP depuis un dépôt git (celui de votre cours d'info), ce
@@ -434,8 +481,7 @@ trouver le "bon" dépôt, on utilise assez naturellement l'algo suivant:
 > on regarde si le dossier courant est un dépôt git, si oui on a trouvé, sinon on
   regarde dans le dossier parent, et ainsi de suite
 
-Donc c'est assez simple, mais surtout au tout début,
-faites juste attention à ne pas ajouter vos fichiers dans le mauvais dépôt
+Donc c'est assez simple, mais faites juste **attention à ne pas ajouter vos fichiers dans le mauvais dépôt**
 
 Dernière astuce pour les *geeks*: si vous voulez savoir où se trouve la racine
 de votre dépôt courant:
@@ -446,3 +492,4 @@ git config --global alias.root "rev-parse --show-toplevel"
 
 après quoi vous pourrez taper n'importe où `git root` pour voir s'afficher le
 (chemin complet du) dossier racine de votre dépôt.
+<!-- #endregion -->
