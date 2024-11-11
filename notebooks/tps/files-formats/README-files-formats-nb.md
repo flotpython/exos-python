@@ -232,6 +232,14 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 - lisez le fichier `tiny.yaml`
 - comment peut-on comparer avec JSON ?
 
+```{admonition} et avec annotations ?
+
+en option: par défaut le format YAML permet de stocker - comme JSON - les types communs aux autres langages, 
+i.e. booléens, nombres, chaines, listes et dictionnaires; il est possible aussi de stocker des types un peu moins communs comme le tuple et l'ensemble, au prix d'une gymnastique déjà un peu oins facile d'accès; arrivez-vous à lire le fichier `small-annotated.yaml` ?  
+ça peut demander une plangée dans SO (stackoverflow)...
+
+```
+
 
 ### et aussi: les csv
 

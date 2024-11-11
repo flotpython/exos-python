@@ -1,21 +1,17 @@
 # this format supports comments
+# we can easily create a dictionary
 a:
+# and lists of values
 - 0
 - 1
 - 2
-# and annotations: here we save a tuple
-b: !!python/tuple
-- 3
-- 4
-- 5
-# and a set
-12: !!set
-  6: null
-  7: null
-  8: null
-# and even a tuple as a dictionary key
-? !!python/tuple
-- 2
-- 5
-: 0: true
+b:
+- three
+- four
+- five
+# booleans are treated a bit differently
+c:
+  zero: false
   1: false
+  two: no
+  3: yes
