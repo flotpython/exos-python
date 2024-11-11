@@ -315,7 +315,7 @@ def to_graphviz(graph, engine='dot'):
         gv = graphviz.Digraph(engine=engine)
         for s, adj in graph.items():
             for d, w in adj.items():
-                gv.edge(s, d, label=str(w))
+                gv.edge(s, d, label=str(w) if w != 1 else None)
         return gv
     except Exception as exc:
         print("oops:", exc)

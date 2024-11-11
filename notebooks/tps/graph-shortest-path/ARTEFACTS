@@ -1,3 +1,4 @@
 README-graph-shortest-path-nb.md
-data/
+data/[a-z]*.csv
+data/*.json
 media/
