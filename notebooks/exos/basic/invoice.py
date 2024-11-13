@@ -16,7 +16,6 @@ def center_address(address: str) -> str:
     for line in address.split("\n"):
         if not line:
             continue
-        line = line.replace("\n", "")
         result += f"{line:^{WIDTH}}" + NL
     return result
 
@@ -28,7 +27,7 @@ def generate_invoice(items, company_address, thanks=DEFAULT_THANKS, currency='â‚
     result += center_address(company_address)
     result += WIDTH * '+' + NL
 
-    right, middle, left = "Product Name", "#", "Item Price"
+    left, middle, right = "Product Name", "#", "Item Price"
     result += f"{left:>{LEFT}}{middle:^{MIDDLE}}{right:<{RIGHT}}" + NL
     total = 0.
     for what, unit_price, how_many in items:
