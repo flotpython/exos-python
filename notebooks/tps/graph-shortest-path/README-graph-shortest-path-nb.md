@@ -1163,9 +1163,9 @@ P = planar(N)
 ```
 
 ```{code-cell} ipython3
-# encore *2 
-# de l'ordre de 11s !
-# bref c'est inutilisable en vrai !
+# je change encore d'échelle - cette fois c'est de l'ordre de 11s ! 
+# (je le commente du coup..., mais vous pouvez le réactiver)
+# bref cet algo est inutilisable en vrai !
 
 N = 80
 P = planar(N)
