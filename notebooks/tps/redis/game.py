@@ -24,7 +24,7 @@ def main():
 
     # player's name as provided on the command line
     local_player_name = args.name
-    pg.display.set_caption(f"multi-game: {local_player_name}")
+    pg.display.set_caption(f"game: {local_player_name}")
 
 
     screen = Screen()
