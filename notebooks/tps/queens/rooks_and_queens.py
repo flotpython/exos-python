@@ -92,6 +92,9 @@ def generator_size(gen):
     return sum(1 for _ in gen)
 
 
+# in this part we call
+# - position a tuple of ints
+# - np a numpy array
 
 import numpy as np
 
