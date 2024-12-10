@@ -35,3 +35,6 @@ ipykernel
 
 # for updating nbhosting toc from jupyter book
 ruamel.yaml
+
+# for unicode boxes
+colorama
