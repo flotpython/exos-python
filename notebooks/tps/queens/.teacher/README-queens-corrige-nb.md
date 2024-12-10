@@ -115,7 +115,10 @@ par le tuple `(0, 4, 1, 2, 3)` qui donne les coordonnées en Y dans les colonnes
 # prune-cell
 from rooks_and_queens import *
 
-draw_position((0, 4, 1, 2, 3), "../media/coordinates.svg")
+# install this one manually in ../media if relevant
+# otherwise it keeps creating false diffs in git
+#draw_position((0, 4, 1, 2, 3), "../media/coordinates.svg")
+draw_position((0, 4, 1, 2, 3), "../coordinates.svg")
 ```
 
 ### ce qu'on doit pouvoir faire
