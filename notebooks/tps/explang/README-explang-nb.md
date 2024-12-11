@@ -20,7 +20,7 @@ nbhosting:
 
 +++
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-expressions-lang.zip>`
+pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-explang.zip>`
 
 +++
 
@@ -69,27 +69,29 @@ Dans ce monde-là, on représentera par exemple
   par l'arbre 
   
   ```
-  Multiply(Plus(Integer(30), Integer(40), Integer(50)),
-           Minus(Integer(20), Integer(15)))
+  Multiply(
+      Plus(Integer(30), Integer(40), Integer(50)),
+      Minus(Integer(20), Integer(15)))
   ```
                      
 * et le fragment `(4 + 1.) / -(4. + 12)`  
   par l'arbre 
   
   ```
-  Divide(Plus(Integer(4), Float(1)),
-         Negative(Plus(Float(4.), Integer(12))))
+  Divide(
+      Plus(Integer(4), Float(1)),
+      Negative(
+          Plus(Float(4.), Integer(12))))
   ```
 
 +++
 
 ###  v2 : variables et affectations
     
-Si on souhaite sophistiquer un peu davantage, on peut introduire l'affectation comme une expression.  
+Si on souhaite sophistiquer un peu davantage, on peut introduire l'affectation comme une expression  
+(ce qui rappelons-le n'est pas le cas en Python, ou plutôt c'est seulement le cas avec le *walrus* operator `:=`)  
 
-Pour digresser légèrement, on rappelle d'ailleurs que l'affectation usuelle en Python est une instruction et pas une expression (il y a d'ailleurs un nouvel opérateur en Python-3.8, qui se note `:=` et qui s'appelle le *walrus operator*, qui comble cette lacune).
-
-Nous nous écartons donc ici légèrement de la sémantique de Python, en décidant que dans notre langage une affectation est une expression, comme c'est le cas dans de nombreux langages réels (C++, Javascript,…)
+Nous nous écartons donc ici légèrement de la sémantique de Python, en décidant que dans notre langage une affectation est une expression, comme c'est le cas dans de nombreux langages réels (C, C++, Javascript,…)
   
 Dans ce monde-ci, on ajoute 3 opérateurs : *Expressions*, *Assign* et *Variable*  
 et munis de ce vocabulaire on peut maintenant représenter
@@ -101,8 +103,9 @@ et munis de ce vocabulaire on peut maintenant représenter
   ```  
 * par l'arbre  
   ```
-  Expressions(Assign(Variable(a), Int(20)),
-              Plus(Variable(a), Int(1)))
+  Expressions(
+      Assign(Variable(a), Int(20)),
+      Plus(Variable(a), Int(1)))
   ```
 
 +++
@@ -131,9 +134,11 @@ expression.eval()
 
 Parmi ce qui est attendu:
 * on s'efforcera de **factoriser au maximum le code**, et d'éviter dans toute la mesure du possible les répétitions fastidieuses  
-  c'est tout l'objectif de cet exercice, on veut produire un code maintenable (pas de répétition), et dans lequel on puisse facilement ajouter des *features* (nouveaux opérateurs notamment).
-* on vous demande à la construction des objets de vérifier qu'on **appelle** le **constructeur** avec un **nombre d'arguments correct**, et lancer une **exception `TypeError` sinon** (comme le fait Python lorsqu'on appelle une fonction avec un mauvais nombre d'arguments)  
-  (voyez tout à la fin du notebook un tableau récapitulatif des nombres d'arguments)
+  c'est tout l'objectif de cet exercice, on veut produire un code maintenable (pas de répétition),
+  et dans lequel on puisse facilement ajouter des *features* (nouveaux opérateurs notamment).
+* on vous demande à la construction des objets de vérifier qu'on **appelle** le **constructeur** avec un **nombre d'arguments correct**,  
+  et de lancer une **exception `TypeError` sinon** (comme le fait Python lorsqu'on appelle une fonction avec un mauvais nombre d'arguments)  
+  voyez tout à la fin du notebook un tableau récapitulatif des nombres d'arguments
 
 +++
 
@@ -141,7 +146,20 @@ Parmi ce qui est attendu:
 
 +++
 
-Pour vous convaincre que vous avez bien répondu à la question, nous fournissons quelques cellules de test.
+Pour vous convaincre que vous avez bien répondu à la question, et vous aider à debugger, nous fournissons quelques cellules de test directement dans le notebook.
+
+Une fois que vous êtes satisfait de votre code, vous pouvez optionnellement:
+- mettre votre dans un fichier `explangv1.py`
+- et importer son contenu dans le notebook en faisant
+  `from explangv1 import (Plus, Multiply, ...)
+- de façon à pouvoir le tester automatiquement avec `pytest` en faisant
+  ```bash
+  pytest test_explangv1.py
+  ```
+
+```{admonition} autoreload
+cette approche fonctionne très bien mais il est crucial d'avoir **mis en place l'*autoreload*** pour que le notebook recharge votre code lorsque vous le modifiez par l'éditeur
+```
 
 +++
 

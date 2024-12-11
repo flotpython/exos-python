@@ -5,7 +5,7 @@
 # are considered test cases
 
 # the code to test
-from expressionsv2 import (
+from explangv2 import (
     Integer, Float, Negative, Plus, Minus, Multiply, Divide,
     Expressions, Assignment, Variable
     )
