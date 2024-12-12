@@ -63,14 +63,20 @@ on met à votre disposition **deux serveurs** `ollama`:
 
 ## objectif
 
-ce qu'on veut faire, c'est fabriquer une UI sommaire qui permet de choisir le serveur, le modèle, et de poser ensuite des questions comme avec chatGPT
+ce qu'on veut faire, c'est fabriquer une UI sommaire qui permet
+- de choisir le serveur,
+- de choisir le modèle,
+- et de poser ensuite des questions comme avec chatGPT
+- enfin sur cette implémentation on a également un bouton qui permet d'enabler le *streaming*
+  l'idée consiste à afficher les résultats "au fur et à mesure" plutôt qu'en une seule fois à la fin de l'échange avec le serveur, on en reparlera...
+
+
+ça pourrait ressembler à ceci:
 
 ```{image} media/chatbot-sample.png
 :align: center
-:width: 500px
+:width: 600px
 ```
-
-sur cette implémentation on a également un bouton qui permet d'enabler le *streaming*, l'idée consiste à afficher les résultats "au fur et à mesure" plutôt qu'en une seule fois à la fin de l'échange avec le serveur, on en reparlera...
 
 +++
 
@@ -117,19 +123,34 @@ vous aurez envie de *bookmark* ces entrées dans la doc, pour plus d'info:
 * <https://flet.dev> le point d'entrée principal
 * <https://flet.dev/docs/controls> pour les détails des objets disponibles
 
+````{admonition} python ou flet run
+:class: dropdown
+
+on peut **aussi* lancer le programme de manière plus traditionnelle avec juste `python chatbot.py`  
+mais dans ce cas on n'a pas le *hot reload* et  l'usage c'est une grosse différence de confort !  
+en outre il est conseillé de regarder les possibilités offertes par la CLI (i.e. le programme `flet`)
+qui permet de faire **aussi** d'autres choses très utiles:
+```{image} media/flet-help.png
+:width: 400px
+```
+````
+
 +++
 
 ## pour les forts
 
-si cet énoncé vous inspire, vous pouvez simplement suivre votre voie pour développer l'application
-
-sinon pour les autres, voici un chemin possible pour y arriver; évidemment je vous donne ces étapes **entièrement à titre indicatif**
-
+si cet énoncé vous inspire, vous pouvez simplement suivre votre voie pour développer l'application  
+sinon pour les autres, voici un chemin possible pour y arriver; évidemment je vous donne ces étapes **entièrement à titre indicatif**  
 bref, dans tous les cas, n'hésitez pas à faire comme vous le sentez...
 
 +++
 
 ## v02: ajoutons un titre
+
+```{image} media/chatbot-02.png
+:width: 400px
+:align: right
+```
 
 pour vous familiariser avec le modèle de lignes et colonnes de `flet`, **ajoutez un titre principal**, comme sur l'illustration
 
@@ -156,6 +177,11 @@ ceci est une étape **totalement optionnelle**, mais je vous recommande de **cr�
 +++
 
 ## v04: une classe `History`
+
+```{image} media/chatbot-04.png
+:width: 400px
+:align: right
+```
 
 toujours pour éviter de finir avec un gros paquet de spaguettis, on pourrait imaginer à ce stade **écrire une classe `History`** (tout ceci est totalement indicatif...) qui:
 
@@ -188,6 +214,11 @@ quelques indices:
 
 ## v06: on affiche la réponse
 
+```{image} media/chatbot-06.png
+:width: 400px
+:align: right
+```
+
 dans cette version, on utilise la réponse du serveur pour **afficher le dialogue** dans notre application  
 pour cela on va devoir faire quelques modifications à la classe `History`; en effet vous devez avoir observé à ce stade que la réponse vient "en petits morceaux", ce qui fait qu'on pourrait avoir envie de modifier un peu la classe `History` de sorte qu'elle expose à présent les méthodes
 
@@ -204,6 +235,11 @@ pour cela voyez dans `flet` l'attribut `disabled`
 +++
 
 ## v08: supporter le mode *streaming*
+
+```{image} media/chatbot-08.png
+:width: 400px
+:align: right
+```
 
 une requête HTTP "classique" est d'une grande simplicité: on envoie une requête, on reçoit une réponse  
 dans notre cas toutefois, ce modèle n'est pas tout à fait adapté, car l'IA met du temps à élaborer sa réponse, et on aimerait mieux **voir la réponse au fur et à mesure**, plutôt que de devoir attendre la fin, qui est le comportement que vous obeservez si vous avez suivi mes indications jusqu'ici  
@@ -235,9 +271,24 @@ c'est juste une question d'ajouter, dans l'appel à `requests.post`, un paramèt
 
 ## v10 (optionnel): acquérir la liste des modèles
 
+```{image} media/chatbot-10.png
+:width: 400px
+:align: right
+```
+
 plutôt que de proposer une liste de modèles "en dur" comme dans le *starter code*, on pourrait à ce stade **acquérir**, auprès du serveur choisi, la **liste des modèles** connus; pour cela `ollama` met à notre disposition l'API `/api/tags`
 
 dans mon implémentation j'ai choisi de "cacher" ce résultat, pour ne pas redemander plusieurs fois cette liste à un même serveur (cette liste bouge très très peu...); mais c'est optionnel; par contre ce serait sympa pour les utilisateurs de conserver, lorsque c'est possible, le modèle choisi lorsqu'on change de serveur...
+
++++
+
+## plein d'améliorations possibles
+
+en vrac:
+
+- ajouter un bouton "Cancel" - en fait idéalement on en aurait besoin le plus tôt possible car le développement peut vite devenir fastidieux (ne pas hésiter à quitter et relancer); mais le truc c'est que c'est non trivial à faire en fait !
+- ou pourrait imaginer soumettre le même prompt à plusieurs modèles pour les comparer
+- etc...
 
 +++
 
