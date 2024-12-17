@@ -15,6 +15,13 @@ nbhosting:
   title: "cr\xE9ation de facture"
 ---
 
+<div class="licence">
+<span>Licence CC BY-NC-ND</span>
+<span>Thierry Parmentelat & Arnaud Legout</span>
+</div>
+
++++
+
 # génération de facture
 
 +++
