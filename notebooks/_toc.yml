@@ -39,6 +39,7 @@ parts:
   - file: tps/queens/README-queens-nb
 - caption: TPs classes
   chapters:
+  - glob: exos/basic/EXO-class-sort-hash-nb
   - glob: tps/students-grades/README*
   - glob: tps/auctions/README*
   - glob: tps/unicode-boxes/README*
