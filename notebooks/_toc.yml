@@ -42,7 +42,7 @@ parts:
   - glob: tps/students-grades/README*
   - glob: tps/auctions/README*
   - glob: tps/unicode-boxes/README*
-  - glob: tps/expressions-lang/README*
+  - glob: tps/explang/README*
 - caption: TPs graphes
   chapters:
   - glob: tps/graph-bfs-dfs/README*
