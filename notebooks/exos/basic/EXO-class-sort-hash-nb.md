@@ -22,7 +22,7 @@ nbhosting:
 
 +++
 
-# une classe sortable et hashable
+# EXO: classe sortable et hashable
 
 
 ## hashable
