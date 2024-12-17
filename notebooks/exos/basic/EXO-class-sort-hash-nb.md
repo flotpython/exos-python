@@ -17,7 +17,7 @@ nbhosting:
 
 <div class="licence">
 <span>Licence CC BY-NC-ND</span>
-<span>Thierry Parmentelat &amp; Arnaud Legout</span>
+<span>Thierry Parmentelat</span>
 </div>
 
 +++
