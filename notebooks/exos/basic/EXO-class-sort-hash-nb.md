@@ -74,4 +74,4 @@ class Class:
 ## Indices
 
 * voir le cours ici
-  https://ue12-p24-python.readthedocs.io/en/p24/4-2-dunder-specials-nb.html#classe-sortable-obj-obj2
+  <https://ue12-p24-python.readthedocs.io/en/p24/4-2-dunder-specials-nb.html#classe-sortable-obj-obj2>
