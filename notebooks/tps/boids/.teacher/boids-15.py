@@ -1,5 +1,6 @@
 """
-display a single object, inert, at (100, 100)
+each boid is made aware of its sibling boids
+and avoids them as well
 """
 
 import math

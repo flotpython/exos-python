@@ -1,4 +1,5 @@
 """
+simplest possible starting code with one motionless boid
 display a single object, inert, at (100, 100)
 """
 

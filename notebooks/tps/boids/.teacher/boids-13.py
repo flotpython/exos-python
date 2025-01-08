@@ -1,5 +1,6 @@
 """
-display a single object, inert, at (100, 100)
+the boid's speed can be controlled with the arrow keys
+UP and DOWN to speed it up or slow it down
 """
 
 import math

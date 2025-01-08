@@ -1,5 +1,6 @@
 """
-display a single object, inert, at (100, 100)
+use keyboard left and right arrows
+to control boid's direction
 """
 
 import math

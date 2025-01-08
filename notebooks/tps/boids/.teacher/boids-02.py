@@ -1,5 +1,5 @@
 """
-display a single object, inert, at (100, 100)
+Window has a self.boids instead of a self.boid
 """
 
 import arcade

@@ -1,5 +1,5 @@
 """
-display a single object, inert, at (100, 100)
+soften the impact that avoidance has on current heading
 """
 
 import math

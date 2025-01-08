@@ -1,5 +1,6 @@
 """
-display a single object, inert, at (100, 100)
+replace the single centered obstacle
+with a grid of obstacles
 """
 
 import math

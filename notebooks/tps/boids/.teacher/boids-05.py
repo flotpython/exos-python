@@ -1,5 +1,5 @@
 """
-display a single object, inert, at (100, 100)
+add noise on the Boid's angle
 """
 
 import math

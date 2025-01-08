@@ -1,5 +1,6 @@
 """
-display a single object, inert, at (100, 100)
+the boid is made aware of the obstacles
+and it changes its opacity when close to one
 """
 
 import math

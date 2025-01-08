@@ -1,5 +1,5 @@
 """
-display a single object, inert, at (100, 100)
+class Boid: the boid moves at constant speed and heading
 """
 
 import math

@@ -1,5 +1,5 @@
 """
-display a single object, inert, at (100, 100)
+add one obstacle at the center
 """
 
 import math
