@@ -269,7 +269,7 @@ ceci est beaucoup plus facile à utiliser si le boid continue de tourner pendant
 ### v07: ajouter un obstacle
 
 ajoutez un unique obstacle, immobile, par exemple au centre du jeu  
-vous trouverez une image media/obstacle-resized.png` pour le matérialiser
+vous trouverez une image `media/obstacle-resized.png` pour le matérialiser
 
 **2 options**
 * on pourrait facilement s'en sortir avec juste la classe `Sprite`
