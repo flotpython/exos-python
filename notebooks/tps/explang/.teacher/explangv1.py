@@ -11,25 +11,36 @@ A small expressions language
 from operator import neg, add, sub, mul, truediv
 
 
-class Atom:
+class Expression:
+    """
+    the root of all expression classes
+    useful for type checking - search for isinstance below
+    that is its only purpose though
+    """
+    pass
+
+
+
+class Atom(Expression):
     """
     a class to implement an atomic value,
     like an int, a float, a str, ...
 
     in order to be able to use this,
-    child classes need to provide self.type
-    that should be a class like int or float
+    child classes need to provide self.implementation_type
+    that should be a Python class - like typically int or float
     or similar whose constructor expects one arg
     """
     def __init__(self, value):
-        self.value = self.type(value)
+        # convert the argument into the specific class implementation type
+        self.value = self.implementation_type(value)
 
     def eval(self):
         return self.value
 
 
 
-class Unary:
+class Unary(Expression):
     """
     the mother of all unary operators
 
@@ -38,6 +49,9 @@ class Unary:
     which is expected to be a 1-parameter function
     """
     def __init__(self, operand):
+        classname = self.__class__.__name__
+        if not isinstance(operand, Expression):
+            raise TypeError(f"passing a non-Expression object in {classname} is not supported")
         self.operand = operand
 
     def eval(self):
@@ -56,7 +70,7 @@ class Unary:
 # we can factor true binary (minus and divide) with n-ary (plus and mult)
 # if we're a little careful about how we do the evaluation
 
-class MultiAry:
+class MultiAry(Expression):
     """
     the mother of all binary or n-ary operators
 
@@ -73,6 +87,9 @@ class MultiAry:
         classname = self.__class__.__name__
         if not self.arg_checker(nargs):
             raise TypeError(f"passing {nargs} arguments in {classname} is not supported")
+        for child in children:
+            if not isinstance(child, Expression):
+                raise TypeError(f"passing a non-Expression object in {classname} is not supported")
         self.children = children
 
     def eval(self):
@@ -104,10 +121,10 @@ class Nary(MultiAry):
 # and with all that in place the code for adding new operators becomes
 
 class Integer(Atom):
-    type = int
+    implementation_type = int
 
 class Float(Atom):
-    type = float
+    implementation_type = float
 
 
 class Negative(Unary):

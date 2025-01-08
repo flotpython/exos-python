@@ -11,25 +11,41 @@ A small expressions language, with variables
 from operator import neg, add, sub, mul, truediv
 
 
-class Atom:
+class Expression:
+    """
+    the root of all expression classes
+    useful for type checking - search for isinstance below
+
+    in this second version we take advantage of this class to factorize
+    this type-checking oriented snippet
+    """
+
+    def check_is_expression(self, expression):
+        classname = self.__class__.__name__
+        if not isinstance(expression, Expression):
+            raise TypeError(f"passing a non-Expression object in {classname} is not supported")
+
+
+class Atom(Expression):
     """
     a class to implement an atomic value,
     like an int, a float, a str, ...
 
     in order to be able to use this,
-    child classes need to provide self.type
-    that should be a class like int or float
+    child classes need to provide self.implementation_type
+    that should be a Python class - like typically int or float
     or similar whose constructor expects one arg
     """
     def __init__(self, value):
-        self.value = self.type(value)
+        # convert the argument into the specific class implementation type
+        self.value = self.implementation_type(value)
 
     def eval(self, env):
         return self.value
 
 
 
-class Unary:
+class Unary(Expression):
     """
     the mother of all unary operators
 
@@ -38,6 +54,7 @@ class Unary:
     which is expected to be a 1-parameter function
     """
     def __init__(self, operand):
+        self.check_is_expression(operand)
         self.operand = operand
 
     def eval(self, env):
@@ -56,7 +73,7 @@ class Unary:
 # we can factor true binary (minus and divide) with n-ary (plus and mult)
 # if we're a little careful about how we do the evaluation
 
-class MultiAry:
+class MultiAry(Expression):
     """
     the mother of all binary or n-ary operators
 
@@ -73,6 +90,8 @@ class MultiAry:
         classname = self.__class__.__name__
         if not self.arg_checker(nargs):
             raise TypeError(f"passing {nargs} arguments in {classname} is not supported")
+        for child in children:
+            self.check_is_expression(child)
         self.children = children
 
     def eval(self, env):
@@ -104,10 +123,10 @@ class Nary(MultiAry):
 # and with all that in place the code for adding new operators becomes
 
 class Integer(Atom):
-    type = int
+    implementation_type = int
 
 class Float(Atom):
-    type = float
+    implementation_type = float
 
 
 class Negative(Unary):
@@ -142,7 +161,7 @@ class Divide(Binary):
 
 # and the new guys
 
-class Variable:
+class Variable(Expression):
     def __init__(self, name):
         self.name = name
 
@@ -153,10 +172,12 @@ class Variable:
         return env[self.name]
 
 
-class Expressions:
+class Expressions(Expression):
     # make sure there is at least one expression
     def __init__(self, mandatory, *others):
         self.children = (mandatory, *others)
+        for child in self.children:
+            self.check_is_expression(child)
 
     def eval(self, env):
         """
@@ -167,10 +188,11 @@ class Expressions:
         return result
 
 
-class Assignment:
+class Assignment(Expression):
     def __init__(self, name, expr):
         self.name = name
         self.expr = expr
+        self.check_is_expression(expr)
 
     def eval(self, env):
         """
