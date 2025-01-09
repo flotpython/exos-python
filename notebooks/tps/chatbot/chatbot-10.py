@@ -131,6 +131,8 @@ class ChatbotApp(ft.Column):
         print("HTTP status code:", answer.status_code)
         raw = answer.json()
         models = [ record['name'] for record in raw['models'] ]
+        # for usability: sort the models alphabetically
+        models.sort()
         print(f"For model {self.server.value}, received models:", models)
         self.models_per_server[self.server.value] = models
 
