@@ -106,6 +106,8 @@ class Window(arcade.Window):
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol in (arcade.key.LEFT, arcade.key.RIGHT):
             self.boids[0].steer_neutral()
+        else:
+            return super().on_key_release(symbol, modifiers)
 
 
 window = Window()

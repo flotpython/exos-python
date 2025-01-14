@@ -162,6 +162,8 @@ class Window(arcade.Window):
             self.boids[0].steer_neutral()
         elif symbol in (arcade.key.UP, arcade.key.DOWN):
             self.boids[0].speed_neutral()
+        else:
+            return super().on_key_release(symbol, modifiers)
 
 
 window = Window()
