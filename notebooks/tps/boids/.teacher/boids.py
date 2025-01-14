@@ -318,6 +318,12 @@ class Window(arcade.Window):
             pos_x, pos_y = OBSTACLES_RADIUS * math.cos(angle), OBSTACLES_RADIUS * math.sin(angle)
             self.obstacles.append(Obstacle(WIDTH//2+pos_x, HEIGHT//2+pos_y))
 
+    def remove_obstacles(self):
+        """
+        remove all obstacles
+        """
+        self.obstacles = SpriteList()
+
     def on_draw(self):
         arcade.start_render()
         self.boids.draw()
@@ -366,6 +372,10 @@ class Window(arcade.Window):
             global DEBUG
             DEBUG = not DEBUG
             self.display_current_settings()
+        elif symbol == arcade.key.KEY_0:
+            self.remove_obstacles()
+        elif symbol == arcade.key.KEY_1:
+            self.populate_obstacles()
         else:
             return super().on_key_release(symbol, modifiers)
 
@@ -431,6 +441,8 @@ use any of the following keyboard keys
 * SPACE to suspend/resume
 * f to slow down/speed up frame rate
 * d to toggle debugging
+* 0 remove all obstacles
+* 1 reinstate obstacles
 
 use the following mouse events
 * right-click to add obstacle
