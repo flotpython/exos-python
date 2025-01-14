@@ -29,6 +29,13 @@ SERVERS = [
 ]
 
 
+# a hardwired list of models 
+MODELS = [
+    "gemma2:2b",
+    "mistral:7b",
+]
+
+
 TITLE = "My first Chatbot"
 
 
@@ -49,8 +56,8 @@ def main(page: ft.Page):
     # the visual pieces
     streaming = ft.Checkbox(label="streaming", value=False)
     model = ft.Dropdown(
-        options=[ft.dropdown.Option(model) for model in ("llama2", "mistral", "gemma")],
-        value="llama2",
+        options=[ft.dropdown.Option(model) for model in MODELS],
+        value=MODELS[0],
         width=100,
     )
     server = ft.Dropdown(
