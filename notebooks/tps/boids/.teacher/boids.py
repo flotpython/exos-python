@@ -444,6 +444,8 @@ use any of the following keyboard keys
 * 0 remove all obstacles
 * 1 reinstate obstacles
 
+this version no longer has support for controlling the (first) boid
+
 use the following mouse events
 * right-click to add obstacle
 * shift-right-click to remove obstacle
