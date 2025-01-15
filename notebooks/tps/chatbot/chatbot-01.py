@@ -29,7 +29,7 @@ SERVERS = [
 ]
 
 
-# a hardwired list of models 
+# a hardwired list of models
 MODELS = [
     "gemma2:2b",
     "mistral:7b",
@@ -58,7 +58,7 @@ def main(page: ft.Page):
     model = ft.Dropdown(
         options=[ft.dropdown.Option(model) for model in MODELS],
         value=MODELS[0],
-        width=100,
+        width=300,
     )
     server = ft.Dropdown(
         options=[ft.dropdown.Option(server) for server in ("CPU", "GPU")],

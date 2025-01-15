@@ -30,6 +30,13 @@ SERVERS = [
 ]
 
 
+# a hardwired list of models
+MODELS = [
+    "gemma2:2b",
+    "mistral:7b",
+]
+
+
 TITLE = "My first Chatbot"
 
 
@@ -87,11 +94,9 @@ class ChatbotApp(ft.Column):
 
         self.streaming = ft.Checkbox(label="streaming", value=True)
         self.model = ft.Dropdown(
-            options=[
-                ft.dropdown.Option(model) for model in ("llama2", "mistral", "gemma")
-            ],
-            value="llama2",
-            width=100,
+            options=[ft.dropdown.Option(model) for model in MODELS],
+            value=MODELS[0],
+            width=300,
         )
         servernames = [s['name'] for s in SERVERS]
         self.server = ft.Dropdown(

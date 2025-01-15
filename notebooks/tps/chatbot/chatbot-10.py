@@ -27,6 +27,8 @@ SERVERS = [
     },
 ]
 
+# models are now fetched, no longer need for a global list
+
 
 TITLE = "My first Chatbot"
 
@@ -89,9 +91,7 @@ class ChatbotApp(ft.Column):
         self.streaming = ft.Checkbox(label="streaming", value=True)
 
         self.model = ft.Dropdown(
-            options=[
-                ft.dropdown.Option(model) for model in ("llama2", "mistral", "gemma")
-            ],
+            # options=[],
             width=300,
         )
 
@@ -130,6 +130,8 @@ class ChatbotApp(ft.Column):
         answer = requests.get(url, **extra_args)
         print("HTTP status code:", answer.status_code)
         raw = answer.json()
+        # for model in sorted(raw['models'], key=lambda record: record['name']):
+        #     print("Model:", model)
         models = [ record['name'] for record in raw['models'] ]
         # for usability: sort the models alphabetically
         models.sort()
@@ -147,7 +149,11 @@ class ChatbotApp(ft.Column):
             ft.dropdown.Option(model) for model in self.models_per_server[self.server.value]
         ]
         # preserve setting if possible, otherwise pick first one
-        self.model.value = current_model if current_model in available_models else available_models[0]
+        if current_model in available_models:
+            self.model.value = current_model
+        else:
+            # find the first model that does start with 
+            available_models[0]
         self.page.update()
 
     def submit(self, event):
