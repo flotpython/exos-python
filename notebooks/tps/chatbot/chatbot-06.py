@@ -52,7 +52,17 @@ class History(ft.Column):
     """
 
     def __init__(self):
-        super().__init__([ft.TextField(label="Type a message...")])
+
+        super().__init__(
+            [ft.TextField(label="Type a message...")],
+            # when we send several prompts the text goes down
+            # so make the column scrollable, and always at the bottom
+            scroll=ft.ScrollMode.AUTO,
+            auto_scroll=True,
+            # see https://stackoverflow.com/questions/77172817/items-not-scrolling-in-flet-gui
+            # required for scroll to work properly
+            expand=True,
+        )
 
     # insert material - prompt or answer - to allow for different styles
     def add_prompt(self, message):
@@ -102,7 +112,11 @@ class ChatbotApp(ft.Column):
         )
         super().__init__(
             [header, row, self.history],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            # same as above, the history column needs to know
+            # it is expected to take all the vertical space
+            expand=True,
+        )
 
 
     def submit(self, event):

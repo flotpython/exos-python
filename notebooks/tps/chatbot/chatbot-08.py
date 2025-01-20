@@ -51,12 +51,15 @@ class History(ft.Column):
     # need to pass the app object so we can invoke its submit method
     def __init__(self, app):
         self.app = app
-        super().__init__([
-            ft.TextField(
+        super().__init__(
+            [ft.TextField(
                 label="Type a message...",
                 on_submit=lambda event: self.app.submit(event),
-            )
-        ])
+            )],
+            scroll=ft.ScrollMode.AUTO,
+            auto_scroll=True,
+            expand=True,
+        )
 
     # insert material - prompt or answer - to allow for different styles
     def add_prompt(self, message):
@@ -108,7 +111,9 @@ class ChatbotApp(ft.Column):
         )
         super().__init__(
             [header, row, self.history],
-            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
+        )
         # a local attribute to prevent multiple submissions
         self.disabled = False
 
