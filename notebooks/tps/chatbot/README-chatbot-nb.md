@@ -173,7 +173,8 @@ ceci est une étape **totalement optionnelle**, mais je vous recommande de **cr�
   ```
   ````{admonition} page.update()
   :class: tip
-  on choisit de passer `page` au constructeur de l'objet, car avec *flet* il faut penser à *flush* les changements avec un `page.update()` - sinon les changements que l'on fait en mémoire ne sont pas répercutés dans l'affichage
+  on choisit de passer `page` au constructeur de l'objet, car avec *flet* il faut penser à *flush* les changements avec un `page.update()` - sinon les changements que l'on fait en mémoire ne sont pas répercutés dans l'affichage  
+  et donc il faut qu'on puisse accéder à cette `page` depuis la classe `ChatbotApp` !
   ````
 
 +++
@@ -191,8 +192,16 @@ toujours pour éviter de finir avec un gros paquet de spaguettis, on pourrait im
 - et est responsable de la partie "dialogue" entre humain et robot
 - et qui du coup crée la zone de prompt,
 - et possède une méthode `current_prompt()` qui renvoie le prompt tapé par l'utilisateur
-- et une méthode `add_message` pour insérer les questions et les réponses au fur et à mesure
+- et une méthode `add_message()` pour insérer les questions et les réponses au fur et à mesure
   (à ce stade on ne fait pas encore la différence entre prompt et réponse)
+
+````{admonition} alternance de questions / réponses
+:class: tip
+
+comme la logique du dialogue c'est d'alterner les questions et les réponses, on peut tout à fait considérer que c'est un fait acquis, et du coup admettre que:
+- le dernier élément dans la colonne History est toujours le dernier prompt;
+- et les autres éléments sont alternativement, en commençant du début: prompt, réponse, prompt, réponse, etc...
+````
 
 pour être bien clair, à ce stade on ne fait pas encore usage du réseau pour quoi que ce soit
 
@@ -221,11 +230,39 @@ quelques indices:
 :align: right
 ```
 
-dans cette version, on utilise la réponse du serveur pour **afficher le dialogue** dans notre application  
+dans cette version, on utilise la réponse du serveur pour *afficher le dialogue **dans notre application*** et non plus dans le terminal
+
 pour cela on va devoir faire quelques modifications à la classe `History`; en effet vous devez avoir observé à ce stade que la réponse vient "en petits morceaux", ce qui fait qu'on pourrait avoir envie de modifier un peu la classe `History` de sorte qu'elle expose à présent les méthodes
 
 - `add_prompt()` et `add_answer()` pour distinguer entre les deux types d'entrée
 - et surtout `add_chunk()` qui permet d'ajouter *juste un mot* dans la réponse du robot, pour nous ajuster avec le format de la réponse
+
+````{admonition} le scrolling
+:class: tip dropdown
+
+peut-être un peu prématuré (revenez dessus plus tard si nécessaire), mais il est important que notre chatbot *scroll* correctement:  
+c'est-à-dire qu'après plusisurs questions/réponses on voie toujours le bas du dialogue  
+et pour ça sachez qu'il faut procéder comme ceci
+```python
+cl = ft.Column(
+    [....], # the children
+    # required so the column knows it is supposed to take all the vertical space of its father
+    expand=True,
+    # so that the widget activates scrolling when needed
+    scroll=ft.ScrollMode.AUTO,
+    # so that we're always seeing the bottom area
+    auto_scroll=True,
+)
+```
+
+enfin, remarquez qu'on peut avoir envie d'activer le scrolling
+
+- sur la `Column` principale (notre `ChatbotApp`), mais dans ce cas les widgets de mode (streaming, server...) vont scroller aussi  
+  c'est mieux que pas de scroll, mais pas forcément idéal encore
+- sur la `History`, et dans ce cas les widgets de mode vont rester fixes;  
+  dans ce cas-là toutefois, pensez à mettre tout de même `expand=True` sur la `ChatbotApp` pour que les changements de la taille de l'app se propagent jusqu'à l'`History`
+
+````
 
 +++
 
@@ -288,6 +325,14 @@ dans mon implémentation j'ai choisi de "cacher" ce résultat, pour ne pas redem
 
 en vrac:
 
+- une fois que vous faites l'acquisition des modèles disponibles, il se peut qu'on vous retourne des valeurs de modèle qui ne fonctionnent pas;  
+  notamment les modèles `all-minilm:22m-l6-v2-fp16' et 'all-minilm:33m-l12-v2-fp16` (entre autres sans doute) ne supportent pas l'interface `generate`  
+  et comme - pas de bol - ils apparaissent en premier dans la liste des tags, c'est sans doute habile d'éviter de les choisir comme défaut du modèle
+  ```{admonition} on pourrait le savoir par programme ?
+  :class: dropdown
+
+  sans doute; dans <https://github.com/ollama/ollama/blob/main/docs/api.md#list-local-models> on nous montre comment obtenir des informations plus fines sur les mdèles...
+  ```
 - ajouter un bouton "Cancel" - en fait idéalement on en aurait besoin le plus tôt possible car le développement peut vite devenir fastidieux (ne pas hésiter à quitter et relancer); mais le truc c'est que c'est non trivial à faire en fait !
 - ou pourrait imaginer soumettre le même prompt à plusieurs modèles pour les comparer
 - etc...
