@@ -153,8 +153,12 @@ class ChatbotApp(ft.Column):
         if current_model in available_models:
             self.model.value = current_model
         else:
-            # find the first model that does start with 
-            available_models[0]
+            # xxx somehow the first model on GPU - all-minilm:22m-l6-v2-fp16
+            # returns an error saying the model does not support generate
+            # so, as a workaround, find the first model that does not start with all-
+            self.model.value = next(
+                model for model in available_models if not model.startswith("all-")
+            )
         self.page.update()
 
     def submit(self, event):
@@ -204,6 +208,9 @@ class ChatbotApp(ft.Column):
         if not streaming:
             answer = requests.post(url, json=data, **extra_args)
             print("HTTP status code:", answer.status_code)
+            if answer.status_code != 200:
+                history.add_answer(f"Error: {answer.text}")
+                return
             # print(f"Received answer: {answer.text}")
             # turns out we receive a stream of JSON objects
             # each one on its own line
@@ -230,6 +237,9 @@ class ChatbotApp(ft.Column):
             # and read the stream
             with requests.post(url, json=data, stream=True, **extra_args) as answer:
                 print("HTTP status code:", answer.status_code)
+                if answer.status_code != 200:
+                    history.add_chunk(f"Error: {answer.text}")
+                    return
                 for line in answer.iter_lines():
                     if not line:
                         continue
