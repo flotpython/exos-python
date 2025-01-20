@@ -240,7 +240,7 @@ class ChatbotApp(ft.Column):
                         history.add_chunk(data['response'])
                         self.page.update()
                     except Exception as e:
-                        print("Error:", e)
+                        print(f"Exception {type(e)=}, {e=}")
 
 
 def main(page: ft.Page):

@@ -188,7 +188,7 @@ class ChatbotApp(ft.Column):
                     # display that message; it's only a token so we append it to the last message
                     history.add_chunk(data['response'])
                 except Exception as e:
-                    print("Error:", e)
+                    print(f"Exception {type(e)=}, {e=}")
             self.page.update()
         else:
             # streaming version
@@ -206,7 +206,7 @@ class ChatbotApp(ft.Column):
                         history.add_chunk(data['response'])
                         self.page.update()
                     except Exception as e:
-                        print("Error:", e)
+                        print(f"Exception {type(e)=}, {e=}")
 
 
 def main(page: ft.Page):
