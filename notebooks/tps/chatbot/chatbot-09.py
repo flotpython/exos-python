@@ -37,7 +37,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot 09"
 
 
 # find the server details from the UI label
@@ -52,15 +52,14 @@ class History(ft.Column):
     """
 
     def __init__(self, app):
-        super().__init__()
         self.app = app
-        self.controls = [
+        super().__init__([
             ft.TextField(
                 label="Type a message...",
                 on_submit=lambda event: self.app.submit(event),
                 fill_color="lightgrey",
-            ),
-        ]
+            )
+        ])
 
     # insert material - prompt or answer - to allow for different styles
     def add_prompt(self, message):
@@ -72,7 +71,7 @@ class History(ft.Column):
         display.color = "blue" if kind == "prompt" else "green"
         display.size = 20 if kind == "prompt" else 16
         display.italic = kind == "prompt"
-        self.controls[-1:-1] = [display]
+        self.controls.insert(-1, display)
 
     # we always insert in the penultimate position
     # given that the last item in controls is the prompt TextField
@@ -82,15 +81,11 @@ class History(ft.Column):
         return self.controls[-1].value
 
 
-# being a Column, ChatbotApp can be directly included in a Page
-# also it is a container for other controls
 class ChatbotApp(ft.Column):
 
     def __init__(self, page):
-        super().__init__()
         self.page = page
-        self.disabled = False
-        self.header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=True)
         self.model = ft.Dropdown(
@@ -98,6 +93,7 @@ class ChatbotApp(ft.Column):
             value=MODELS[0],
             width=300,
         )
+
         servernames = [s['name'] for s in SERVERS]
         self.server = ft.Dropdown(
             options=[ft.dropdown.Option(server) for server in servernames],
@@ -105,19 +101,22 @@ class ChatbotApp(ft.Column):
             width=100,
         )
 
+        # need to rename because of the new submit method
         self.submit_button = ft.ElevatedButton("Send", on_click=self.submit)
 
+        # pass the app parameter to the history
         self.history = History(self)
 
-        self.controls = [
-                self.header,
-                ft.Row(
-                    [self.streaming, self.model, self.server, self.submit_button],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                self.history,
-            ]
-        self.horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        row = ft.Row(
+            [self.streaming, self.model, self.server, self.submit_button],
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+        super().__init__(
+            [header, row, self.history],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+        # a local attribute to prevent multiple submissions
+        self.disabled = False
+
 
     def submit(self, event):
         # and now that the textfield itself is linked to this callback
@@ -125,10 +124,11 @@ class ChatbotApp(ft.Column):
         if self.disabled:
             return
         # disable the button to prevent double submission
-        # keep it for the visual effect
+        # mark the button as disabled for the visual effect
         self.submit_button.disabled = True
         self.disabled = True
         self.send_request(event)
+        # once the request is completed we can re-enable the button
         self.submit_button.disabled = False
         self.disabled = False
         self.page.update()

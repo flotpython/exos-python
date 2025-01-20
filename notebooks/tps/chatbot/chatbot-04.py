@@ -30,7 +30,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot 04"
 
 
 class History(ft.Column):
@@ -40,23 +40,20 @@ class History(ft.Column):
     """
 
     def __init__(self):
-        super().__init__()
-        self.controls = [
-            ft.TextField(label="Type a message..."),
-        ]
+        super().__init__([ft.TextField(label="Type a message...")])
 
+    # leave the prompt as the last entry
+    # so insert at the penultimate position;
     def add_message(self, message):
-        self.controls[-1:-1] = [ft.Text(value=message)]
+        self.controls.insert(-1, ft.Text(value=message))
     def current_prompt(self):
         return self.controls[-1].value
 
 
-# see https://flet.dev/docs/tutorials/python-todo/#reusable-ui-components
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        super().__init__()
-        self.header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
@@ -74,15 +71,14 @@ class ChatbotApp(ft.Column):
 
         self.history = History()
 
-        self.controls = [
-                self.header,
-                ft.Row(
-                    [self.streaming, self.model, self.server, self.submit],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                self.history,
-            ]
-        self.horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        row = ft.Row(
+            [self.streaming, self.model, self.server, self.submit],
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+        super().__init__(
+            [header, row, self.history],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+
 
     # in this version we access the application status through
     # attributes in the 'ChatbotApp' instance

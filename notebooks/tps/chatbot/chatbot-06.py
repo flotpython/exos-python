@@ -37,7 +37,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot 06"
 
 
 # find the server details from the UI label
@@ -52,10 +52,7 @@ class History(ft.Column):
     """
 
     def __init__(self):
-        super().__init__()
-        self.controls = [
-            ft.TextField(label="Type a message..."),
-        ]
+        super().__init__([ft.TextField(label="Type a message...")])
 
     # insert material - prompt or answer - to allow for different styles
     def add_prompt(self, message):
@@ -67,7 +64,7 @@ class History(ft.Column):
         display.color = "blue" if kind == "prompt" else "green"
         display.size = 20 if kind == "prompt" else 16
         display.italic = kind == "prompt"
-        self.controls[-1:-1] = [display]
+        self.controls.insert(-1, display)
 
     # we always insert in the penultimate position
     # given that the last item in controls is the prompt TextField
@@ -77,14 +74,11 @@ class History(ft.Column):
         return self.controls[-1].value
 
 
-# being a Column, ChatbotApp can be directly included in a Page
-# also it is a container for other controls
 class ChatbotApp(ft.Column):
 
     def __init__(self, page):
-        super().__init__()
         self.page = page
-        self.header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
@@ -102,15 +96,14 @@ class ChatbotApp(ft.Column):
 
         self.history = History()
 
-        self.controls = [
-                self.header,
-                ft.Row(
-                    [self.streaming, self.model, self.server, self.submit],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-                self.history,
-            ]
-        self.horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        row = ft.Row(
+            [self.streaming, self.model, self.server, self.submit],
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+        super().__init__(
+            [header, row, self.history],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+
 
     def submit(self, event):
         # disable the button to prevent double submission

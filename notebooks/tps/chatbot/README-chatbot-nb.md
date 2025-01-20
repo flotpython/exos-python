@@ -123,17 +123,19 @@ vous aurez envie de *bookmark* ces entrées dans la doc, pour plus d'info:
 * <https://flet.dev> le point d'entrée principal
 * <https://flet.dev/docs/controls> pour les détails des objets disponibles
 
-````{admonition} python ou flet run
+`````{admonition} python ou flet run
 :class: dropdown
 
-on peut **aussi* lancer le programme de manière plus traditionnelle avec juste `python chatbot.py`  
-mais dans ce cas on n'a pas le *hot reload* et  l'usage c'est une grosse différence de confort !  
+````{div}
+on peut **aussi** lancer le programme de manière plus traditionnelle avec juste `python chatbot.py`  
+mais dans ce cas on n'a pas le *hot reload* et à l'usage, c'est une grosse différence de confort !  
 en outre il est conseillé de regarder les possibilités offertes par la CLI (i.e. le programme `flet`)
 qui permet de faire **aussi** d'autres choses très utiles:
 ```{image} media/flet-help.png
 :width: 400px
 ```
 ````
+`````
 
 +++
 

@@ -33,15 +33,16 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot - 03"
 
 
+# being a Column, ChatbotApp can be directly included in a Page
+# also it is a container for other controls
 # see https://flet.dev/docs/tutorials/python-todo/#reusable-ui-components
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        super().__init__()
-        self.header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
@@ -57,14 +58,13 @@ class ChatbotApp(ft.Column):
 
         self.submit = ft.ElevatedButton("Send", on_click=self.show_current_settings)
 
-        self.controls = [
-                self.header,
-                ft.Row(
-                    [self.streaming, self.model, self.server, self.submit],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                ),
-            ]
-        self.horizontal_alignment=ft.CrossAxisAlignment.CENTER
+        row = ft.Row(
+            [self.streaming, self.model, self.server, self.submit],
+            alignment=ft.MainAxisAlignment.CENTER,
+        )
+        super().__init__(
+            [header, row],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     # in this version we access the application status through
     # attributes in the 'ChatbotApp' instance
