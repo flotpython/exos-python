@@ -223,6 +223,43 @@ quelques indices:
 
 +++
 
+````{admonition} un petit exemple
+:class: dropdown tip
+
+voici comment on pourrait dire bonjour au modèle `gemma2:2b`
+
+```python
+import requests
+import json
+
+url = "http://ollama.pl.sophia.inria.fr:8080/api/generate"
+
+# envoyer une requête POST avec comme paramètre un dictionnaire
+# encodé en JSON
+# cette ligne peut prendre un moment à s'exécuter...
+response = requests.post(url, json={'model': 'gemma2:2b', 'prompt': 'hey'})
+
+# pour voir le status HTTP (devrait être 200)
+response.status_code
+
+# pour accéder au corps de la réponse (sans les headers HTTP)
+body = response.text
+
+# comme c'est aussi du JSON on doit le décoder
+# mais attention, regardez bien le contenu
+# il y a plusieurs lignes et chacune est un JSON 
+
+lines = body.split("\n")
+
+for line in lines:
+    # le dernier élément de lines peut être une ligne vide
+    if line:
+        print(f"reçu la ligne: {json.loads(line)}")
+```
+````
+
++++
+
 ## v06: on affiche la réponse
 
 ```{image} media/chatbot-06.png
