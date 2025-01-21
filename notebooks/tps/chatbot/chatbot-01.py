@@ -36,7 +36,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot version 01"
 
 
 def main(page: ft.Page):
