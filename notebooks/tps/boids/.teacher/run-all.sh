@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DRY_RUN=""
+
 # find the current folder name without the teacher part
 
 function find-stem() {
@@ -49,7 +51,7 @@ function run-one() {
     echo ========== "$current "
     extract-docstring $current
     # python $current  "$@" 2>&1 | grep -v 'Warning: Expected'
-    python $current
+    [[ -z "$DRY_RUN" ]] && python $current
 }
 
 function run-all() {
@@ -61,6 +63,14 @@ function run-all() {
 }
 
 function main() {
+    while getopts "n" opt; do
+        case $opt in
+            n) DRY_RUN="yes";;
+            *) echo "Unknown option: $opt";;
+        esac
+    done
+    shift $((OPTIND-1))
+    
     if [[ -z "$@" ]]; then
         run-all
     else
