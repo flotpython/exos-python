@@ -1,8 +1,5 @@
 """
-this version now actually displays the answer from the server
-
-to this end, the History class is a little more elaborate,
-as it needs to add only pieces of the answer to the last message
+cosmetic changes, the questions and answers are now in different styles
 """
 
 import json
@@ -36,7 +33,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot 06"
+TITLE = "My first Chatbot 07a"
 
 
 class History(ft.Column):
@@ -50,11 +47,24 @@ class History(ft.Column):
             [ft.TextField(
                 label="Type a message...",
                 on_submit=lambda event: app.send_request(event),
+                fill_color="lightgrey",
             )]
         )
 
-    def add_message(self, message):
-        self.controls.insert(-1, ft.Text(value=message))
+    # insert material - prompt or answer - to allow for different styles
+    def add_prompt(self, message):
+        self._add_entry(message, "prompt")
+    def add_answer(self, message):
+        self._add_entry(message, "answer")
+    def _add_entry(self, message, kind):
+        display = ft.Text(value=message)
+        display.color = "blue" if kind == "prompt" else "green"
+        display.size = 20 if kind == "prompt" else 16
+        display.italic = kind == "prompt"
+        self.controls.insert(-1, display)
+
+    # we always insert in the penultimate position
+    # given that the last item in controls is the prompt TextField
     def add_chunk(self, chunk):
         self.controls[-2].value += chunk
     def current_prompt(self):
@@ -78,12 +88,13 @@ class ChatbotApp(ft.Column):
             width=100,
         )
 
-        submit = ft.ElevatedButton("Send", on_click=self.send_request)
+        # make an attibute as well, so we can disable it from the networking code
+        self.submit = ft.ElevatedButton("Send", on_click=self.send_request)
 
         self.history = History(self)
 
         row = ft.Row(
-            [self.streaming, self.model, self.server, submit],
+            [self.streaming, self.model, self.server, self.submit],
             alignment=ft.MainAxisAlignment.CENTER,
         )
         super().__init__(
@@ -104,9 +115,9 @@ class ChatbotApp(ft.Column):
         url = f"{server_record['url']}/api/generate"
 
         # record the question asked
-        self.history.add_message(prompt)
+        self.history.add_prompt(prompt)
         # create placeholder for the answer
-        self.history.add_message("")
+        self.history.add_answer("")
         # update UI
         self.update()
 

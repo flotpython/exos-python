@@ -1,12 +1,9 @@
 """
-this version now actually displays the answer from the server
-
-to this end, the History class is a little more elaborate,
-as it needs to add only pieces of the answer to the last message
+this version is now able to send requests to a server
+for now it just prints the response in the terminal
 """
 
-import json
-
+# the library to actually send stuff to the network
 import requests
 import flet as ft
 
@@ -36,7 +33,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot 06"
+TITLE = "My first Chatbot 05a"
 
 
 class History(ft.Column):
@@ -45,6 +42,7 @@ class History(ft.Column):
     where prompts and answers alternate
     """
 
+    # constructor
     def __init__(self, app):
         super().__init__(
             [ft.TextField(
@@ -55,8 +53,6 @@ class History(ft.Column):
 
     def add_message(self, message):
         self.controls.insert(-1, ft.Text(value=message))
-    def add_chunk(self, chunk):
-        self.controls[-2].value += chunk
     def current_prompt(self):
         return self.controls[-1].value
 
@@ -74,7 +70,7 @@ class ChatbotApp(ft.Column):
         )
         self.server = ft.Dropdown(
             options=[ft.dropdown.Option(server) for server in ("CPU", "GPU")],
-            value="GPU",
+            value="CPU",
             width=100,
         )
 
@@ -91,58 +87,29 @@ class ChatbotApp(ft.Column):
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
         )
 
-
-    # need to split this in two for clarity
-    # could use a better naming, but to minimize the diffs
-    # we still use these names
     def send_request(self, _event):
+        print("Your current settings :")
+        print(f"{self.streaming.value=}")
+        print(f"{self.model.value=}")
+        print(f"{self.server.value=}")
+
         model = self.model.value
         prompt = self.history.current_prompt()
+        # ignore the streaming checkbox, as this first version is non-streaming
+
         server_record = SERVERS[self.server.value]
         server_name = server_record['name']
         # the endpoint is always at /api/generate
         url = f"{server_record['url']}/api/generate"
 
-        # record the question asked
-        self.history.add_message(prompt)
-        # create placeholder for the answer
-        self.history.add_message("")
-        # update UI
-        self.update()
-
-        # send the request
         print(f"Sending message to {server_name}, {model=}, {prompt=}")
-
-        # authenticate if needed
-        auth_args = {}
-        if 'username in server_record':
-            auth_args = {
-                'auth': (server_record['username'], server_record['password'])
-            }
 
         # prepare data
         payload = {'model': model, 'prompt': prompt}
-        answer = requests.post(url, json=payload, **auth_args)
+        answer = requests.post(url, json=payload)
         print("HTTP status code:", answer.status_code)
-        # turns out we receive a stream of JSON objects
-        # each one on its own line
-        for line in answer.text.split("\n"):
-            # splitting artefacts can be ignored
-            if not line:
-                continue
-            # ther should be no exception, but just in case...
-            try:
-                # print("line:", line)
-                data = json.loads(line)
-                # the last JSON chunk contains statistics and is not a message
-                if data['done']:
-                    # ignore last summary chunk
-                    pass
-                # display that message; it's only a token so we append it to the last message
-                self.history.add_chunk(data['response'])
-            except Exception as e:
-                print(f"Exception {type(e)=}, {e=}")
-        self.update()
+        print(f"==== Received answer:")
+        print(answer.text)
 
 
 def main(page: ft.Page):

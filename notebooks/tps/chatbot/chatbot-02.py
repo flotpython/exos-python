@@ -1,14 +1,15 @@
 """
 just add a main title on top of the page
-this is to ilustrate the layout model of flet
+this is to illustrate the layout model of flet
+and how to mix and match Rows and Columns
 """
 
 import flet as ft
 
-SERVERS = [
+SERVERS = {
     # this one is fast because it has GPUs,
     # but it requires a login / password
-    {
+    'GPU': {
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
         "username": "Bob",
@@ -17,11 +18,11 @@ SERVERS = [
     },
     # this one is slow because it has no GPUs,
     # but it does not require a login / password
-    {
+    'CPU': {
         "name": "CPU slow",
         "url": "http://ollama.pl.sophia.inria.fr:8080",
     },
-]
+}
 
 
 # a hardwired list of models
@@ -31,23 +32,13 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot"
+TITLE = "My first Chatbot 02"
 
 
 def main(page: ft.Page):
     page.title = TITLE
 
-    header = ft.Text(value=TITLE, size=40)
-
-    # we're not (yet?) using the event parameter,
-    # but unlike with JavaScript, we need to define it
-    # NOTE that we can use the variables that are local to 'main'
-    # i.e. model, server, streaming...
-    def show_current_settings(_event):
-        print("Your current settings :")
-        print(f"{streaming.value=}")
-        print(f"{model.value=}")
-        print(f"{server.value=}")
+    header = ft.Text(value="My Chatbot", size=40)
 
     streaming = ft.Checkbox(label="streaming", value=False)
     model = ft.Dropdown(
@@ -61,8 +52,22 @@ def main(page: ft.Page):
         width=100,
     )
 
-    submit = ft.ElevatedButton("Send", on_click=show_current_settings)
+    # the submit button
 
+    def send_request(_event):
+        print("Your current settings :")
+        print(f"{streaming.value=}")
+        print(f"{model.value=}")
+        print(f"{server.value=}")
+
+    # send_request is the callback function defined above
+    # it MUST accept one parameter which is the event that triggered the callback
+    submit = ft.ElevatedButton("Send", on_click=send_request)
+
+    # a slightly more elaborate layout creates:
+    # a Column, that has 2 children:
+    # - a Text (for the newly inserted title)
+    # - the Row we had in v01
     page.add(
         ft.Column(
             [
