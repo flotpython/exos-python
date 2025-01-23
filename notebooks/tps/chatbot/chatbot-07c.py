@@ -1,8 +1,6 @@
 """
-this version now actually displays the answer from the server
-
-to this end, the History class is a little more elaborate,
-as it needs to add only pieces of the answer to the last message
+disable sending a request while one is in progress
+this applies to both the Sens button, and the Enter key in the prompt area
 """
 
 import json
@@ -36,7 +34,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot 06"
+TITLE = "My first Chatbot 07c"
 
 
 class History(ft.Column):
@@ -50,16 +48,36 @@ class History(ft.Column):
             [ft.TextField(
                 label="Type a message...",
                 on_submit=lambda event: app.send_request(event),
-            )]
+                fill_color="lightgrey",
+            )],
+            scroll=ft.ScrollMode.AUTO,
+            auto_scroll=True,
+            expand=True,
         )
 
-    def add_message(self, message):
-        self.controls.insert(-1, ft.Text(value=message))
+    # insert material - prompt or answer - to allow for different styles
+    def add_prompt(self, message):
+        self._add_entry(message, "prompt")
+    def add_answer(self, message):
+        self._add_entry(message, "answer")
+    def _add_entry(self, message, kind):
+        display = ft.Text(value=message)
+        display.color = "blue" if kind == "prompt" else "green"
+        display.size = 20 if kind == "prompt" else 16
+        display.italic = kind == "prompt"
+        self.controls.insert(-1, display)
+
+    # we always insert in the penultimate position
+    # given that the last item in controls is the prompt TextField
     def add_chunk(self, chunk):
         self.controls[-2].value += chunk
     def current_prompt(self):
         return self.controls[-1].value
 
+    def enable_prompt(self):
+        self.controls[-1].disabled = False
+    def disable_prompt(self):
+        self.controls[-1].disabled = True
 
 class ChatbotApp(ft.Column):
 
@@ -78,24 +96,34 @@ class ChatbotApp(ft.Column):
             width=100,
         )
 
-        submit = ft.ElevatedButton("Send", on_click=self.send_request)
+        self.submit = ft.ElevatedButton("Send", on_click=self.send_request)
 
         self.history = History(self)
 
         row = ft.Row(
-            [self.streaming, self.model, self.server, submit],
+            [self.streaming, self.model, self.server, self.submit],
             alignment=ft.MainAxisAlignment.CENTER,
         )
         super().__init__(
             [header, row, self.history],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            expand=True,
         )
 
 
-    # need to split this in two for clarity
-    # could use a better naming, but to minimize the diffs
-    # we still use these names
+
     def send_request(self, _event):
+        # disable the button to prevent double submission
+        self.submit.disabled = True
+        self.history.disable_prompt()
+        self.send_request_2(_event)
+        self.submit.disabled = False
+        self.history.enable_prompt()
+        self.update()
+
+
+    # send the prompt to the server and display the answer
+    def send_request_2(self, _event):
         model = self.model.value
         prompt = self.history.current_prompt()
         server_record = SERVERS[self.server.value]
@@ -104,9 +132,9 @@ class ChatbotApp(ft.Column):
         url = f"{server_record['url']}/api/generate"
 
         # record the question asked
-        self.history.add_message(prompt)
+        self.history.add_prompt(prompt)
         # create placeholder for the answer
-        self.history.add_message("")
+        self.history.add_answer("")
         # update UI
         self.update()
 
@@ -124,8 +152,9 @@ class ChatbotApp(ft.Column):
         payload = {'model': model, 'prompt': prompt}
         answer = requests.post(url, json=payload, **auth_args)
         print("HTTP status code:", answer.status_code)
-        # turns out we receive a stream of JSON objects
-        # each one on its own line
+        if answer.status_code != 200:
+            print("not 200, aborting")
+            return
         for line in answer.text.split("\n"):
             # splitting artefacts can be ignored
             if not line:

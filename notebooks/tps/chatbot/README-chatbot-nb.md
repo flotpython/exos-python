@@ -162,20 +162,23 @@ pour vous familiariser avec le modèle de lignes et colonnes de `flet`, **ajoute
 
 +++ {"slideshow": {"slide_type": ""}, "tags": []}
 
-## v03: avec un peu de classe
+## v03: avec un peu de classe: `ChatbotApp`
 
 ceci est une étape **totalement optionnelle**, mais je vous recommande de **créer une classe**, qui pourrait s'appeler **`ChatbotApp`**, pour regrouper la logique de notre application, et éviter de mettre tout notre code en vrac dans le `main`
 
 - on pourrait envisager par exemple que `ChatbotApp` hérite de `ft.Column`
 - de cette façon on se retrouverait avec un `main` qui ne fait plus que
-  ```{literalinclude} chatbot-10.py
-  :start-after: def main
+  ```{literalinclude} chatbot-03a.py
+  :start-after: show the code in the instructions
   ```
-  ````{admonition} page.update()
-  :class: tip
-  on choisit de passer `page` au constructeur de l'objet, car avec *flet* il faut penser à *flush* les changements avec un `page.update()` - sinon les changements que l'on fait en mémoire ne sont pas répercutés dans l'affichage  
-  et donc il faut qu'on puisse accéder à cette `page` depuis la classe `ChatbotApp` !
-  ````
+
+Je vous propose de procéder en deux temps
+
+- étape 3a: on crée la classe `ChatbotApp`;
+  le code de `main` se retrouve essentiellement dans le constructeur de `ChatbotApp`  
+  (et souvenez-vous comment on utilise `super()` pour initialiser la superclasse, ici `Column`
+- étape 3b: la fonction `send_request` devient une méthode de la classe
+  (au lieu d'être une fontion incluse dans le constructeur)
 
 +++
 
@@ -186,47 +189,71 @@ ceci est une étape **totalement optionnelle**, mais je vous recommande de **cr�
 :align: right
 ```
 
-toujours pour éviter de finir avec un gros paquet de spaguettis, on pourrait imaginer à ce stade **écrire une classe `History`** (tout ceci est totalement indicatif...) qui:
+toujours pour éviter de finir avec un gros paquet de spaguettis, on va imaginer à ce stade d'**écrire une classe `History`** ( nouveau <!--  -->tout ceci est totalement indicatif...) qui:
 
 - hérite, là encore de `ft.Column`
-- et est responsable de la partie "dialogue" entre humain et robot
-- et qui du coup crée la zone de prompt,
-- et possède une méthode `current_prompt()` qui renvoie le prompt tapé par l'utilisateur
-- et une méthode `add_message()` pour insérer les questions et les réponses au fur et à mesure
-  (à ce stade on ne fait pas encore la différence entre prompt et réponse)
+- c'est elle qui est responsable de **créer la zone de prompt**
+- et d'afficher au fur et à mesure, et au bon endroit, **les échanges avec le robot**
+- de cette façon on pourra l'insérer simplement en bas dans l'objet `ChatbotApp`
+  ainsi cet objet - qui rappelons-le est une `Column` - va voir maintenant 3 fils:
 
-````{admonition} alternance de questions / réponses
+  - le titre
+  - la `Row` avec les différents réglages
+  - et une instance de `History()`
+
+`````{admonition} la logique de la classe History
 :class: tip
+pour fixer les idées, disons qu'à ce stade cette classe possède les méthodes
 
-comme la logique du dialogue c'est d'alterner les questions et les réponses, on peut tout à fait considérer que c'est un fait acquis, et du coup admettre que:
-- le dernier élément dans la colonne History est toujours le dernier prompt;
-- et les autres éléments sont alternativement, en commençant du début: prompt, réponse, prompt, réponse, etc...
-````
+- `current_prompt()` qui renvoie le prompt tapé par l'utilisateur
+- `add_message(some_text)` pour insérer les questions et les réponses au fur et à mesure  
 
-pour être bien clair, à ce stade on ne fait pas encore usage du réseau pour quoi que ce soit
+l'idée est que l'objet `History` possède:
+
+- en dernier (tout en bas donc) un objet de type `ft.TextField` (qui est éditable); dans lequel on va taper notre prompt  
+- et au dessus on va conserver la trace des échanges: question1, réponse1, etc...  
+  et pour cela on utilisera `add_message(some_text)`, dont le job donc est d'insérer un objet `ft.Text`  
+  (non modifiable par l'utilisateur cette fois)  
+  **en avant-dernière position** - c'est-à-dire juste au dessus du prompt
+`````
+
+pour être bien clair, à ce stade on ne fait pas encore usage du réseau pour quoi que ce soit, on veut juste mettre en place la structure de l'UI
+
+ici encore je vous conseille de procéder par petites étapes:
+
+- 4a: la trame de la classe `History`
+- 4b: faites en sorte que le fait de taper "Entrée" dans la zone de prompt fasse le même effet que le bouton "Send"
 
 +++
 
 ## v05: un peu de réseau
 
 c'est seulement maintenant que l'on va effectivement **interagir via le réseau avec les serveurs** ollama  
-je vous propose pour commencer de simplement fabriquer la requête, et pour commencer de simplement afficher la réponse sur le terminal  
+je vous propose pour commencer de simplement:
+
+- fabriquer la requête,
+- et simplement afficher la réponse **dans le terminal**
 
 quelques indices:
 
 - la librairie qu'on va utiliser pour cela s'appelle `requests`;
 - vous pouvez commencer par regarder ceci pour quelques exemples <https://requests.readthedocs.io/en/latest/user/quickstart/>
-- je vous recommande de vous concentrer pour l'instant sur le serveur CPU, ce qui vous évite pour l'instant de vous embêter avec les authentifications
 - notre objectif ici et de bien comprendre la structure de la réponse
   posez-vous notamment la question de savoir quand est-ce que c'est terminé, et regardez bien la fin de la réponse
 - pour l'instant aussi, on ignore le flag *streaming*: on poste une requête et on attend le retour
+
+à nouveau on pourra procéder par étapes:
+
+- 5a: en commençant par le serveur CPU uniquement
+- 5b: ajouter l'authentification lorsque c'est nécessaire, de façon à pouvoir utiliser indifféremment les deux serveurs
 
 +++
 
 ````{admonition} un petit exemple
 :class: dropdown tip
 
-voici comment on pourrait dire bonjour au modèle `gemma2:2b`
+voici comment on pourrait dire `hey` au modèle `gemma2:2b`  
+ce code peut s'exécuter par exemple directement dans ipython 
 
 ```python
 import requests
@@ -234,10 +261,15 @@ import json
 
 url = "http://ollama.pl.sophia.inria.fr:8080/api/generate"
 
-# envoyer une requête POST avec comme paramètre un dictionnaire
-# encodé en JSON
+# c'est expliqué dans la doc ollama: l'API /api/generate
+# s'attend à ce qu'on lui passe ces deux paramètres:
+payload = {'model': 'gemma2:2b', 'prompt': 'hey'}
+
+# pour envoyer une requête POST 
+# avec comme paramètre ce payload encodé en JSON:
+
 # cette ligne peut prendre un moment à s'exécuter...
-response = requests.post(url, json={'model': 'gemma2:2b', 'prompt': 'hey'})
+response = requests.post(url, json=payload)
 
 # pour voir le status HTTP (devrait être 200)
 response.status_code
@@ -245,16 +277,37 @@ response.status_code
 # pour accéder au corps de la réponse (sans les headers HTTP)
 body = response.text
 
-# comme c'est aussi du JSON on doit le décoder
-# mais attention, regardez bien le contenu
-# il y a plusieurs lignes et chacune est un JSON 
+# et regardez bien à quoi ça ressemble
+print(body)
+```
+````
 
-lines = body.split("\n")
++++
 
-for line in lines:
-    # le dernier élément de lines peut être une ligne vide
-    if line:
-        print(f"reçu la ligne: {json.loads(line)}")
+````{admonition} avec authentification
+:class: dropdown tip
+
+dans le cas du serveur GPU qui attend une authentification:  
+vous pouvez simplement aménager le code ci-dessus en remplaçant cette ligne
+
+```python
+response = requests.post(url, json=payload)
+```
+
+par celles-ci
+```python
+login_password = ('the-login', 'the-password')
+response = requests.post(url, json=payload, auth=login_password)
+```
+
+si bien que vous pouvez envisager un code un peu unifié en faisant quelque chose dans le genre de 
+```python
+auth_args = {}
+if need_authentication:
+    auth_args['auth'] = ('the-login', 'the-password')
+# voir le cours: on ajoute les éléments du dictionnaire
+# sous la forme d'arguments nommés dans l'appel de la fonction
+response = requests.post(url, json=payload, **auth_args)
 ```
 ````
 
@@ -269,16 +322,61 @@ for line in lines:
 
 dans cette version, on utilise la réponse du serveur pour *afficher le dialogue **dans notre application*** et non plus dans le terminal
 
-pour cela on va devoir faire quelques modifications à la classe `History`; en effet vous devez avoir observé à ce stade que la réponse vient "en petits morceaux", ce qui fait qu'on pourrait avoir envie de modifier un peu la classe `History` de sorte qu'elle expose à présent les méthodes
+pour cela on va devoir faire quelques modifications à la classe `History`;
+en effet vous devez avoir observé à ce stade que la réponse vient "en petits morceaux", ce que l'on n'a pas encore prévu  
 
-- `add_prompt()` et `add_answer()` pour distinguer entre les deux types d'entrée
-- et surtout `add_chunk()` qui permet d'ajouter *juste un mot* dans la réponse du robot, pour nous ajuster avec le format de la réponse
+du coup pour aboutir à une version à peu près fonctionnelle il devrait vous suffire de
 
-````{admonition} le scrolling
-:class: tip dropdown
+- ajouter à la classe `History` une méthode `add_chunk(token)`, qui permet d'ajouter *juste un mot* dans la réponse du robot
+- et au lieu d'afficher la réponse du robot en bloc, de la traiter proprement pour en extraire les différents petits morceaux, puis les afficher dans l'interface grâce donc à `add_chunk()`
 
-peut-être un peu prématuré (revenez dessus plus tard si nécessaire), mais il est important que notre chatbot *scroll* correctement:  
-c'est-à-dire qu'après plusisurs questions/réponses on voie toujours le bas du dialogue  
+````{admonition} update()
+:class: tip
+
+avec *flet* il faut penser à *flush* les changements avec un `flet_object.update()`  
+car sinon les changements que l'on fait en mémoire ne sont pas répercutés dans l'affichage  
+(si vous avez le TP sur le snake, c'est la même logique ici avec `flet` que ça l'était avec `pygame`)  
+**il faut rafraichir explicitement** la page pour que vos modifications se voient à l'écran
+
+pour faire ça `flet` fournit sur tous ses objets une méthode `update()`  
+et comme notre `History` hérite de `ft.Column`, vous pouvez simplement lui envoyer la méthode `update()`
+````
+
++++
+
+## v07: un peu de cosmétique
+
+```{image} media/chatbot-07.png
+:width: 400px
+:align: right
+```
+
+ici on va simplement ajouter un peu de relief pour qu'on s'y retrouve entre les questions et les réponses
+
+ici aussi on peut imaginer procéder en deux étapes
+
+- 7a: juste la cosmétique: montrer de manière plus distinte les 3 groupes (questions, réponses, et prompt)
+- 7b: faire en sorte que la fenêtre *scroll* automatiquement vers le bas, lorsque le dialogue remplit toute la page
+- 7c: faire en sorte qu'on ne puisse pas envoyer plusieurs requêtes en parallèle
+
++++
+
+````{admonition} pour 7a: de la couleur
+:class: dropdown tip
+
+- mettre un fond de couleur à notre `TextField` (le prompt)
+- enrichir un peu l'interface de `History`, et remplacer l'unique méthode `add_message()`
+par deux méthodes différentes `add_prompt(text)` et `add_answer(text)`
+````
+
++++
+
+````{admonition} pour 7b: le scrolling
+:class: dropdown tip
+
+j'ai eu un peu du mal avec cette partie; (revenez dessus plus tard si nécessaire), mais il est important que notre chatbot *scroll* correctement:  
+c'est-à-dire qu'après plusieurs questions/réponses on voie toujours **le bas du dialogue**
+
 et pour ça sachez qu'il faut procéder comme ceci
 ```python
 cl = ft.Column(
@@ -294,19 +392,25 @@ cl = ft.Column(
 
 enfin, remarquez qu'on peut avoir envie d'activer le scrolling
 
-- sur la `Column` principale (notre `ChatbotApp`), mais dans ce cas les widgets de mode (streaming, server...) vont scroller aussi  
+- sur la `Column` principale (notre `ChatbotApp`), mais dans ce cas les widgets de mode (streaming, server...) vont scroller aussi...  
   c'est mieux que pas de scroll, mais pas forcément idéal encore
 - sur la `History`, et dans ce cas les widgets de mode vont rester fixes;  
   dans ce cas-là toutefois, pensez à mettre tout de même `expand=True` sur la `ChatbotApp` pour que les changements de la taille de l'app se propagent jusqu'à l'`History`
-
 ````
 
 +++
 
-## v07: pas de multiples requêtes
+````{admonition} pour 7c: éviter plusieurs Send en parallèle
+:class: dropdown tip
 
-à ce stade il est utile d'ajouter un peu de logique pour éviter que l'on puisse poster deux requêtes "en même temps": on **rend l'UI inactive** jusqu'à réception de la réponse  
-pour cela voyez dans `flet` l'attribut `disabled`
+le sujet c'est que si le code ne fait rien de particulier, rien n'empêche l'utilisateur de cliquer 3 fois de suite sur le bouton Send, et que ça envoie 3 requêtes essentiellement *en même temps*
+
+pour éviter ça, vous faites en sorte de *disable* les deux moyens d'envoyer la requête (le bouton *Send* et la touche *Entrée* dans le prompt)
+
+je vous recommande du coup d'ajouter les méthodes `enable_prompt()` et `disable_prompt()` dans la classe `History`
+
+et ensuite d'implémenter une logique dans la méthode `send_request()` pour désactiver / réactiver l'interface au bon moment; c'est peut-être d'ailleurs le moment de couper cette méthode en plus petits morceaux..
+````
 
 +++
 
@@ -338,16 +442,9 @@ dans mon code j'ai conservé les deux modes (streaming et non-streaming) pour po
 
 +++
 
-## v09: authentification
+## v09 (optionnel): acquérir la liste des modèles
 
-à ce stade il est temps d'ajouter du code pour pouvoir s'**authentifier avec le login/password** auprès du serveur qui en a besoin  
-c'est juste une question d'ajouter, dans l'appel à `requests.post`, un paramètre `auth=(user, password)`
-
-+++
-
-## v10 (optionnel): acquérir la liste des modèles
-
-```{image} media/chatbot-10.png
+```{image} media/chatbot-09.png
 :width: 400px
 :align: right
 ```

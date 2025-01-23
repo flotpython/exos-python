@@ -1,16 +1,16 @@
 """
-separate the logic of our app into a class
-named ChatbotApp, which inherits from ft.Column
-this way we can insert it directly into the Page
-it still won't do much, but it's more reusable this way
+the code of the callback goes in a class method
+
+for that to work, we need to store the 3 settings widgets
+as attributes in the ChatbotApp instance
 """
 
 import flet as ft
 
-SERVERS = [
+SERVERS = {
     # this one is fast because it has GPUs,
     # but it requires a login / password
-    {
+    'GPU': {
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
         "username": "Bob",
@@ -19,11 +19,11 @@ SERVERS = [
     },
     # this one is slow because it has no GPUs,
     # but it does not require a login / password
-    {
+    'CPU': {
         "name": "CPU slow",
         "url": "http://ollama.pl.sophia.inria.fr:8080",
     },
-]
+}
 
 
 # a hardwired list of models
@@ -33,7 +33,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot - 03"
+TITLE = "My first Chatbot 03b"
 
 
 # being a Column, ChatbotApp can be directly included in a Page
@@ -42,7 +42,11 @@ TITLE = "My first Chatbot - 03"
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value="My Chatbot", size=40)
+
+        # the 3 settings widgets need to be inspectable
+        # later on in the code (in the submit method)
+        # so we store them as attributes in the ChatbotApp instance
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
@@ -56,19 +60,25 @@ class ChatbotApp(ft.Column):
             width=100,
         )
 
-        self.submit = ft.ElevatedButton("Send", on_click=self.show_current_settings)
+        # the callback is now a method
+        # note that self.send_request, being a bound method object,
+        # really expects exactly 1 parameter and not 2
+        submit = ft.ElevatedButton("Send", on_click=self.send_request)
 
         row = ft.Row(
-            [self.streaming, self.model, self.server, self.submit],
+            [self.streaming, self.model, self.server, submit],
             alignment=ft.MainAxisAlignment.CENTER,
         )
+
+        # we initialize ourselves as a ft.Column
+        # so we need to call ft.Column.__init__( list-of-children, ...)
         super().__init__(
             [header, row],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     # in this version we access the application status through
     # attributes in the 'ChatbotApp' instance
-    def show_current_settings(self, _event):
+    def send_request(self, _event):
         print("Your current settings :")
         print(f"{self.streaming.value=}")
         print(f"{self.model.value=}")
@@ -82,4 +92,4 @@ def main(page: ft.Page):
     page.add(chatbot)
 
 
-ft.app(target=main)
+ft.app(main)

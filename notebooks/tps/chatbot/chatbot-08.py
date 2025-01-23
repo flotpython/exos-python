@@ -7,11 +7,10 @@ import json
 import requests
 import flet as ft
 
-
-SERVERS = [
+SERVERS = {
     # this one is fast because it has GPUs,
     # but it requires a login / password
-    {
+    'GPU': {
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
         "username": "Bob",
@@ -20,11 +19,11 @@ SERVERS = [
     },
     # this one is slow because it has no GPUs,
     # but it does not require a login / password
-    {
+    'CPU': {
         "name": "CPU slow",
         "url": "http://ollama.pl.sophia.inria.fr:8080",
     },
-]
+}
 
 
 # a hardwired list of models
@@ -37,24 +36,18 @@ MODELS = [
 TITLE = "My first Chatbot 08"
 
 
-# find the server details from the UI label
-def spot_server(servername):
-    return next(server for server in SERVERS if servername in server["name"])
-
-
 class History(ft.Column):
     """
     the history is a column of text messages
     where prompts and answers alternate
     """
 
-    # need to pass the app object so we can invoke its submit method
     def __init__(self, app):
-        self.app = app
         super().__init__(
             [ft.TextField(
                 label="Type a message...",
-                on_submit=lambda event: self.app.submit(event),
+                on_submit=lambda event: app.send_request(event),
+                fill_color="lightgrey",
             )],
             scroll=ft.ScrollMode.AUTO,
             auto_scroll=True,
@@ -80,14 +73,17 @@ class History(ft.Column):
     def current_prompt(self):
         return self.controls[-1].value
 
+    def enable_prompt(self):
+        self.controls[-1].disabled = False
+    def disable_prompt(self):
+        self.controls[-1].disabled = True
 
 class ChatbotApp(ft.Column):
 
-    def __init__(self, page):
-        self.page = page
-        header = ft.Text(value=TITLE, size=40)
+    def __init__(self):
+        header = ft.Text(value="My Chatbot", size=40)
 
-        self.streaming = ft.Checkbox(label="streaming", value=False)
+        self.streaming = ft.Checkbox(label="streaming", value=True)
         self.model = ft.Dropdown(
             options=[ft.dropdown.Option(model) for model in MODELS],
             value=MODELS[0],
@@ -95,18 +91,16 @@ class ChatbotApp(ft.Column):
         )
         self.server = ft.Dropdown(
             options=[ft.dropdown.Option(server) for server in ("CPU", "GPU")],
-            value="CPU",
+            value="GPU",
             width=100,
         )
 
-        # need to rename because of the new submit method
-        self.submit_button = ft.ElevatedButton("Send", on_click=self.submit)
+        self.submit = ft.ElevatedButton("Send", on_click=self.send_request)
 
-        # pass the app parameter to the history
         self.history = History(self)
 
         row = ft.Row(
-            [self.streaming, self.model, self.server, self.submit_button],
+            [self.streaming, self.model, self.server, self.submit],
             alignment=ft.MainAxisAlignment.CENTER,
         )
         super().__init__(
@@ -114,54 +108,55 @@ class ChatbotApp(ft.Column):
             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
             expand=True,
         )
-        # a local attribute to prevent multiple submissions
-        self.disabled = False
 
 
-    def submit(self, event):
-        # and now that the textfield itself is linked to this callback
-        # we enforce it even further
-        if self.disabled:
-            return
+
+    def send_request(self, _event):
         # disable the button to prevent double submission
-        # mark the button as disabled for the visual effect
-        self.submit_button.disabled = True
-        self.disabled = True
-        self.send_request(event)
-        # once the request is completed we can re-enable the button
-        self.submit_button.disabled = False
-        self.disabled = False
-        self.page.update()
+        self.submit.disabled = True
+        self.history.disable_prompt()
+        self.send_request_2(_event)
+        self.submit.disabled = False
+        self.history.enable_prompt()
+        self.update()
 
 
     # send the prompt to the server and display the answer
-    def send_request(self, _event):
-        # retrieve the current state
-        history = self.history
-        streaming = self.streaming.value
+    def send_request_2(self, _event):
         model = self.model.value
-        servername = self.server.value
-        prompt = history.current_prompt()
+        prompt = self.history.current_prompt()
+        server_record = SERVERS[self.server.value]
+        server_name = server_record['name']
+        # the endpoint is always at /api/generate
+        url = f"{server_record['url']}/api/generate"
 
-        # record question asked
-        history.add_prompt(prompt)
+        # record the question asked
+        self.history.add_prompt(prompt)
         # create placeholder for the answer
-        history.add_answer("")
+        self.history.add_answer("")
         # update UI
-        self.page.update()
+        self.update()
 
         # send the request
-        server = spot_server(servername)
-        print(f"Sending message to {server=}, {model=}, {streaming=}, {prompt=}")
+        streaming = self.streaming.value
+        print(f"Sending message to {server_name=}, {model=}, {streaming=}, {prompt=}")
+
+        # authenticate if needed
+        auth_args = {}
+        if 'username in server_record':
+            auth_args = {
+                'auth': (server_record['username'], server_record['password'])
+            }
+
+        payload = {'model': model, 'prompt': prompt}
+
         # streaming or non streaming
-        url = f"{server['url']}/api/generate"
-        data = {'model': model, 'prompt': prompt}
-        answer = requests.post(url, json=data)
         if not streaming:
+            answer = requests.post(url, json=payload, **auth_args)
             print("HTTP status code:", answer.status_code)
-            # print(f"Received answer: {answer.text}")
-            # turns out we receive a stream of JSON objects
-            # each one on its own line
+            if answer.status_code != 200:
+                print("not 200, aborting")
+                return
             for line in answer.text.split("\n"):
                 # splitting artefacts can be ignored
                 if not line:
@@ -175,16 +170,19 @@ class ChatbotApp(ft.Column):
                         # ignore last summary chunk
                         pass
                     # display that message; it's only a token so we append it to the last message
-                    history.add_chunk(data['response'])
+                    self.history.add_chunk(data['response'])
                 except Exception as e:
                     print(f"Exception {type(e)=}, {e=}")
-            self.page.update()
+            self.update()
         else:
             # streaming version
             # we need to keep the connection open
             # and read the stream
-            with requests.post(url, json=data, stream=True) as answer:
+            with requests.post(url, json=payload, stream=True, **auth_args) as answer:
                 print("HTTP status code:", answer.status_code)
+                if answer.status_code != 200:
+                    print("not 200, aborting")
+                    return
                 for line in answer.iter_lines():
                     if not line:
                         continue
@@ -192,8 +190,8 @@ class ChatbotApp(ft.Column):
                         data = json.loads(line)
                         if data['done']:
                             pass
-                        history.add_chunk(data['response'])
-                        self.page.update()
+                        self.history.add_chunk(data['response'])
+                        self.update()
                     except Exception as e:
                         print(f"Exception {type(e)=}, {e=}")
 
@@ -201,8 +199,7 @@ class ChatbotApp(ft.Column):
 def main(page: ft.Page):
     page.title = TITLE
 
-    # we need page to be able to do updates..
-    chatbot = ChatbotApp(page)
+    chatbot = ChatbotApp()
     page.add(chatbot)
 
 

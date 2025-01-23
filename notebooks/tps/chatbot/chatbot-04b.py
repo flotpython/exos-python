@@ -1,13 +1,13 @@
 """
-introduce class History that will store the history of the chatbot
+hitting return in the Send button triggers the callback as well
 """
 
 import flet as ft
 
-SERVERS = [
+SERVERS = {
     # this one is fast because it has GPUs,
     # but it requires a login / password
-    {
+    'GPU': {
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
         "username": "Bob",
@@ -16,11 +16,11 @@ SERVERS = [
     },
     # this one is slow because it has no GPUs,
     # but it does not require a login / password
-    {
+    'CPU': {
         "name": "CPU slow",
         "url": "http://ollama.pl.sophia.inria.fr:8080",
     },
-]
+}
 
 
 # a hardwired list of models
@@ -30,7 +30,7 @@ MODELS = [
 ]
 
 
-TITLE = "My first Chatbot 04"
+TITLE = "My first Chatbot 04b"
 
 
 class History(ft.Column):
@@ -39,13 +39,22 @@ class History(ft.Column):
     where prompts and answers alternate
     """
 
-    def __init__(self):
-        super().__init__([ft.TextField(label="Type a message...")])
+    # constructor
+    def __init__(self, app):
+        # hitting Enter in the prompt area triggers the callback
+        # for that we need a reference to the app object
+        super().__init__(
+            [ft.TextField(
+                label="Type a message...",
+                on_submit=lambda event: app.send_request(event),
+            )]
+        )
 
-    # leave the prompt as the last entry
-    # so insert at the penultimate position;
     def add_message(self, message):
+        # leave the prompt as the last entry
+        # so insert at the penultimate position;
         self.controls.insert(-1, ft.Text(value=message))
+
     def current_prompt(self):
         return self.controls[-1].value
 
@@ -53,7 +62,7 @@ class History(ft.Column):
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        header = ft.Text(value=TITLE, size=40)
+        header = ft.Text(value="My Chatbot", size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
@@ -67,22 +76,21 @@ class ChatbotApp(ft.Column):
             width=100,
         )
 
-        self.submit = ft.ElevatedButton("Send", on_click=self.show_current_settings)
+        submit = ft.ElevatedButton("Send", on_click=self.send_request)
 
-        self.history = History()
+        self.history = History(self)
 
         row = ft.Row(
-            [self.streaming, self.model, self.server, self.submit],
+            [self.streaming, self.model, self.server, submit],
             alignment=ft.MainAxisAlignment.CENTER,
         )
         super().__init__(
             [header, row, self.history],
             horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
-
     # in this version we access the application status through
     # attributes in the 'ChatbotApp' instance
-    def show_current_settings(self, _event):
+    def send_request(self, _event):
         print("Your current settings :")
         print(f"{self.streaming.value=}")
         print(f"{self.model.value=}")
@@ -97,4 +105,4 @@ def main(page: ft.Page):
     page.add(chatbot)
 
 
-ft.app(target=main)
+ft.app(main)
