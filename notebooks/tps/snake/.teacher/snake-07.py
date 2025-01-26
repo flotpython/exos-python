@@ -1,7 +1,6 @@
 """
-on affiche le score (la taille du serpent) dans la bannière
-game over si le serpent se marche dessus
-game over si on sort du cadre
+v07: on ajoute le fruit
+et il change de place quand il est mangé
 """
 
 from random import randint
@@ -55,36 +54,23 @@ def draw_tile(x, y, color):
     pg.draw.rect(screen, color, rect)
 
 
-def in_scope(tile):
-    x, y = tile
-    return 0 <= x < X and 0 <= y < Y
-
-def quit(snake, reason):
-    print(f"Game over ({reason}) with a score of {len(snake)}")
-    pg.quit()
-    exit()
-
 def move_snake(snake, direction):
     global fruit
-    # the new first piece is based on the current first piece
+    # the new head is based on the current head
     head = snake[-1]
     # compute it
     x, y = head
     dx, dy = direction
-    new_head = (x+dx , y+dy)
+    new_head = ((x+dx) % X, (y+dy) % Y)
     if new_head == fruit:
         snake.append(fruit)
         fruit = (randint(0, X-1), randint(0, Y-1))
-        pg.display.set_caption(f"Score: {len(snake)}")
-    elif new_head in snake:
-        quit(snake, "self-bite")
-    elif not in_scope(new_head):
-        quit(snake, "out-of-board")
     else:
         # the last item in snake just vanishes
         _tail = snake.pop(0)
         # insert as the new head
         snake.append(new_head)
+
 
 running = True
 while running:
@@ -120,7 +106,6 @@ while running:
     draw_tile(*fruit, FRUIT_COLOR)
 
     pg.display.update()
-
 
 # Enfin on rajoute un appel à pg.quit()
 # Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows

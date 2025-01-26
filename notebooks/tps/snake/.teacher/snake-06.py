@@ -1,6 +1,6 @@
+v06: on peut changer la direction du serpent
+avec les fleches du clavier
 """
-on ajoute le fruit
-il change de place quand il est mangé
 """
 
 from random import randint
@@ -12,7 +12,6 @@ X, Y = 30, 30
 WHITE = (240, 240, 240)
 BLACK = (255, 255, 255)
 SNAKE_COLOR = (128, 128, 0)
-FRUIT_COLOR = (192, 16, 16)
 
 DIRECTIONS = {
     'DOWN':  (0, +1),
@@ -28,8 +27,6 @@ snake = [
     (11, 15),
     (12, 15),
 ]
-
-fruit = (10, 10)
 
 
 pg.init()
@@ -55,21 +52,16 @@ def draw_tile(x, y, color):
 
 
 def move_snake(snake, direction):
-    global fruit
-    # the new head is based on the current head
+    # the last item in snake just vanishes
+    _tail = snake.pop(0)
+    # the new first piece is based on the current first piece
     head = snake[-1]
     # compute it
     x, y = head
     dx, dy = direction
     new_head = ((x+dx) % X, (y+dy) % Y)
-    if new_head == fruit:
-        snake.append(fruit)
-        fruit = (randint(0, X-1), randint(0, Y-1))
-    else:
-        # the last item in snake just vanishes
-        _tail = snake.pop(0)
-        # insert as the new head
-        snake.append(new_head)
+    # insert as the new head
+    snake.append(new_head)
 
 
 running = True
@@ -103,9 +95,9 @@ while running:
     draw_background()
     for x, y in snake:
         draw_tile(x, y, SNAKE_COLOR)
-    draw_tile(*fruit, FRUIT_COLOR)
 
     pg.display.update()
+
 
 # Enfin on rajoute un appel à pg.quit()
 # Cet appel va permettre à Pygame de "bien s'éteindre" et éviter des bugs sous Windows

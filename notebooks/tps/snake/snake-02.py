@@ -1,21 +1,13 @@
 """
-le fond d'écran en damier
+v02 : pareil mais au moins on peut sortir du programme
+avec la touche 'q', ou avec la souris en fermant la fenêtre
 """
 
 from random import randint
 import pygame as pg
 
-# in pixels
-W, H = 20, 20
-# in snake units
-X, Y = 30, 30
-
-BACKGROUND_COLOR = (255, 255, 255)
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-
 pg.init()
-screen = pg.display.set_mode((X*W, Y*H))
+screen = pg.display.set_mode((400, 300))
 clock = pg.time.Clock()
 
 # on rajoute une condition à la boucle: si on la passe à False le programme s'arrête
@@ -37,16 +29,11 @@ while running:
             if event.key == pg.K_q:
                 running = False
 
-    screen.fill(WHITE)
+    # xxx ici c'est discutable, car si on tape 'q'
+    # on va quand même changer de couleur avant de sortir...
 
-    for x in range(X):
-        for y in range(Y):
-            if (x+y) % 2 == 0:
-                xp = x*W # coordonnée x (colonnes) en pixels
-                yp = y*H # coordonnée y (lignes) en pixels
-                rect = pg.Rect(xp, yp, W, H)
-                pg.draw.rect(screen, BLACK, rect)
-
+    random_color = (randint(0, 255), randint(0, 255), randint(0, 255))
+    screen.fill(random_color)
     pg.display.update()
 
 

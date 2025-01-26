@@ -1,5 +1,6 @@
 """
-le fond d'écran, et le serpent peut contenir plusieurs cases
+v04: le serpent peut contenir plusieurs cases
+on introduit un utilitaire draw_title() pour dessiner une case
 """
 
 from random import randint

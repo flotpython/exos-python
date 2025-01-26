@@ -1,5 +1,5 @@
 """
-le snake - v0
+le snake - v01
 on repeint l'écran à une période de 1 seconde
 et on a du mal à sortir du programme
 """
