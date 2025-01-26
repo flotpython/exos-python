@@ -280,7 +280,8 @@ flet run mycode.py
 ```bash
 python mycode.py
 ```
-the latter form will likely just crash, with little or no explanation...
+the former is supposedly better in that it will reload changed sources dynamically (no need to restart the program after you change the source)  
+the latter form should work too (but without dynamic loading, of course)
 ````
 
 +++
