@@ -21,7 +21,15 @@ nbhosting:
 
 # le réseau du métro parisien
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-metro.zip>`
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++ {"slideshow": {"slide_type": ""}, "tags": []}
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-metro.zip>`
+```
 
 +++
 

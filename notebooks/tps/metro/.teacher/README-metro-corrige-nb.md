@@ -1,11 +1,7 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   cell_metadata_json: true
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -21,11 +17,19 @@ nbhosting:
   title: "m\xE9tro parisien"
 ---
 
-+++ {"editable": true, "slideshow": {"slide_type": ""}, "tags": []}
++++ {"slideshow": {"slide_type": ""}, "tags": []}
 
 # le réseau du métro parisien
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-metro.zip>`
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++ {"slideshow": {"slide_type": ""}, "tags": []}
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-metro.zip>`
+```
 
 +++
 
