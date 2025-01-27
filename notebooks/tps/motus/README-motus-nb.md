@@ -16,9 +16,19 @@ nbhosting:
   title: 'TP: le jeu de motus'
 ---
 
-+++ {"tags": ["raises-exception"]}
++++ {"tags": []}
 
 # le jeu de motus
+
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-motus.zip>`
+```
 
 +++
 
@@ -98,8 +108,7 @@ ce qui signifie entre autres qu'il ne suffit pas trouver une lettre en bleu dans
 
 ## ce qui est fourni
 
-{download}`commencez par télécharger le zip<./ARTEFACTS-motus.zip>`
-dans lequel vous trouverez
+dans le zip vous trouverez
 
 * un dictionnaire (dans `data/ods6.txt`)
 * un module `motus.py` qui contient des morceaux de logique

@@ -1,11 +1,6 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
-    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
@@ -21,9 +16,19 @@ nbhosting:
   title: 'TP: le jeu de motus'
 ---
 
-+++ {"tags": ["raises-exception"]}
++++ {"tags": []}
 
 # le jeu de motus
+
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-motus.zip>`
+```
 
 +++
 
@@ -122,8 +127,7 @@ show_example("escarcelle", "ecartelees")
 
 ## ce qui est fourni
 
-{download}`commencez par télécharger le zip<./ARTEFACTS-motus.zip>`
-dans lequel vous trouverez
+dans le zip vous trouverez
 
 * un dictionnaire (dans `data/ods6.txt`)
 * un module `motus.py` qui contient des morceaux de logique
