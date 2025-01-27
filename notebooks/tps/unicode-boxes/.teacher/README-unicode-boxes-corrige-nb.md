@@ -29,6 +29,12 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
 ````
 
++++ {"tags": ["prune-cell"]}
+
+````{admonition} no need for a zip
+to practise this exercise, you only need this HTML text, there are no zip attached
+````
+
 +++
 
 Unicode comes with a few characters that can be used to draw squares or rectangles on the terminal
