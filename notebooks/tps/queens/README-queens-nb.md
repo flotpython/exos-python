@@ -20,11 +20,19 @@ nbhosting:
 
 +++
 
-## modalités
+Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++
 
-vous êtes censé travailler en local sur votre ordi; commencez par {download}`télécharger le zip<./ARTEFACTS-queens.zip>` qui contient
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-queens.zip>`
+```
+
++++
+
+## modalités
+
+vous êtes censé travailler en local sur votre ordi; le zip contient
 
 * ce notebook
 * un dossier `media/` avec les figures
