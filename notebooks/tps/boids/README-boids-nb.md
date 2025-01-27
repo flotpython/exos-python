@@ -15,15 +15,6 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
-<div class="licence">
-<span>Licence CC BY-NC-ND</span>
-<span>Thierry Parmentelat</span>
-</div>
-
-# TP - les boids avec `arcade`
-
-+++
-
 ## c'est quoi les *boids* ?
 
 une simulation ludique où on tente de reproduire le comportement d'animaux en

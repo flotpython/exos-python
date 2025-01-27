@@ -15,12 +15,13 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
-<div class="licence">
-<span>Licence CC BY-NC-ND</span>
-<span>Thierry Parmentelat</span>
-</div>
++++ {"slideshow": {"slide_type": ""}, "tags": ["prune-cell"]}
 
 # TP - les boids avec `arcade`
+
++++ {"slideshow": {"slide_type": ""}, "tags": ["prune-cell"]}
+
+Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++
 
