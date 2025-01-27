@@ -15,6 +15,16 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-boids.zip>`
+```
+
++++
+
 ## c'est quoi les *boids* ?
 
 une simulation ludique où on tente de reproduire le comportement d'animaux en
@@ -73,8 +83,7 @@ le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des boid
 
 ### contenu
 
-vous êtes censé travailler en local sur votre ordi;
-commencez par {download}`télécharger le zip<./ARTEFACTS-boids.zip>` qui contient
+le zip contient
 
 * le starter code dans `boids-01.py`
 * les figures dans le dossier `media/`

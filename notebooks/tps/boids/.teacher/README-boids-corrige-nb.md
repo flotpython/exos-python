@@ -15,13 +15,27 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
-+++ {"slideshow": {"slide_type": ""}, "tags": ["prune-cell"]}
++++ {"tags": ["prune-cell"]}
 
 # TP - les boids avec `arcade`
 
-+++ {"slideshow": {"slide_type": ""}, "tags": ["prune-cell"]}
++++
 
 Licence CC BY-NC-ND, Thierry Parmentelat
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-boids.zip>`
+```
 
 +++
 
@@ -83,8 +97,7 @@ le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des boid
 
 ### contenu
 
-vous êtes censé travailler en local sur votre ordi;
-commencez par {download}`télécharger le zip<./ARTEFACTS-boids.zip>` qui contient
+le zip contient
 
 * le starter code dans `boids-01.py`
 * les figures dans le dossier `media/`
