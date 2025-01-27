@@ -16,15 +16,17 @@ nbhosting:
   title: algos de graphe
 ---
 
-Licence CC BY-NC-ND, Thierry Parmentelat
-
-+++
-
 # TP - algos de base sur les graphes
 
 +++
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-graph-shortest-path.zip>`
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+pour faire cet exercice localement sur votre ordinateur, {download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-graph-shortest-path.zip>`
+```
 
 +++
 
