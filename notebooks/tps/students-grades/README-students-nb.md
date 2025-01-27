@@ -17,7 +17,19 @@ nbhosting:
   title: TP - classes simples
 ---
 
++++ {"slideshow": {"slide_type": ""}, "tags": []}
+
 # classes `Student` et `Class`
+
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat & Laurent Lacourt
+
++++ {"tags": [], "slideshow": {"slide_type": ""}}
+
+````{admonition} pas besoin de zip
+pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML
+````
 
 +++
 

@@ -1,10 +1,6 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -21,7 +17,19 @@ nbhosting:
   title: TP - classes simples
 ---
 
++++ {"slideshow": {"slide_type": ""}, "tags": []}
+
 # classes `Student` et `Class`
+
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat & Laurent Lacourt
+
++++ {"tags": [], "slideshow": {"slide_type": ""}}
+
+````{admonition} pas besoin de zip
+pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML
+````
 
 +++
 
