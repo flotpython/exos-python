@@ -15,11 +15,11 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
-Licence CC BY-NC-ND, Thierry Parmentelat
+# TP - un chatbot avec `flet`
 
 +++
 
-# TP - un chatbot avec `flet`
+Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++ {"tags": ["prune-cell"]}
 
@@ -27,6 +27,12 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 :class: warning
 
 there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} pas besoin de zip
+pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML, qui contient le code de démarrage
 ````
 
 +++
@@ -37,16 +43,6 @@ dans ce TP nous allons
 
 * découvrir (très superficiellement) la librairie `flet`
 * et l'utiliser pour implémenter un début de simulation de *chatbot*
-
-+++
-
-### contenu
-
-vous êtes censé travailler en local sur votre ordi;
-commencez par {download}`télécharger le zip<./ARTEFACTS-chatbot.zip>` qui contient
-
-* le starter code dans `chatbot-01.py`
-* les illustrations dans un dossier `media/`
 
 +++
 
