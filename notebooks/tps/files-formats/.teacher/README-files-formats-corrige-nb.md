@@ -180,7 +180,7 @@ on va regarder dans les yeux deux fichiers texte:
 faites pareil avec `bonjour.txt`
 
 - que constatez-vous ?
-- voyez aussi <https://www.utf8-chartable.de/>  
+- voyez aussi <https://www.utf8-chartable.de/>
 
 +++
 
