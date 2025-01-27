@@ -17,7 +17,13 @@ language_info:
 
 +++
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-dobble.zip>`
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-dobble.zip>`
+```
 
 +++ {"cell_style": "split"}
 

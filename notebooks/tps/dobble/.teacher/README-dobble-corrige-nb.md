@@ -17,7 +17,21 @@ language_info:
 
 +++
 
-pour faire cet exercice localement sur votre ordinateur, {download}`commencez par télécharger le zip<./ARTEFACTS-dobble.zip>`
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-dobble.zip>`
+```
 
 +++ {"cell_style": "split"}
 
