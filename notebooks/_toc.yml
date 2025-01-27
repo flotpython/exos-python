@@ -24,6 +24,7 @@ parts:
   - file: howtos/encodings/HOWTO-encodings-nb
   - file: howtos/requests/HOWTO-requests-nb
   - file: howtos/adnwalk/HOWTO-adnwalk-nb
+  - glob: tps/graph-bfs-dfs/README*
   - file: howtos/subprocesses/HOWTO-subprocesses-nb
 - caption: TPs basiques
   chapters:
@@ -46,7 +47,6 @@ parts:
   - glob: tps/explang/README*
 - caption: TPs graphes
   chapters:
-  - glob: tps/graph-bfs-dfs/README*
   - glob: tps/graph-shortest-path/README*
   - file: tps/metro/README-metro-nb
   - glob: tps/pagerank-thrones/README*

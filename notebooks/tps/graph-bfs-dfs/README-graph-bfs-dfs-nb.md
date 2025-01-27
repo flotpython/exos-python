@@ -20,14 +20,6 @@ language_info:
 
 Licence CC BY-NC-ND, Thierry Parmentelat
 
-+++ {"tags": ["prune-cell"]}
-
-````{admonition} nothing to prune
-:class: warning
-
-there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
-````
-
 +++
 
 ```{admonition} just a HOWTO
