@@ -15,9 +15,17 @@ language_info:
 
 # puzzle 8 : a.k.a. "taquin"
 
-initially designed as a 3h assignment for a 4-people team
++++
 
-+++ {"tags": ["prune-cell"]}
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+````{admonition} no need for a zip
+to tackle this topic, you only need this HTML text, there is no starter code attached
+````
+
++++
 
 ````{admonition} nothing to prune
 :class: warning
