@@ -14,25 +14,6 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-Licence CC BY-NC-ND, Thierry Parmentelat
-
-+++
-
-# Le snake
-
-````{admonition} pas besoin de zip
-pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML, qui contient le code de démarrage
-````
-
-Le but de ce TP est de réaliser un petit jeu en Python. L'objectif est de vous
-apprendre à concevoir et réaliser un programme complet, et non de réaliser le
-nouveau best-seller.
-
-Gardez en tête que votre objectif est de réaliser un **programme qui marche**, et
-pas un programme parfait.
-
-+++
-
 ## Objectifs et démarche
 
 on va commencer par se créer un dossier vierge

@@ -14,15 +14,29 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-Licence CC BY-NC-ND, Thierry Parmentelat
-
-+++
++++ {"tags": ["prune-cell"]}
 
 # Le snake
+
++++ {"tags": ["prune-cell"]}
+
+Licence CC BY-NC-ND, Thierry Parmentelat & Aurélien Noce
+
++++ {"tags": ["prune-cell"]}
 
 ````{admonition} pas besoin de zip
 pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML, qui contient le code de démarrage
 ````
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
++++ {"tags": ["prune-cell"]}
 
 Le but de ce TP est de réaliser un petit jeu en Python. L'objectif est de vous
 apprendre à concevoir et réaliser un programme complet, et non de réaliser le
