@@ -19,6 +19,14 @@ language_info:
 
 Licence CC BY-NC-ND, Thierry Parmentelat & Aurélien Noce
 
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
 +++
 
 ```{admonition} commencez par télécharger le zip
@@ -172,7 +180,7 @@ on va regarder dans les yeux deux fichiers texte:
 faites pareil avec `bonjour.txt`
 
 - que constatez-vous ?
-- voyez aussi <https://www.utf8-chartable.de/>
+- voyez aussi <https://www.utf8-chartable.de/>  
 
 +++
 
