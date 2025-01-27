@@ -19,6 +19,18 @@ nbhosting:
 
 # ventes aux enchères
 
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat & Daniel Garnier-Moiroux
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-auctions.zip>`
+```
+
++++
+
 OOP and inheritance ... in Python!
 
 Les intérêts de ce TP
@@ -27,30 +39,6 @@ Les intérêts de ce TP
 * utiliser des tests automatisés  
   (c'est une pratique hyper-courante dans la vraie vie: 
    comme ça on détecte tout de suite les régressions sur le code)
-
-+++
-
-## Instructions
-
-{download}`Commencez par télécharger le zip<./ARTEFACTS-auctions.zip>`
-
-Votre but est d'implémenter des ventes aux enchères. Une vente aux enchères à l'aveugle a déjà été implémentée pour vous dans le fichier `blind.py`.
-Vous pouvez exécuter chacun des fichiers directement, pour "jouer" aux enchères:
-
-```
-$ python blind.py
-```
-
-Des tests pour ces enchères on été implementés dans `test_blind.py`. Vous pouvez les exécuter avec VSCode, ou bien directement dans le terminal:
-
-```
-$ python test_blind.py
-```
-
-Votre but va être d'implémenter d'autres types d'enchères. Pour chaque type d'enchères, un fichier de test vous est fourni.
-
-Il y a également un certain nombre d'utilitaires dans le projet (`utils.py`, `testing_utils.py`), mais pour ce TP, vous n'avez pas besoin de les regarder.
-Je vous déconseille fortement de les modifier 🙃
 
 +++
 

@@ -1,12 +1,7 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   encoding: '# -*- coding: utf-8 -*-'
   main_language: python
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
-    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
@@ -24,6 +19,26 @@ nbhosting:
 
 # ventes aux enchères
 
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat & Daniel Garnier-Moiroux
+
++++ {"tags": ["prune-cell"]}
+
+````{admonition} nothing to prune
+:class: warning
+
+there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+````
+
++++
+
+```{admonition} commencez par télécharger le zip
+{download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-auctions.zip>`
+```
+
++++
+
 OOP and inheritance ... in Python!
 
 Les intérêts de ce TP
@@ -33,7 +48,7 @@ Les intérêts de ce TP
   (c'est une pratique hyper-courante dans la vraie vie: 
    comme ça on détecte tout de suite les régressions sur le code)
 
-+++
++++ {"tags": ["prune-cell"]}
 
 ## Instructions
 
