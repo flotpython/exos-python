@@ -17,12 +17,22 @@ nbhosting:
 
 # le dict: struct ou index
 
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFACTS-indexing-structs.zip>`
+```
+
++++
+
 dans ce petit exercice on va utiliser
 * le dict pour gérer des enregistrements (en C on dirait des *structs*)
 * le dict pour indexer un grand nombre de données pour accélérer les recherches
 * et l'ensemble pour détecter les collisions et calculer le nombre d'entrées uniques dans une collection
-
-pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFACTS-indexing-structs.zip>`
 
 ***disclaimer***: gardez à l'esprit le caractère pédagogique de l'exercice,  
 car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une dataframe pandas...

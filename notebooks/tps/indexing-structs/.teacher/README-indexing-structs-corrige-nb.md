@@ -1,10 +1,5 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -jupytext.custom_cell_magics, -language_info.version, -language_info.codemirror_mode.version,
-    -language_info.codemirror_mode, -language_info.file_extension, -language_info.mimetype,
-    -toc, -vscode
   text_representation:
     extension: .md
     format_name: myst
@@ -22,12 +17,22 @@ nbhosting:
 
 # le dict: struct ou index
 
++++
+
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} commencez par télécharger le zip
+pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFACTS-indexing-structs.zip>`
+```
+
++++
+
 dans ce petit exercice on va utiliser
 * le dict pour gérer des enregistrements (en C on dirait des *structs*)
 * le dict pour indexer un grand nombre de données pour accélérer les recherches
 * et l'ensemble pour détecter les collisions et calculer le nombre d'entrées uniques dans une collection
-
-pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFACTS-indexing-structs.zip>`
 
 ***disclaimer***: gardez à l'esprit le caractère pédagogique de l'exercice,  
 car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une dataframe pandas...
