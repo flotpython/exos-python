@@ -465,7 +465,7 @@ en vrac:
   ```{admonition} on pourrait le savoir par programme ?
   :class: dropdown
 
-  sans doute; dans <https://github.com/ollama/ollama/blob/main/docs/api.md#list-local-models> on nous montre comment obtenir des informations plus fines sur les mdèles...
+  sans doute; dans <https://github.com/ollama/ollama/blob/main/docs/api.md#list-local-models> on nous montre comment obtenir des informations plus fines sur les modèles...
   ```
 - ajouter un bouton "Cancel" - en fait idéalement on en aurait besoin le plus tôt possible car le développement peut vite devenir fastidieux (ne pas hésiter à quitter et relancer); mais le truc c'est que c'est non trivial à faire en fait !
 - ou pourrait imaginer soumettre le même prompt à plusieurs modèles pour les comparer

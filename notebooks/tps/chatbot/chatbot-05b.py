@@ -14,7 +14,6 @@ SERVERS = {
         "url": "https://ollama-sam.inria.fr",
         "username": "Bob",
         "password": "hiccup",
-        "default": True,
     },
     # this one is slow because it has no GPUs,
     # but it does not require a login / password
