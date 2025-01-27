@@ -1,11 +1,7 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
   cell_metadata_json: true
   encoding: '# -*- coding: utf-8 -*-'
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -23,9 +19,20 @@ nbhosting:
 
 # parsing people and groups
 
-parsing text files, and building structures using builtin types
++++
 
-in order to work on this exercise from your laptop, {download}`start with downloading the zip<./ARTEFACTS-parse-peo.zip>`
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} grab the zip for starters
+
+{download}`you will need the zipfile that you can find here<./ARTEFACTS-parse-people.zip>`
+```
+
++++
+
+This activity is about parsing text files, and building structures using builtin types.
 
 +++
 

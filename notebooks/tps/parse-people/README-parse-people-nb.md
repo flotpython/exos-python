@@ -19,9 +19,20 @@ nbhosting:
 
 # parsing people and groups
 
-parsing text files, and building structures using builtin types
++++
 
-in order to work on this exercise from your laptop, {download}`start with downloading the zip<./ARTEFACTS-parse-peo.zip>`
+Licence CC BY-NC-ND, Thierry Parmentelat
+
++++
+
+```{admonition} grab the zip for starters
+
+{download}`you will need the zipfile that you can find here<./ARTEFACTS-parse-people.zip>`
+```
+
++++
+
+This activity is about parsing text files, and building structures using builtin types.
 
 +++
 
