@@ -22,20 +22,20 @@
 # ---
 
 # %% [markdown]
-# <div class="licence">
-# <span>Licence CC BY-NC-ND</span>
-# <span>Thierry Parmentelat &amp; Arnaud Legout</span>
-# </div>
+# # pagerank on a graph
 
 # %% [markdown]
-# # pagerank on a graph
-#
-# in order to work on this exercise from your laptop, {download}`start with downloading the zip<./ARTEFACTS-pagerank-thrones.zip>`
-#
-# *pagerank* is a graph metric made famous by Google, who has been using it - at its beginning - to sort pages found in an Internet search, so as to show most relevant pages first.
+# Licence CC BY-NC-ND, Thierry Parmentelat
+
+# %% [markdown]
+# ```{admonition} grab the zip for starters
+# {download}`you will need the zipfile that you can find here<./ARTEFACTS-pagerank-thrones.zip>`
+# ```
 
 # %% [markdown]
 # ## what is pagerank ?
+#
+# *pagerank* is a graph metric made famous by Google, who has been using it - at its beginning - to sort pages found in an Internet search, so as to show most relevant pages first.
 #
 # we consider in a **valued** and **directed** graph; that is to say
 #
