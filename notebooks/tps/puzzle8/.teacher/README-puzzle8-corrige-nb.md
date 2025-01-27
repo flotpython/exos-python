@@ -37,6 +37,12 @@ there are no difference - apart from this very cell - between the teacher and th
 
 ## problem statement
 
+```{image} media/puzzle8-solving.gif
+:align: right
+:width: 250px
+```
+
+
 the puzzle is a 3x3 board with 8 tiles numbered from 1 to 8, and a hole (that we
 note `0` or `-` depending on the context).  
 the hole is free to swap with any of the up to 4 adjacent tiles (no diagonal move); here's an example  
@@ -383,8 +389,16 @@ one common mistake by first-timers is to
 
 ### page.update()
 
-also, as explained in the library documentation, dont' forget to add `page.update()` whenever necessary  
-without a call to this function, your changes will remain in memory and won't be reflected on the actual screen !
+also, as explained in the library documentation, don't forget to add `page.update()` whenever necessary  
+(you can also call update() on an inner widget if that's more convenient)  
+but without a call to this function, your changes will remain in memory and won't be reflected on the actual screen !  
+
+```{admonition} do not overuse
+:class: dropdown
+
+because this function actually involves updating the display, this is a relatively slow operation, 
+so make sure to not call it too often either !
+```
 
 +++
 
@@ -442,6 +456,7 @@ with our convention that the goal is "1 2 3 4 5 6 7 8 0", here's a sample of
 boards with their respective shortest distance; the last one is unreachable
 
 ```python
+# here are a few solvable problems, with their minimal distance to the goal
 problems = []
 problems.append(("1 2 3 4 5 6 7 0 8", 1))
 problems.append(("1 2 3 4 5 6 0 7 8", 2))
@@ -455,7 +470,7 @@ problems.append(("6 1 8 3 4 5 7 0 2", 21))
 problems.append(("6 1 5 7 0 8 4 2 3", 24))
 problems.append(("6 1 4 5 3 0 8 2 7", 27))
 problems.append(("8 6 7 5 0 1 3 2 4", 30))
-# not reachable
+# this one is not reachable
 problems.append(("6 1 7 4 5 2 3 8 0", float('inf')))
 ```
 
@@ -612,5 +627,5 @@ the full documentation is here:
   first lines)
 
 using this information, you can identify the bottleneck functions, and then focus on optimizing them  
-this is how for example how I was able to discard numpy arrays as a possible representation for the boards,
+this is how for example how I was able to discard numpy arrays as a possible representation for the boards,  
 as profiling showed that they were incurring a significant overhead - the way I was using them at least
