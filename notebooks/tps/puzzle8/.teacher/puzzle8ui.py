@@ -19,13 +19,12 @@ class COLORS(StrEnum):                # pylint: disable=missing-class-docstring
     REGULAR = "#43766C"
 
 
-class Puzzle8:
+class Puzzle8(ft.Column):
     """
-    the pieces of the UI
+    the game UI as a ftp.Column
     """
 
-    def __init__(self, page):
-        self.page = page
+    def __init__(self):
         self.solver = Solver()
         # start with the goal board
         goal_board = Board()
@@ -47,29 +46,29 @@ class Puzzle8:
         # header
         self.message_area = ft.TextField(
             disabled=True,
-            bgcolor=ft.colors.WHITE,
-            color=ft.colors.BLACK,
+            bgcolor=ft.Colors.WHITE,
+            color=ft.Colors.BLACK,
             expand=True)
         self.header = ft.Row([self.message_area, ])
 
         # footer
         self.shuffle_button = ft.IconButton(
-            ft.icons.SHUFFLE, tooltip="shuffle", icon_size=50,
+            ft.Icons.SHUFFLE, tooltip="shuffle", icon_size=50,
             autofocus=True,
-            icon_color=ft.colors.RED,
+            icon_color=ft.Colors.RED,
             on_click=lambda e: self.shuffle())
         self.solve_button = ft.IconButton(
-            ft.icons.START, tooltip="solve", icon_size=50,
-            icon_color=ft.colors.GREEN,
+            ft.Icons.START, tooltip="solve", icon_size=50,
+            icon_color=ft.Colors.GREEN,
             on_click=lambda e: self.solve())
         self.cache_button = ft.IconButton(
-            ft.icons.MEMORY,
+            ft.Icons.MEMORY,
             tooltip="compute and cache all results", icon_size=50,
-            icon_color=ft.colors.BLUE,
+            icon_color=ft.Colors.BLUE,
             on_click=lambda e: self.cache())
         self.reset_button = ft.IconButton(
-            ft.icons.RESTART_ALT, tooltip="reset", icon_size=50,
-            icon_color=ft.colors.RED,
+            ft.Icons.RESTART_ALT, tooltip="reset", icon_size=50,
+            icon_color=ft.Colors.RED,
             on_click=lambda e: self.reset())
         self.footer = ft.GridView([
             self.shuffle_button,
@@ -77,6 +76,14 @@ class Puzzle8:
             self.cache_button,
             self.reset_button,
         ], runs_count=4)
+
+        # initialize as a Column
+        # i.e. call the Column constructor
+        super().__init__([
+            self.header,
+            ft.GridView(self.squares, runs_count=3),
+            self.footer,
+        ])
 
     def reset(self):
         """
@@ -100,7 +107,7 @@ class Puzzle8:
         string = stream.getvalue()
         self.message_area.value = string
         # print("MESSAGE", string)
-        self.page.update()
+        self.update()
 
     def outline_hole(self):
         """
@@ -109,7 +116,7 @@ class Puzzle8:
         for square in self.squares:
             square.bgcolor = (
                 COLORS.HOLE if square.value == "0" else COLORS.REGULAR)
-        self.page.update()
+        self.update()
 
     #
     def spot_square(self, value, skip_square=None):
@@ -159,7 +166,7 @@ class Puzzle8:
         for index, board in enumerate(path[1:], 1):
             self.show_board(board)
             self.message(f"{index}/{steps}")
-            self.page.update()
+            self.update()
             if index < steps:
                 time.sleep(delay)
 
@@ -175,7 +182,7 @@ class Puzzle8:
         elapsed = time.time() - begin
         self.message(f"in {elapsed:.3f} s: all results cached ")
         self.enable_ui(True)
-        self.page.update()
+        self.update()
 
     def solve(self, delay=SPEED):
         """
@@ -193,7 +200,7 @@ class Puzzle8:
             self.message(f"in {elapsed:.3f} s: {board} in {len(path)-1} hops")
             self.animate(path, delay)
         self.enable_ui(True)
-        self.page.update()
+        self.update()
 
     #
     def changed(self, event):
@@ -219,7 +226,7 @@ class Puzzle8:
             self.message(f"invalid value: {new}")
             square.value = previous
         self.outline_hole()
-        self.page.update()
+        self.update()
 
     def focused(self, event):
         """
@@ -231,7 +238,7 @@ class Puzzle8:
             if other is not square and not other.value:
                 other.value = self.missing_value(other)
         self.outline_hole()
-        self.page.update()
+        self.update()
 
     def enable_ui(self, enable=True):
         """
@@ -245,7 +252,7 @@ class Puzzle8:
                 self.cache_button,
                 self.reset_button):
             button.disabled = not enable
-        self.page.update()
+        self.update()
 
 
 def main(page):
@@ -253,20 +260,11 @@ def main(page):
     main entry point
     """
     page.title = "Puzzle 8"
-    page.window_width = 400
-    page.window_resizable = False
+    page.window.width = 400
+    page.window.resizable = False
 
-    puzzle8 = Puzzle8(page)
-
-    page.add(
-        ft.Column([
-            puzzle8.header,
-            ft.GridView(
-                puzzle8.squares,
-                runs_count=3),
-            puzzle8.footer,
-        ])
-    )
+    puzzle8 = Puzzle8()
+    page.add(puzzle8)
     puzzle8.outline_hole()
 
 

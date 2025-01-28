@@ -156,10 +156,10 @@ of course you can stop the algorithm as soon as you have found the goal node
 
 - the problem is symmetric - in the sense that you can start from the goal or from the starting position
 - and that **starting from the goal** has the extra advantage that you can **cache the results** of the algorithm  
-  and this way you case reuse them to solve another board !
+  and this way you can reuse them to solve another board !
 
 this might be a useful observation if you need to solve several problems in a row, and want to speed up the whole process  
-please note that this is not at all crucial at first, and is useful only for optimization, so you can ignore it at first if you wish
+please note that this is not at all crucial at first, and is useful only for optimization, so you can ignore this at first if you wish
 ```
 
 +++
@@ -172,15 +172,16 @@ focusing on the Dijkstra algorithm and Python, here are a few hints that may hel
 
 #### board representation (1)
 
-you need to choose a way to represent a board; for that there are many options, like
+you need to choose a way to represent a board; for that you have many options, like
 
-- a sequence of 9 numbers
+- a sequence (list or tuple) of 9 numbers
 - a string of 9 characters
 - a numpy array
 - a class of your own
 - ...
 
 however, please pay attention to the fact that you will probably want to use boards:
+
 - in structures like sets or dicts - so its needs to be **hashable**
 - in a priority queue, which implies *sorting*, so you need a **sortable** representation as well
 
@@ -193,9 +194,10 @@ also please be aware that my early attempts at using a **numpy array** tended to
 #### board representation (2)
 
 as part of this decision, you need to choose whether to model boards as **native Python** objects, or as **class instances**  
-both approaches are valid, but the latter is likely to lead to a much cleaner code, and **more easily modifiable**, which is an important point when time
-matters  
-so, not that if you choose to use you own class:
+both approaches are valid, but the latter is likely to lead to a much cleaner code, and **more easily modifiable**,  
+which is an important point when time matters
+
+so, note that if you choose to use you own class:
 
 - in order to make it **hashable**, you just need to implement the following methods:
   - `__eq__` to allow to compare boards
@@ -205,7 +207,7 @@ so, not that if you choose to use you own class:
     `self.internal`, then the `__hash__` method will return `hash(self.internal)`
 - and to make it **sortable**, you can go with implementing only `__lt__` (stands for *lower than*)  
   which is enough to describe order among instances of your class  
-  (for a deeper discussion, see also <https://docs.python.org/3/library/functools.html#functools.total_ordering>)
+  (for a deeper discussion, see also <https://docs.python.org/3/library/functools.html#functools.total_ordering>)  
   **note** however that in my solution, I did not even had to resort to that, thanks to `dataclass`, [more on this in this section below](label-dataclass-in-queue)
 
 ````{admonition} which is the cheapest ?
@@ -213,7 +215,8 @@ so, not that if you choose to use you own class:
 using a native Python data type - say, a `str` or a `tuple` - frees you from writing these 3 methods  
 but note that each of these 3 methods is .. a one-liner itself, so you actually spare exactly 6 lines of code
 
-on the other hand, using a native Python data type is likely to make your code more convoluted, so again, harder to tweak; so there's that...
+on the other hand, using a native Python data type is likely to make your code more convoluted, so again, harder to tweak;  
+so there's that...
 ````
 
 +++
@@ -243,7 +246,7 @@ I'd like to outline in particular **the one below**, where you will find **very 
 ````{admonition} this can **get you quickly up to speed**
 :class: important
 particularly if you are unsure how to start !  
-<https://www.redblobgames.com/pathfinding/a-star/implementation.html#python-search>  
+<https://www.redblobgames.com/pathfinding/a-star/implementation.html#python-dijkstra>  
 other algorithms and languages are also discussed in other sections of the page
 ````
 
@@ -273,7 +276,7 @@ if you are done early, or want to pursue your work after the hackathon, you can
 
 - alter your code so it works on any dimension, not just 3x3
 - write a variant of the solver that uses the A\* algorithm,
-- and then compare both implementations on larger board sizes
+- and then compare both implementations on larger board sizes  
   this will show you why *A** is quite useful too, even if it's not guaranteed to be optimal
 
 +++
@@ -283,19 +286,20 @@ if you are done early, or want to pursue your work after the hackathon, you can
 as for the GUI, you can use any library you want; here we're going to quickly
 describe [the `flet library`](https://flet.dev/) which is a simple Python
 library that allows to create a GUI in a few lines of code; the resulting app
-can then be run a standalone app, or in a browser
+can then be run as a standalone app, or in a browser
 
 ````{admonition} warning: use flet run
-although your flet code sits in a `.py` file, you are supposed to run it with
+although your flet code sits in a `.py` file, you are supposed to run it like this
+
 ```bash
+# the recommended way
 flet run mycode.py
-```
-**and not simply**
-```bash
+
+# the not so good way
 python mycode.py
 ```
-the former is supposedly better in that it will reload changed sources dynamically (no need to restart the program after you change the source)  
-the latter form should work too (but without dynamic loading, of course)
+the former is generally better, in that it will **reload changed sources dynamically** : no need to restart the program after you change the source! well, this does not work perfectly and a hard restart is sometimes needed, but it's still better than having to kill/restart your program ad nauseam  
+the latter form should work too, but without dynamic loading, of course
 ````
 
 +++
@@ -303,17 +307,41 @@ the latter form should work too (but without dynamic loading, of course)
 ### flet widgets
 
 the basic idea is that the library gives you a `Page` object, that you can
-populate with widgets as Python objects, that your code can then interact with
+populate with a ***hierarchy of widgets*** as Python objects, that your code can then interact with
+
+here are a few introductory words - feel free to skip of you have used the library already  
+(but don't copy this code just yet, read also further on)
+
+#### a simplistic program
+
+```{image} media/puzzle8-00.png
+:width: 250px
+:align: right
+```
+
+in its simplest form, a flet program looks like this
+
+- notice the way the application is started
+- also notice the way the layout is built by nesting a row inside the column
+- and how this layout is fined-tuned using alignment
+  bookmark this for later, but the details are here <https://flet.dev/docs/reference/types/mainaxisalignment/>
+
+````{admonition} a very basic, but working, flet program
+:class: dropdown
+```{literalinclude} puzzle8-00.py
+```
+````
+
+#### in our case
+
+```{image} media/gui-sample.png
+:width: 250px
+:align: right
+```
 
 typically, in order to create a GUI that looks like this (this is just a
 suggestion of course, you can and should do whatever you want in terms of layout
-and capabilities):
-
-```{image} gui-sample.png
-:width: 300px
-```
-
-you would build a widget tree like this (but don't copy this code yet, read also further):
+and capabilities), you would instead build a widget tree like this :
 
 ```python
     ft.Column([
@@ -338,9 +366,9 @@ and from then, your job is to
 
 - keep references to the created widgets, in order to be able to interact with
   them later
-- find the right settings to make the widgets look like you want
 - define the callbacks that will be called when the user interacts with the
   widgets
+- find the right settings to make the widgets look like you want
 
 below are further hints and considerations, particularly for first-timers
 
@@ -387,11 +415,22 @@ one common mistake by first-timers is to
 
 +++
 
+### using globals or not
+
+now, with the code above, it's easy to "retrieve" the widgets, because they are now stored in the **global variable `squares`**  
+this is considered a poor practice though, (mainly because global variables mean poor or no reusability)  
+so once you get this working, you could optionnally try to be **a little smarter**, and avoid the global  
+however that's an easy first step to get something working, if again you have never written anything like this before
+
++++
+
 ### page.update()
 
 also, as explained in the library documentation, don't forget to add `page.update()` whenever necessary  
 (you can also call update() on an inner widget if that's more convenient)  
 but without a call to this function, your changes will remain in memory and won't be reflected on the actual screen !  
+
+see v02 below for an example
 
 ```{admonition} do not overuse
 :class: dropdown
@@ -402,49 +441,47 @@ so make sure to not call it too often either !
 
 +++
 
-### using globals or not
+### starter code (optional)
 
-now, with the code above, it's easy to "retrieve" the widgets, because they are now stored in the **global variable `squares`**  
-this is considered a poor practice though, (mainly because global variables mean poor or no reusability)  
-so once you get this working, you could optionnally try to be **a little smarter**, and avoid the global  
-however that's an easy first step to get something working, if again you have never written anything like this before
+if you feel comfortable, just read on  
+if you need more help in putting together your UI, here are the possible 2 first steps to get you started
 
-+++
+again this is just one of the many possible paths forward:  
 
-### using classes or not
+#### ***in v01***
 
-here again you can choose to use classes or not; if you're not comfortable with
-object-oriented programming, you can just use functions and global variables like above;
-however like most of the time, using classes will lead to a cleaner code, which
-is easier to maintain and to get right
+we create a totally passive UI; it is helpful so you can understand the basics:
 
-consider e.g. this new structure:
+- it defines the game as **a function** that returns a `Column` that can be added to the page
+- it defines a `main(page)` function, which is a requirement of `flet`
+- we just call `ft.app(main)` that actually runs the whole UI
+it is `ft.app` that actually creates the `Page` (the main window) object, and passes it to `main`
 
-```python
-class Board:
-    def __init__(self, page):
-         self.page = page
-    def create_squares:
-        self.squares = [ft.TextField(...) for i in range(9)]
-        return self.squares
-    def update(board):
-        for i, square in zip(board, squares):
-            square.value = i
-        # with this approach it is MUCH EASIER to get our hands on the page instance !
-        self.page.update()
+don't copy this code either, v02 is more suitable as a starter code, but v01 should help you grasp how v02 actually works
 
-def main(page):
-    board = Board()
-    page.add(
-        ft.Column(
-            ...                                  # the message area
-            ft.GridView(board.create_squares(), ...),   # main area
-            ft.Row(
-                ...                               # the icons below
-            ),
-        )
-    )
-```
+`````{admonition} a possible v01
+:class: dropdown tip
+````{literalinclude} puzzle8-01.py
+````
+`````
+
+#### ***in v02***
+
+this version has a few changes as compared with v01
+
+- this time it defines the game as **a class** that **inherits** the `Column` class
+- this way we can simply insert a `Puzzle8` instance in the page, just as it were a `Column` object (and to an extent, it is also a `Column` object thanks to the inheritance)
+- and the additional benefit is we can keep track of the various "pieces" in the game
+- this is illustrated in a sample callback `my_callback`, that we bind to the second button (`start_button`)
+
+
+`````{admonition} a possible v02
+:class: dropdown tip
+````{literalinclude} puzzle8-02.py
+````
+`````
+
+you **could consider using this code as a starting point** for your app, provided that you have followed the construction up to this point of course.
 
 +++
 
@@ -486,7 +523,7 @@ here is a little more information on how to use this stuff
 
 +++
 
-### the basics: sorting numbers
+### with numbers
 
 first with simple, atomic, objects:
 
@@ -508,7 +545,7 @@ while not Q.empty():
     print(Q.get())
 ```
 
-### sorting objects
+### with objects
 (label-dataclass-in-queue)=
 
 in our case though, the items that we need to store in the queue are **not simple
