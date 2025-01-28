@@ -12,14 +12,14 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'TP: les boids'
+  title: 'TP: un chatbot'
 ---
 
-Licence CC BY-NC-ND, Thierry Parmentelat
+# TP - un chatbot avec `flet`
 
 +++
 
-# TP - un chatbot avec `flet`
+Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++
 
@@ -29,16 +29,6 @@ dans ce TP nous allons
 
 * découvrir (très superficiellement) la librairie `flet`
 * et l'utiliser pour implémenter un début de simulation de *chatbot*
-
-+++
-
-### contenu
-
-vous êtes censé travailler en local sur votre ordi;
-commencez par {download}`télécharger le zip<./ARTEFACTS-chatbot.zip>` qui contient
-
-* le starter code dans `chatbot-01.py`
-* les illustrations dans un dossier `media/`
 
 +++
 

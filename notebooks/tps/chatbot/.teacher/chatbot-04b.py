@@ -26,6 +26,7 @@ SERVERS = {
 MODELS = [
     "gemma2:2b",
     "mistral:7b",
+    "deepseek-r1:7b",
 ]
 
 

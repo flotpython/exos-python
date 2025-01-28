@@ -12,7 +12,7 @@ language_info:
   nbconvert_exporter: python
   pygments_lexer: ipython3
 nbhosting:
-  title: 'TP: les boids'
+  title: 'TP: un chatbot'
 ---
 
 # TP - un chatbot avec `flet`
