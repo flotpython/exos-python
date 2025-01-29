@@ -72,6 +72,7 @@ project:
       - file: tps/metro/README-metro-nb.md
       - pattern: tps/pagerank-thrones/README*-nb.md
       - pattern: tps/puzzle8/README-*-nb.md
+      - file: tps/ants/README-ants-nb.md
 
     - title: TPs visu & games
       children:

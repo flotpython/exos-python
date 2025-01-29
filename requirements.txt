@@ -38,3 +38,6 @@ ruamel.yaml
 
 # for unicode boxes
 colorama
+# for ants
+graphviz
+plotly
