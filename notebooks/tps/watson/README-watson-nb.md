@@ -26,14 +26,6 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++
 
-````{admonition} nothing to prune
-:class: warning
-
-there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
-````
-
-+++
-
 ```{admonition} commencez par télécharger le zip
 {download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-watson.zip>`
 ```

@@ -21,7 +21,7 @@ nbhosting:
 
 Licence CC BY-NC-ND, Thierry Parmentelat
 
-+++
++++ {"tags": ["prune-cell"]}
 
 ````{admonition} nothing to prune
 :class: warning

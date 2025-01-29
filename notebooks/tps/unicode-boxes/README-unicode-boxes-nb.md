@@ -23,14 +23,6 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++
 
-````{admonition} nothing to prune
-:class: warning
-
-there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
-````
-
-+++
-
 Unicode comes with a few characters that can be used to draw squares or rectangles on the terminal
 
 See e.g. this page for a list 

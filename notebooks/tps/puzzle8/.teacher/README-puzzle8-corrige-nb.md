@@ -25,7 +25,7 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 to tackle this topic, you only need this HTML text, there is no starter code attached
 ````
 
-+++
++++ {"tags": ["prune-cell"]}
 
 ````{admonition} nothing to prune
 :class: warning

@@ -27,14 +27,6 @@ to tackle this topic, you only need this HTML text, there is no starter code att
 
 +++
 
-````{admonition} nothing to prune
-:class: warning
-
-there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
-````
-
-+++
-
 ## problem statement
 
 ```{image} media/puzzle8-solving.gif
