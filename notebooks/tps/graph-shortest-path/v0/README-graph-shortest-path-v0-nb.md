@@ -1,37 +1,38 @@
-# -*- coding: utf-8 -*-
-# ---
-# jupyter:
-#   jupytext:
-#     cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control
-#     notebook_metadata_filter: all,-language_info,-toc,-jupytext.text_representation.jupytext_version,-jupytext.text_representation.format_version
-#     text_representation:
-#       extension: .py
-#       format_name: percent
-#   kernelspec:
-#     display_name: Python 3 (ipykernel)
-#     language: python
-#     name: python3
-#   notebookname: parcours de graphe
-#   version: '1.0'
-# ---
+---
+jupytext:
+  encoding: '# -*- coding: utf-8 -*-'
+  text_representation:
+    extension: .md
+    format_name: myst
+kernelspec:
+  display_name: Python 3 (ipykernel)
+  language: python
+  name: python3
+language_info:
+  name: python
+  nbconvert_exporter: python
+  pygments_lexer: ipython3
+notebookname: parcours de graphe
+---
 
-# %% [markdown]
-# <div class="licence">
-# <span>Licence CC BY-NC-ND</span>
-# <span>Thierry Parmentelat</span>
-# </div>
+<div class="licence">
+<span>Licence CC BY-NC-ND</span>
+<span>Thierry Parmentelat</span>
+</div>
 
-# %% [markdown]
-# ### plus court chemin - algorithme de Dijkstra
++++
 
-# %% [markdown]
-# digression sur ce sujet
-#
+### plus court chemin - algorithme de Dijkstra
 
-# %% trusted=true
++++
+
+digression sur ce sujet
+
+```{code-cell} ipython3
 import graphviz
+```
 
-# %% trusted=true
+```{code-cell} ipython3
 g = graphviz.Digraph(engine='dot')
 g.edge('v1', 'v3', label='5')
 g.edge('v1', 'v2', label='1')
@@ -43,8 +44,9 @@ g.edge('v4', 'v5', label='1')
 g.edge('v4', 'v6', label='3')
 g.edge('v5', 'v6', label='1')
 g
+```
 
-# %% trusted=true
+```{code-cell} ipython3
 graph = {
     'v1': {'v3': 5, 'v2': 1},
     'v3': {'v4': 1},
@@ -52,8 +54,9 @@ graph = {
     'v4': {'v5': 1, 'v6': 3},
     'v5': {'v6': 1},
 }
+```
 
-# %% trusted=true
+```{code-cell} ipython3
 # inf stands for infinity
 from math import inf
 
@@ -71,9 +74,9 @@ class ClosestNext(dict):
         if total < self.min_distance:
             self.min_vertex = vertex
             self.min_distance = total
+```
 
-
-# %% trusted=true
+```{code-cell} ipython3
 # calcule seulement la distance
 def shortest_distance(graph_data, src, dst):
     explored = {src: 0}
@@ -92,12 +95,13 @@ def shortest_distance(graph_data, src, dst):
             return
         explored[best_vertex] = closest.min_distance
     print(f"YES ! shortest distance is {explored[dst]}")
+```
 
-
-# %% trusted=true
+```{code-cell} ipython3
 shortest_distance(graph, 'v1', 'v6')
+```
 
-# %% trusted=true
+```{code-cell} ipython3
 from math import inf
 
 class ClosestPreviousNext(dict):
@@ -116,9 +120,9 @@ class ClosestPreviousNext(dict):
             self.min_previous = previous
             self.min_vertex = vertex
             self.min_distance = total
+```
 
-
-# %% trusted=true
+```{code-cell} ipython3
 # même algo mais mémorise aussi le chemin
 def shortest_path(graph_data, src, dst):
     # on en garde un peu plus dans cette structure
@@ -140,7 +144,8 @@ def shortest_path(graph_data, src, dst):
         explored[best_vertex] = (
             closest.min_distance, explored[best_previous][1] + [best_vertex])
     print(f"YES ! shortest path is {explored[dst]}")
+```
 
-
-# %% trusted=true
+```{code-cell} ipython3
 shortest_path(graph, 'v1', 'v6')
+```
