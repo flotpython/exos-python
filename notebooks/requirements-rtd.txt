@@ -6,3 +6,6 @@ jupyter-book
 #
 jupyterlite-pyodide-kernel
 jupyterlite-sphinx >= 0.13
+
+# toggable left sidebar
+pydata-sphinx-theme<0.16
