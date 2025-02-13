@@ -13,7 +13,7 @@ language_info:
   pygments_lexer: ipython3
 ---
 
-# un jeu multi-joueur
+# multi-joueur avec redis
 
 +++
 
@@ -66,8 +66,9 @@ l'architecture la plus simple pour établir la communication entre tous les joue
 
 +++
 
-```{image} processes.svg
+```{image} media/processes.svg
 :align: center
+:height: 450px
 ```
 
 +++
@@ -149,7 +150,7 @@ jusqu'ici on a fait tourner tous les processus dans le même ordinateur
 
 en vraie grandeur bien sûr, on veut faire tourner ça sur plusieurs ordinateurs
 
-```{image} ip-address.svg
+```{image} media/ip-address.svg
 :align: center
 ```
 
@@ -169,7 +170,7 @@ et cherchez une adresse parmi les intervalles réservés aux adresses privées
 
 +++
 
-```{image} private-ranges.png
+```{image} media/private-ranges.png
 :align: center
 ```
 
