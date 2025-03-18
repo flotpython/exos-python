@@ -1,6 +1,8 @@
 import random
 import json
 
+import pygame as pg
+
 def random_color():
     return [random.randint(0, 255) for _ in range(3)]
 
@@ -35,10 +37,11 @@ class Player:
         add local name to database
         with a random color
         """
-        self.redis_server.hmset(
+        self.redis_server.hset(
             self.name,
-            {'color' : json.dumps(self.color),
-             'position': json.dumps(self.position),
+            mapping = {
+                'color' : json.dumps(self.color),
+                'position': json.dumps(self.position),
             })
 
 
@@ -59,3 +62,20 @@ class Player:
         self.position[1] %= self.height
         self.redis_server.hset(self.name, 'position',
                                json.dumps(self.position))
+
+
+    def handle_event(self, event):
+        if event.type == pg.KEYDOWN:
+            match event.key:
+                case pg.K_UP:
+                    self.move(0, -1)
+                case pg.K_DOWN:
+                    self.move(0, 1)
+                case pg.K_RIGHT:
+                    self.move(1, 0)
+                case pg.K_LEFT:
+                    self.move(-1, 0)
+                case pg.K_c:
+                    self.color = random_color()
+                    self.redis_server.hset(self.name, 'color',
+                                           json.dumps(self.color))

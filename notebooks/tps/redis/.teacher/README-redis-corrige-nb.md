@@ -162,16 +162,27 @@ lance le jeu en lui indiquant sur quel ordinateur se trouve le serveur redis
 ### trouver son addresse IP
 
 selon les systèmes, lancez dans un terminal la commande suivante
+
 * Windows `ipconfig`
 * MacOS `ifconfig`
 * LInux `ip address show`
 
-et cherchez une adresse parmi les intervalles réservés aux adresses privées
+et cherchez une adresse parmi les intervalles réservés aux adresses privées:
 
 +++
 
-```{image} media/private-ranges.png
-:align: center
+| plage | taille |
+|-:|:-|
+| `192.168.0.0/16` | $2^{16} = 65,536$ adresses
+| `172.16.0.0/12` | $2^{20} = 1,048,576$ adresses
+| `10.0.0.0/8` | $2^{24} = 16,777,216$ adresses
+
++++
+
+```{admonition} plus de détails
+plus de détails ici
+* <https://ipstack.com/classes-of-private-ip-address>
+* le RFC: <https://datatracker.ietf.org/doc/html/rfc1918>
 ```
 
 +++
@@ -182,7 +193,7 @@ dans notre configuration, si Pierre est sur l'adresse disons `192.168.200.20`,
 il suffit aux autres joueurs qui veulent le rejoindre de lancer par exemple
 
 ```
-game.py --server 192.168.200.20 Jacques
+python game.py --server 192.168.200.20 Jacques
 ```
 
 +++

@@ -40,11 +40,11 @@ class Screen:
     def display(self, players):
         """
         players is an iterable of dictionaries
-        b'color' -> [r g b], b'position' -> [x, y]
+        'color' -> [r g b], 'position' -> [x, y]
         """
         self.screen.fill(BLACK)
         for player in players:
-            x, y = player[b'position']
-            color = player[b'color']
+            x, y = player['position']
+            color = player['color']
             self.draw_cell(x, y, color)
         pygame.display.update()

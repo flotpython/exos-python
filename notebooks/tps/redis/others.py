@@ -8,7 +8,7 @@ class Others:
         # a handle to the redis server
         self.redis_server = redis_server
 
-    def all_players(self):
+    def fetch_all_players(self):
         # xxx need to optimize these multiple round trips
         player_names = self.redis_server.keys()
         players = []
