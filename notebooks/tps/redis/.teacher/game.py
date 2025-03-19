@@ -9,7 +9,7 @@ from redis import Redis
 
 from screen import Screen
 from player import Player
-# from others import Others
+from others import Others
 
 # 2 differents speeds
 #
@@ -30,7 +30,6 @@ FRAMES_PER_MOVE = 3
 def main():
 
     parser = ArgumentParser()
-    # not yet used in the starter code...
     parser.add_argument("-s", "--server", default=None,
                         help="IP adddress for the redis server")
     parser.add_argument("-a", "--auto-move", action="store_true",
@@ -42,22 +41,21 @@ def main():
     local_player_name = args.name
     pg.display.set_caption(f"game: {local_player_name}")
 
-    # likewise, at this point args.server can be set from the terminal
-    # so you should use it to connect to the redis server
-    print(f"This is where we should connect to redis server at {args.server}")
 
     screen = Screen()
     W, H = screen.size()
 
     clock = pg.time.Clock()
 
-    player = Player(local_player_name, H, W)
+    redis_server = Redis(args.server, decode_responses=True)
 
-    # in anticipation for a multi-player version,
-    # screen deals with dictionaries, not with player objects
-    # this is because the data coming from the redis server
-    # will be in the form of dictionaries
-    players = [{'color': player.color, 'position': player.position}]
+    player = Player(local_player_name, H, W, redis_server)
+    player.join()
+
+    others = Others(redis_server)
+
+    # ask the redis server where the other players are
+    players = others.fetch_all_players()
     screen.display(players)
 
     # type 'a' to toggle auto move
@@ -67,6 +65,8 @@ def main():
     while True:
         # sync with the frame rate
         clock.tick(FRAME_RATE)
+        # get the position of other players
+        players = others.fetch_all_players()
 
         # move the local player
         # actually do all this only once every FRAMES_PER_MOVE frames
@@ -79,6 +79,7 @@ def main():
             for event in pg.event.get():
                 if (event.type == QUIT or
                     (event.type == pg.KEYDOWN and event.key == pg.K_q)):
+                    player.leave()
                     return
                 elif event.type == pg.KEYDOWN and event.key == pg.K_a:
                     auto_move = not auto_move
@@ -86,9 +87,6 @@ def main():
                     player.handle_event(event)
 
         # redisplay accordingly every frame
-        # same as above, in a multi-player version this will be
-        # acquired from the redis server
-        players = [{'color': player.color, 'position': player.position}]
         screen.display(players)
 
 

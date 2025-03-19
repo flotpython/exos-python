@@ -18,7 +18,7 @@ class Player:
     its position to the redis server
     """
 
-    def __init__(self, name, width, height):
+    def __init__(self, name, width, height, redis_server):
         """
         name is the name of the local player
         """
@@ -28,6 +28,28 @@ class Player:
         self.position = [ random.randint(0, self.width-1),
                           random.randint(0, self.height-1)]
         self.color = random_color()
+        #
+        self.redis_server = redis_server
+
+
+    def join(self):
+        """
+        add local name to database
+        with a random color
+        """
+        self.redis_server.hset(
+            self.name,
+            mapping = {
+                'color' : json.dumps(self.color),
+                'position': json.dumps(self.position),
+            })
+
+
+    def leave(self):
+        """
+        remove local name from database
+        """
+        self.redis_server.delete(self.name)
 
 
     def random_move(self):
@@ -38,6 +60,8 @@ class Player:
         self.position[0] %= self.width
         self.position[1] += dy
         self.position[1] %= self.height
+        self.redis_server.hset(self.name, 'position',
+                               json.dumps(self.position))
 
 
     def handle_event(self, event):
@@ -53,3 +77,5 @@ class Player:
                     self.move(-1, 0)
                 case pg.K_c:
                     self.color = random_color()
+                    self.redis_server.hset(self.name, 'color',
+                                           json.dumps(self.color))
