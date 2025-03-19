@@ -67,14 +67,14 @@ joueurs consiste à créer un **processus serveur**, auquel les joueurs sont
 connectés, selon un diagramme dit en étoile (terme qui prend tout son sens avec
 plusieurs joueurs: le serveur est au centre du diagramme) :
 
-```{image} media/processes.svg
+```{image} media/processes.excalidraw.svg
 :align: center
 :height: 450px
 ```
 
 +++
 
-## starter code
+## étape 0: comprendre le starter code
 
 vous trouverez dans le zip un jeu fonctionnel; c'est très très vaguement
 inspiré du jeu du snake: vous controlez un joueur qui se matérialise par une
@@ -83,7 +83,8 @@ case carrée que vous bougez avec les fleches du clavier
 vous lancez le jeu en faisant
 
 ```shell
-# ajoutez --help pour vois les options disponibles
+# ajoutez --help pour voir les options disponibles
+
 python game.py pierre
 ```
 
@@ -96,6 +97,8 @@ python game.py --server localhost pierre
 ```
 
 mais que pour l'instant ce paramètre n'est pas utilisé
+
++++
 
 ## objectifs du TP
 
@@ -225,7 +228,8 @@ quelques suggestions dans ce sens:
   fichier `others.py`) dont le travail est d'interroger le serveur pour connaitre
   la position des autres joueurs
 * ce qui donnerait un flux de données dans le genre de ceci
-  ```{image} media/dataflow.svg
+
+  ```{image} media/dataflow.excalidraw.svg
   :align: center
   :height: 450px
   ```
@@ -245,7 +249,7 @@ jusqu'ici on a fait tourner tous les processus dans le même ordinateur
 
 en vraie grandeur bien sûr, on veut faire tourner ça sur plusieurs ordinateurs
 
-```{image} media/ip-address.svg
+```{image} media/ip-addresses.excalidraw.svg
 :align: center
 ```
 
