@@ -70,7 +70,7 @@ function main() {
         esac
     done
     shift $((OPTIND-1))
-    
+
     if [[ -z "$@" ]]; then
         run-all
     else
