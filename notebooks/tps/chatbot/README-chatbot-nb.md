@@ -214,6 +214,13 @@ ici encore je vous conseille de procéder par petites étapes:
 - 4a: la trame de la classe `History`
 - 4b: faites en sorte que le fait de taper "Entrée" dans la zone de prompt fasse le même effet que le bouton "Send"
 
+```{admonition} regardez la classe `TextField`
+:class: tip
+
+pour le titre on utilise la classe `Text` qui est en *read-only*; 
+pour la zone de prompt, il est préferable d'utiliser `TextField` qui est *editable* et qui offre plus de flexibilité
+```
+
 +++
 
 ## v05: un peu de réseau
