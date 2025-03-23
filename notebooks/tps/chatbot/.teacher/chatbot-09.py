@@ -80,7 +80,7 @@ class ChatbotApp(ft.Column):
         # we keep a cache of available models on each server
         self.models_per_server = {}
 
-        header = ft.Text(value="My Chatbot", size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=True)
         #  will be populated later

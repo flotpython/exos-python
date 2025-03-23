@@ -42,7 +42,7 @@ TITLE = "My first Chatbot 03a"
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        header = ft.Text(value="My Chatbot", size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         streaming = ft.Checkbox(label="streaming", value=False)
         model = ft.Dropdown(

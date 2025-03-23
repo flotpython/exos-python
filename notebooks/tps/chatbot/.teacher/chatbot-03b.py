@@ -42,7 +42,7 @@ TITLE = "My first Chatbot 03b"
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        header = ft.Text(value="My Chatbot", size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         # the 3 settings widgets need to be inspectable
         # later on in the code (in the submit method)

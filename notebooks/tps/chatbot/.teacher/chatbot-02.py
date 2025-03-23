@@ -38,7 +38,7 @@ TITLE = "My first Chatbot 02"
 def main(page: ft.Page):
     page.title = TITLE
 
-    header = ft.Text(value="My Chatbot", size=40)
+    header = ft.Text(value=TITLE, size=40)
 
     streaming = ft.Checkbox(label="streaming", value=False)
     model = ft.Dropdown(

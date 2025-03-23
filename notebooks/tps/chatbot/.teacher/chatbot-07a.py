@@ -74,7 +74,7 @@ class History(ft.Column):
 class ChatbotApp(ft.Column):
 
     def __init__(self):
-        header = ft.Text(value="My Chatbot", size=40)
+        header = ft.Text(value=TITLE, size=40)
 
         self.streaming = ft.Checkbox(label="streaming", value=False)
         self.model = ft.Dropdown(
