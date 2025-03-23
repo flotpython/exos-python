@@ -105,7 +105,7 @@ class ChatbotApp(ft.Column):
 
         # authenticate if needed
         auth_args = {}
-        if 'username in server_record':
+        if 'username' in server_record:
             auth_args = {
                 'auth': (server_record['username'], server_record['password'])
             }
