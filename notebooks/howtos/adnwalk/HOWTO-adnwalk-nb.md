@@ -41,8 +41,9 @@ La librairie que nous allons utiliser pour dessiner le chemin s'appelle `matplot
 
 ```{code-cell} ipython3
 # pour des graphiques interactifs - version notebook seulement
-# les affichages sont statiques dans la sortie HTML
-%matplotlib ipympl
+# on peut envisager de faire
+#%matplotlib ipympl
+# mais pour la sortie HTML les affichages sont statiques
 
 # importation de la librairie
 import matplotlib.pyplot as plt
