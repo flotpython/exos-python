@@ -32,6 +32,7 @@ execute:
   # consider only filenames that start with an uppercase
     - "[a-z]**/[a-z]*"
     - "**/.teacher/[a-z]*"
+  timeout: 60
 
 parse:
   myst_enable_extensions:
