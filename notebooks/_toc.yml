@@ -3,6 +3,16 @@
 format: jb-book
 root: README
 parts:
+- caption: exercices débutants
+  chapters:
+  # input, loop, int(), except
+  - file: exos/beginners/EXO-countdown-nb
+  # import, argparse
+  - file: exos/beginners/EXO-guess-nb
+  # slicing conditional expression return/break
+  - file: exos/beginners/EXO-palindrom-nb
+  # 
+  - file: exos/beginners/EXO-anagrams-nb
 - caption: exercices basiques
   chapters:
   # str, ints, binary computations
