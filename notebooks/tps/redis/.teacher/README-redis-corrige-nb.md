@@ -15,6 +15,15 @@ language_info:
 
 # multi-joueur avec redis
 
+```{admonition} ATTENTION
+
+l'installation de redis sur Windows est **complexe**  
+l'installation par conda n'installe **que la librairie Python**, et pas le serveur  
+la doc officielle indique de passer par WSL, ce qui est .. carrément *overkill*  
+
+à déconseiller...
+```
+
 {download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-redis.zip>`
 
 on se propose de réaliser un petit jeu multi joueur, et pour cela nous aurons besoin de
