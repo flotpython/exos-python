@@ -9,10 +9,12 @@ parts:
   - file: exos/beginners/EXO-countdown-nb
   # import, argparse
   - file: exos/beginners/EXO-guess-nb
-  # slicing conditional expression return/break
+  # slicing, conditional expression, return/break
   - file: exos/beginners/EXO-palindrom-nb
-  # 
+  # sorted
   - file: exos/beginners/EXO-anagrams-nb
+  # counter, regexp 
+  - file: exos/beginners/EXO-frequency-nb
 - caption: exercices basiques
   chapters:
   # str, ints, binary computations
