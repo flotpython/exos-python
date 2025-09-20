@@ -10,7 +10,7 @@
 all: toc style prune artefacts book
 
 include Makefile.book2
-include Makefile.style
+include Makefile.style2
 include Makefile.prune
 
 # specific to exos
