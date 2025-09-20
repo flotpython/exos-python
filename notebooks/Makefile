@@ -9,7 +9,7 @@
 
 all: toc style prune artefacts book
 
-include Makefile.book
+include Makefile.book2
 include Makefile.style
 include Makefile.prune
 
