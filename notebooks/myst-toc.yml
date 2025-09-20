@@ -1,0 +1,101 @@
+version: 1
+
+project:
+  toc:
+
+    - file: README.md
+
+    - title: exercices débutants
+      children:
+      # input, loop, int(), except
+      - file: exos/beginners/EXO-countdown-nb.md
+      # import, argparse
+      - file: exos/beginners/EXO-guess-nb.md
+      # slicing, conditional expression, return/break
+      - file: exos/beginners/EXO-palindrom-nb.md
+      # sorted
+      - file: exos/beginners/EXO-anagrams-nb.md
+      # counter, regexp
+      - file: exos/beginners/EXO-frequency-nb.md
+
+    - title: exercices basiques
+      children:
+      # str, ints, binary computations
+      - file: exos/basic/EXO-ipsplit-nb.md
+      # lists, side effects
+      - file: exos/basic/EXO-skimlist-readme-nb.md
+      # strs and formatting
+      - file: exos/basic/EXO-invoice-nb.md
+      # dicts
+      - file: exos/basic/README-agenda-nb.md
+      # basic counts, requires dicts
+      - file: exos/basic/README-adnpercents-nb.md
+      # filesystem / pathlib
+      - file: exos/basic/EXO-files-sortby-nb.md
+      - file: exos/basic/EXO-randomdate-readme-nb.md
+      - file: exos/basic/EXO-wordcounts-readme-nb.md
+
+    - title: howtos
+      children:
+      - file: howtos/encodings/HOWTO-encodings-nb.md
+      - file: howtos/requests/HOWTO-requests-nb.md
+      - file: howtos/adnwalk/HOWTO-adnwalk-nb.md
+      - glob: tps/graph-bfs-dfs/README*-nb.md
+      - file: howtos/subprocesses/HOWTO-subprocesses-nb.md
+
+    - title: TPs basiques
+      children:
+      # ascii, utf8, binary, as well as various file formats
+      # like pickle, json, yaml, csv
+      - file: tps/files-formats/README-files-formats-nb.md
+      - file: tps/watson/README-watson-nb.md
+      # using dicts for indexing and sets for creating groups
+      - file: tps/parse-people/README-parse-people-nb.md
+      # using dicts for structs and for indexing
+      - file: tps/indexing-structs/README-indexing-structs-nb.md
+      # itertools
+      - file: tps/queens/README-queens-nb.md
+
+    - title: TPs classes
+      children:
+      - glob: tps/students-grades/README*-nb.md
+      - glob: exos/basic/EXO-class-sort-hash-nb.md
+      - glob: tps/auctions/README*-nb.md
+      - glob: tps/unicode-boxes/README*-nb.md
+      - glob: tps/explang/README*-nb.md
+
+    - title: TPs graphes
+      children:
+      - glob: tps/graph-shortest-path/README*-nb.md
+      - file: tps/metro/README-metro-nb.md
+      - glob: tps/pagerank-thrones/README*-nb.md
+      - glob: tps/puzzle8/README-*-nb.md
+
+    - title: TPs visu & games
+      children:
+      - glob: tps/snake/README*-nb.md
+      # unfinished business
+      # - "python-tps/flappybird-wip/README*.md"
+      - glob: tps/boids/README*-nb.md
+      - glob: tps/chatbot/README*-nb.md
+      - glob: tps/redis/README*-nb.md
+      - glob: tps/motus/README*-nb.md
+      - glob: tps/dobble/README*-nb.md
+
+    - title: lecture de code
+      children:
+      - file: reading/snake/snake-nb.md
+
+    - title: "avancés"
+      children:
+      - file: exos/advanced/EXO-attributes-proxy-nb.md
+      - file: exos/advanced/EXO-attributes-dynprop-nb.md
+
+    - title: sample code
+      children:
+      - glob: samples/*-nb.md
+
+    - title: WIP
+      children:
+      - file: tps/subprocesses-howto-nb.md
+      - glob: tps/webscraper-wip/README*-nb.md
