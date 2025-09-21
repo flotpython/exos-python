@@ -40,7 +40,7 @@ project:
       - file: howtos/encodings/HOWTO-encodings-nb.md
       - file: howtos/requests/HOWTO-requests-nb.md
       - file: howtos/adnwalk/HOWTO-adnwalk-nb.md
-      - glob: tps/graph-bfs-dfs/README*-nb.md
+      - pattern: tps/graph-bfs-dfs/README*-nb.md
       - file: howtos/subprocesses/HOWTO-subprocesses-nb.md
 
     - title: TPs basiques
@@ -55,32 +55,34 @@ project:
       - file: tps/indexing-structs/README-indexing-structs-nb.md
       # itertools
       - file: tps/queens/README-queens-nb.md
+      - pattern: tps/*/.teacher/*-corrige-nb.md
+        hidden: true
 
     - title: TPs classes
       children:
-      - glob: tps/students-grades/README*-nb.md
-      - glob: exos/basic/EXO-class-sort-hash-nb.md
-      - glob: tps/auctions/README*-nb.md
-      - glob: tps/unicode-boxes/README*-nb.md
-      - glob: tps/explang/README*-nb.md
+      - pattern: tps/students-grades/README*-nb.md
+      - pattern: exos/basic/EXO-class-sort-hash-nb.md
+      - pattern: tps/auctions/README*-nb.md
+      - pattern: tps/unicode-boxes/README*-nb.md
+      - pattern: tps/explang/README*-nb.md
 
     - title: TPs graphes
       children:
-      - glob: tps/graph-shortest-path/README*-nb.md
+      - pattern: tps/graph-shortest-path/README*-nb.md
       - file: tps/metro/README-metro-nb.md
-      - glob: tps/pagerank-thrones/README*-nb.md
-      - glob: tps/puzzle8/README-*-nb.md
+      - pattern: tps/pagerank-thrones/README*-nb.md
+      - pattern: tps/puzzle8/README-*-nb.md
 
     - title: TPs visu & games
       children:
-      - glob: tps/snake/README*-nb.md
+      - pattern: tps/snake/README*-nb.md
       # unfinished business
       # - "python-tps/flappybird-wip/README*.md"
-      - glob: tps/boids/README*-nb.md
-      - glob: tps/chatbot/README*-nb.md
-      - glob: tps/redis/README*-nb.md
-      - glob: tps/motus/README*-nb.md
-      - glob: tps/dobble/README*-nb.md
+      - pattern: tps/boids/README*-nb.md
+      - pattern: tps/chatbot/README*-nb.md
+      - pattern: tps/redis/README*-nb.md
+      - pattern: tps/motus/README*-nb.md
+      - pattern: tps/dobble/README*-nb.md
 
     - title: lecture de code
       children:
@@ -93,9 +95,9 @@ project:
 
     - title: sample code
       children:
-      - glob: samples/*-nb.md
+      - pattern: samples/*-nb.md
 
     - title: WIP
       children:
       - file: tps/subprocesses-howto-nb.md
-      - glob: tps/webscraper-wip/README*-nb.md
+      - pattern: tps/webscraper-wip/README*-nb.md
