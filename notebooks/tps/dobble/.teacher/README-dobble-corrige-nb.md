@@ -593,7 +593,7 @@ def draw_map(self, figsize=(8, 8)):
                  ys([-0.5, self.expected()-0.5]),
                  'k-', linewidth=0.5)
     # save as svg, but in the media/ folder
-    output = path(self.filename.replace("data/", "media/")).with_suffix('.svg'))
+    output = Path(self.filename.replace("data/", "media/")).with_suffix('.svg')
     plt.savefig(output)
     
 Deck.draw_map = draw_map    
