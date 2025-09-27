@@ -158,8 +158,12 @@ ceci est une étape **totalement optionnelle**, mais je vous recommande de **cr�
 
 - on pourrait envisager par exemple que `ChatbotApp` hérite de `ft.Column`
 - de cette façon on se retrouverait avec un `main` qui ne fait plus que
-  ```{literalinclude} chatbot-03a.py
-  :start-after: show the code in the instructions
+  ```{code} python
+  def main(page: ft.Page):
+      page.title = TITLE
+
+      chatbot = ChatbotApp()
+      page.add(chatbot)
   ```
 
 Je vous propose de procéder en deux temps
@@ -191,7 +195,9 @@ toujours pour éviter de finir avec un gros paquet de spaguettis, on va imaginer
   - la `Row` avec les différents réglages
   - et une instance de `History()`
 
-`````{admonition} la logique de la classe History
++++
+
+```{admonition} la logique de la classe History
 :class: tip
 pour fixer les idées, disons qu'à ce stade cette classe possède les méthodes
 
@@ -205,7 +211,9 @@ l'idée est que l'objet `History` possède:
   et pour cela on utilisera `add_message(some_text)`, dont le job donc est d'insérer un objet `ft.Text`  
   (non modifiable par l'utilisateur cette fois)  
   **en avant-dernière position** - c'est-à-dire juste au dessus du prompt
-`````
+```
+
++++
 
 pour être bien clair, à ce stade on ne fait pas encore usage du réseau pour quoi que ce soit, on veut juste mettre en place la structure de l'UI
 
@@ -214,12 +222,12 @@ ici encore je vous conseille de procéder par petites étapes:
 - 4a: la trame de la classe `History`
 - 4b: faites en sorte que le fait de taper "Entrée" dans la zone de prompt fasse le même effet que le bouton "Send"
 
-```{admonition} regardez la classe `TextField`
+:::{admonition} regardez la classe `TextField`
 :class: tip
 
 pour le titre on utilise la classe `Text` qui est en *read-only*; 
 pour la zone de prompt, il est préferable d'utiliser `TextField` qui est *editable* et qui offre plus de flexibilité
-```
+:::
 
 +++
 
