@@ -66,7 +66,7 @@ def parse(filename):
             result.append((first, last, email, phone))
     return result
 
-L = parse("data-simple-03"); L
+L = parse("data/people-simple-03.txt"); L
 ```
 
 ```{code-cell} ipython3
@@ -83,7 +83,7 @@ def parse_bis(filename):
             result.append(line.strip().split())
     return result
 
-parse_bis("data-simple-03")
+parse_bis("data/people-simple-03.txt")
 ```
 
 ```{code-cell} ipython3
@@ -97,7 +97,7 @@ def parse_ter(filename):
     with open(filename, encoding="utf-8") as f:
         return [line.strip().split() for line in f]
     
-parse_ter("data-simple-03")
+parse_ter("data/people-simple-03.txt")
 ```
 
 ````{admonition} discussion
@@ -311,7 +311,7 @@ def group_parse(filename):
                 groups_by_name[group].add(person)
     return persons, groups_by_name
 
-G = group_parse("data-groups-10"); G
+G = group_parse("data/people-groups-10.txt"); G
 ```
 
 ```{code-cell} ipython3
@@ -324,7 +324,7 @@ def group_parse_bis(filename) -> tuple[
 ]:
     return group_parse(filename)
 
-group_parse_bis("data-groups-10")
+group_parse_bis("data/people-groups-10.txt")
 ```
 
 ## regexps (optional)
@@ -367,16 +367,16 @@ def _check_values(L, re_n, re_e, re_p):
 
 ```{code-cell} ipython3
 # first rough approx.
-re_names = re.compile("^[-_a-zA-Z]+$")
-re_email = re.compile("^[-a-zA-Z0-9.]+@[-a-zA-Z0-9.]+$")
+re_names = re.compile(r"^[-_a-zA-Z]+$")
+re_email = re.compile(r"^[-a-zA-Z0-9.]+@[-a-zA-Z0-9.]+$")
 # we need to escape the + because otherwise it means repetition
-re_phone = re.compile("^(0|\+33)[0-9]{9}$")
+re_phone = re.compile(r"^(0|\+33)[0-9]{9}$")
 
 
 def check_values(L: list) -> None:
     return _check_values(L, re_names, re_email, re_phone)
 
-L120 = group_parse("data-groups-120")[0]
+L120 = group_parse("data/people-groups-120.txt")[0]
 check_values(L120)
 ```
 
@@ -384,8 +384,8 @@ check_values(L120)
 # using \w is tempting, but it will allow for _
 # and we dont want that...
 
-re_names_bis = re.compile("^[-_\w]+$")
-re_email_bis = re.compile("^[-\w0-9.]+@[-\w0-9.]+$")
+re_names_bis = re.compile(r"^[-_\w]+$")
+re_email_bis = re.compile(r"^[-\w0-9.]+@[-\w0-9.]+$")
 
 def check_values_bis(L: list) -> None:
     return _check_values(L, re_names_bis, re_email_bis, re_phone)
