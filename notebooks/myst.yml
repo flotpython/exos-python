@@ -1,7 +1,7 @@
 # See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  title: Python numérique exos
+  title: Python programmation exos
   # I suspect the intention was maybe to use this for the title tooltip ?
   # in any case as of now 2024 june the title is used for the tooltip too (a bit silly)
   # and I can't see where this is used
