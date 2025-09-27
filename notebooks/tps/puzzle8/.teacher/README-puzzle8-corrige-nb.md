@@ -208,7 +208,7 @@ so, note that if you choose to use you own class:
 - and to make it **sortable**, you can go with implementing only `__lt__` (stands for *lower than*)  
   which is enough to describe order among instances of your class  
   (for a deeper discussion, see also <https://docs.python.org/3/library/functools.html#functools.total_ordering>)  
-  **note** however that in my solution, I did not even had to resort to that, thanks to `dataclass`, [more on this in this section below](label-dataclass-in-queue)
+  **note** however that in my solution, I did not even had to resort to that, thanks to `dataclass`, [more on this in this section below](#label-dataclass-in-queue)
 
 ````{admonition} which is the cheapest ?
 

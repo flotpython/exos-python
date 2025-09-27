@@ -56,7 +56,7 @@ print(reponse)
 
 ### notebooks
 
-si vous envisagez de faire ce TP dans un notebook, [assurez-vous de bien lire cette section](label-autoreload)
+si vous envisagez de faire ce TP dans un notebook, [assurez-vous de bien lire cette section](#label-autoreload)
 
 +++
 

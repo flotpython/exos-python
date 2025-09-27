@@ -16,8 +16,6 @@ nbhosting:
   title: 'TP: le jeu de motus'
 ---
 
-+++ {"tags": []}
-
 # le jeu de motus
 
 +++

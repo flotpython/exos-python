@@ -102,7 +102,7 @@ test_blind.py ...                                                             [1
 1. Ouvrez tout le dossier dans VSCode
 2. Choisissez sur la gauche l'onglet 'Testing', et configurez les tests Python pour utiliser `unittest`
 
-```{image} images/vscode-test-configure.png
+```{image} media/vscode-test-configure.png
 :align: center
 ```
 
@@ -115,7 +115,7 @@ et aux questions suivantes, répondez:
 
 3. À ce stade vous devriez voir les testeurs, toujours dans l'onglet gauche `Testing`
 
-```{image} images/vscode-test-explore.png
+```{image} media/vscode-test-explore.png
 :align: center
 ```
 
