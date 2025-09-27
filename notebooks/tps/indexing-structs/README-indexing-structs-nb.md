@@ -41,8 +41,8 @@ car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une d
 
 ## parsing
 
-on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci (`data-small.txt`)
-```{literalinclude} data-small.txt
+on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci (`data/sample-small.txt`)
+```{literalinclude} data/sample-small.txt
 ```
 
 on suppose dans tout ce TP qu'il y a **unicité du (nom x prénom)**  
@@ -59,9 +59,9 @@ i.e. on n'est pas confronté au cas où deux personnes ont le même nom et le m�
 
 à partir des deux fichiers joints:
 
-* `last_names.txt`  
+* `data/last-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_noms_de_famille_les_plus_courants_en_France>)
-* `first_names.txt`  
+* `data/first-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_pr%C3%A9noms_les_plus_donn%C3%A9s_en_France>)
 
 ce qu'il faut faire:
@@ -69,7 +69,7 @@ ce qu'il faut faire:
 * fabriquez un jeu de données aléatoires contenant 10000 personnes  
   avec la contrainte qu'il y ait en sortie **unicité du nom x prénom**  
 * pour les dates de naissance tirez au sort une date entre le 01/01/2000 et le 31/12/2004
-* rangez cela dans le fichier `data-big.txt`
+* rangez cela dans le fichier `data/sample-big.txt`
 * vous devez produire ce fichier dans un temps de l'ordre de 50-100ms
 
 +++

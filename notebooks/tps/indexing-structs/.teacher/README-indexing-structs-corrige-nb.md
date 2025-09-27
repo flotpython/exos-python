@@ -41,8 +41,8 @@ car pour ce genre de choses, dans la vraie vie, on pourrait aussi utiliser une d
 
 ## parsing
 
-on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci (`data-small.txt`)
-```{literalinclude} data-small.txt
+on veut pouvoir lire des fichiers texte qui ressemblent à celui-ci (`data/sample-small.txt`)
+```{literalinclude} data/sample-small.txt
 ```
 
 on suppose dans tout ce TP qu'il y a **unicité du (nom x prénom)**  
@@ -80,7 +80,7 @@ def parse_text(filename):
             persons.append(person)
     return persons
 
-parse_text("data-small.txt")
+parse_text("data/sample-small.txt")
 ```
 
 ```{code-cell} ipython3
@@ -98,7 +98,7 @@ def parse_text(filename):
     with open(filename) as f:
         return [line_to_person(line) for line in f]
 
-parse_text("data-small.txt")
+parse_text("data/sample-small.txt")
 ```
 
 ```{code-cell} ipython3
@@ -113,9 +113,9 @@ parse_text("data-small.txt")
 
 à partir des deux fichiers joints:
 
-* `last_names.txt`  
+* `data/last-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_noms_de_famille_les_plus_courants_en_France>)
-* `first_names.txt`  
+* `data/first-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_pr%C3%A9noms_les_plus_donn%C3%A9s_en_France>)
 
 ce qu'il faut faire:
@@ -123,7 +123,7 @@ ce qu'il faut faire:
 * fabriquez un jeu de données aléatoires contenant 10000 personnes  
   avec la contrainte qu'il y ait en sortie **unicité du nom x prénom**  
 * pour les dates de naissance tirez au sort une date entre le 01/01/2000 et le 31/12/2004
-* rangez cela dans le fichier `data-big.txt`
+* rangez cela dans le fichier `data/sample-big.txt`
 * vous devez produire ce fichier dans un temps de l'ordre de 50-100ms
 
 ```{code-cell} ipython3
@@ -148,7 +148,7 @@ def random_date(start, end):
 BEG = Date(year=2000, month=1, day=1)
 END = Date(year=2004, month=12, day=31)
 
-with open("last_names.txt") as last, open("first_names.txt") as first:
+with open("data/last-names.txt") as last, open("data/first-names.txt") as first:
     LAST_NAMES = [x for line in last for x in line.strip().split()]
     FIRST_NAMES = [x for line in first for x in line.strip().split()]
     
@@ -173,7 +173,7 @@ def generate_data(filename, how_many):
 
 ```{code-cell} ipython3
 %%timeit
-generate_data("data-big.txt", 10_000)
+generate_data("data/sample-big.txt", 10_000)
 ```
 
 ```{code-cell} ipython3
@@ -193,7 +193,7 @@ generate_data("data-big.txt", 10_000)
 ```
 
 ```{code-cell} ipython3
-L = parse_text("data-big.txt")
+L = parse_text("data/sample-big.txt")
 ```
 
 ```{code-cell} ipython3
