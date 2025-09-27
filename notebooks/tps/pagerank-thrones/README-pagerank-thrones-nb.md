@@ -227,6 +227,10 @@ this radically different approach requires more care, but can then be drasticall
 ### data acquisition
 
 ```{code-cell} ipython3
+import pandas as pd
+```
+
+```{code-cell} ipython3
 URL = "https://raw.githubusercontent.com/pupimvictor/NetworkOfThrones/master/stormofswords.csv"
 ```
 
@@ -301,6 +305,8 @@ class PageRankWalker:
 if you've followed our interface, you can use the following code as-is
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # create a walker object from the graph obtained above
 
 walker = PageRankWalker(G)
@@ -308,6 +314,7 @@ walker = PageRankWalker(G)
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 STEPS = 1000
 
@@ -315,16 +322,22 @@ frequencies = walker.walk(STEPS)
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # the sum of all values should be STEPS
 raincheck = sum(frequencies.values())
 raincheck == STEPS 
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 raincheck, STEPS
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # dicts are not so good at sorting
 # let's use a list instead
 
@@ -394,6 +407,8 @@ def monte_carlo(url_or_filename, steps, damping=0.85):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # show top winners with a 1000-steps simu
 for _ in range(5):
     print(f"{40*'-'}")
@@ -401,6 +416,8 @@ for _ in range(5):
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # same with a tenfold simulation
 for _ in range(5):
     print(f"{40*'-'}")
@@ -436,6 +453,8 @@ from graphviz import Digraph
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 gv = Digraph('Characters of the Thrones', filename='thrones-graphviz')
 
 for source, weighted_dict in G.items():
@@ -445,19 +464,18 @@ for source, weighted_dict in G.items():
 
 ```{code-cell} ipython3
 :cell_style: split
+:tags: [raises-exception]
 
 gv.attr(rankdir='TB', size='12')
 gv
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # save as svg
 # https://graphviz.readthedocs.io/en/stable/formats.html#formats
 
 gv.format = 'svg'
 gv.render()
-```
-
-```{code-cell} ipython3
-
 ```
