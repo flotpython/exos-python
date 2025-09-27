@@ -19,7 +19,7 @@ def read_sample(filename):
     with open(filename, 'r') as feed:
         return yaml.load(feed, yaml.FullLoader)
 
-SAMPLE = "tiny.yaml"
+SAMPLE = "data/tiny.yaml"
 
 def main():
     write_sample(SAMPLE)

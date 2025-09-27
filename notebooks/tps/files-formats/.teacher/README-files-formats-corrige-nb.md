@@ -58,13 +58,13 @@ there are no difference - apart from this very cell - between the teacher and th
 
 ## les fichiers et l'OS
 
-c'est quoi l'OS ? 
+c'est quoi l'OS ?
 
 - votre code ne cause **jamais directement** au harware
 - mais toujours au travers d'**abstractions exposées par l'OS**
 - parmi lesquelles, entre autres, la **notion de "fichier"**
 
-```{image} operating_system_placement.png
+```{image} media/operating_system_placement.png
 :align: right
 :width: 250px
 ```
@@ -81,14 +81,14 @@ c'est quoi l'OS ?
 
 ## lire un fichier simple
 
-(le fichier `hello.txt` fait partie du zip)
+(le fichier `data/hello.txt` fait partie du zip)
 
 +++
 
 ### ouverture d'un fichier
 
 ```{code-cell} ipython3
-f = open("hello.txt")
+f = open("data/hello.txt")
 ```
 
 - que se passe-t-il ?
@@ -98,7 +98,7 @@ f = open("hello.txt")
   ```python
   # ça marche aussi; quelle différence ?
   
-  f = open("hello.txt", encoding="utf-8")
+  f = open("data/hello.txt", encoding="utf-8")
   ```
 
 +++
@@ -107,7 +107,7 @@ f = open("hello.txt")
 
 - analyser les types des différents objets
   ```python
-  type("hello.txt")
+  type("data/hello.txt")
   type(f)
   ```
 - avancer étape par étape
@@ -135,7 +135,7 @@ l'idiome à **toujours utiliser** pour lire un fichier texte
 ```python
 # TOUJOURS lire ou écrire un fichier avec un with !
 
-with open("hello.txt") as f:
+with open("data/hello.txt") as f:
     for line in f:
         print(line, end="")
 ```
@@ -155,7 +155,7 @@ une autre approche consisterait à utiliser `line.rstrip()` qui enlève l'évent
 je dis éventuel car la dernière ligne ne contient pas toujours ce fameux *newline*; le monde est compliqué parfois...
 
 **exercice**: dans *vs-code*, allez enlever le dernier *newline* (mettez vous à la fin du fichier et faites un *Delete*)  
-et refaites tourner les 3 lignes ci-dessus; vous pouvez aussi regarder ce que donne `cat hello.txt` dans le terminal.
+et refaites tourner les 3 lignes ci-dessus; vous pouvez aussi regarder ce que donne `cat data/hello.txt` dans le terminal.
 ````
 
 +++
@@ -169,7 +169,7 @@ on va regarder dans les yeux deux fichiers texte:
 ### ASCII
 
 - installez l'extension vscode *Hex Editor*
-- regarder le contenu de `hello.txt` avec vs-code
+- regarder le contenu de `data/hello.txt` avec vs-code
   - utilisez *clic droit* -> *Open With* -> *Hex Editor*
 - comparez avec <https://www.rapidtables.com/code/text/ascii-table.html>
 
@@ -177,7 +177,7 @@ on va regarder dans les yeux deux fichiers texte:
 
 ### Unicode
 
-faites pareil avec `bonjour.txt`
+faites pareil avec `data/bonjour.txt`
 
 - que constatez-vous ?
 - voyez aussi <https://www.utf8-chartable.de/>
@@ -186,7 +186,7 @@ faites pareil avec `bonjour.txt`
 
 ## un fichier binaire
 
-faites pareil avec `tiny.pickle`
+faites pareil avec `data/tiny.pickle`
 
 - ouvrez-le "normalement"
   (pour l'instant sans utiliser la librairie `pickle`)
@@ -230,7 +230,7 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 à faire:
 
 - lisez la documentation du module `pickle`
-- essayez de lire le fichier `tiny.pickle`
+- essayez de lire le fichier `data/tiny.pickle`
 - inspectez les types des objets dans la donnée
 
 +++
@@ -240,7 +240,7 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 - partez de ce que vous venez de lire
 - modifiez certaines des données
 - sauvegardez-les dans un nouveau fichier  
-  `tiny-changed.pickle`
+  `data/tiny-changed.pickle`
 - et relisez-le pour vérifier que "ça marche"
 
 +++
@@ -249,7 +249,7 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 
 à vous de jouer
 
-- on va refaire pareil à partir de `tiny.json`
+- on va refaire pareil à partir de `data/tiny.json`
 - lisez-la doc et écrivez le code qui lit ce fichier
 - modifiez la donnée lue, et sauvez-la
 - est-ce qu'on peut y mettre un ensemble ? ou un tuple ?
@@ -259,13 +259,13 @@ dans `open(name, 'rb')` le `r` est pour *read* et le `b` pour *binary*
 ### encore un: yaml
 
 - trouvez la doc de `PyYAML`
-- lisez le fichier `tiny.yaml`
+- lisez le fichier `data/tiny.yaml`
 - comment peut-on comparer avec JSON ?
 
 ```{admonition} et avec annotations ?
 
 en option: par défaut le format YAML permet de stocker - comme JSON - les types communs aux autres langages, 
-i.e. booléens, nombres, chaines, listes et dictionnaires; il est possible aussi de stocker des types un peu moins communs comme le tuple et l'ensemble, au prix d'une gymnastique déjà un peu oins facile d'accès; arrivez-vous à lire le fichier `small-annotated.yaml` ?  
+i.e. booléens, nombres, chaines, listes et dictionnaires; il est possible aussi de stocker des types un peu moins communs comme le tuple et l'ensemble, au prix d'une gymnastique déjà un peu oins facile d'accès; arrivez-vous à lire le fichier `data/small-annotated.yaml` ?  
 ça peut demander une plangée dans SO (stackoverflow)...
 
 ```
@@ -278,7 +278,7 @@ on recommence (c'est optionnel, si vous savez déjà lire un csv avec pandas)...
 
 - lisez la documentation du module `csv`  
   google `python module csv`
-- essayez de lire le fichier `pokemon.csv`
+- essayez de lire le fichier `data/pokemon.csv`
 - sauriez-vous créer une dataframe ?
   - version facile: avec `pd.read_csv()`
   - un peu moins simple: sans utiliser `pd.read_csv()`
@@ -295,10 +295,10 @@ pour cela, 2 armes
 
 +++
 
-### exercice: lisez `notes.txt`
+### exercice: lisez `data/notes.txt`
 
 * sans importer de module additionnel,
-* lisez le fichier `notes.txt`
+* lisez le fichier `data/notes.txt`
 * créez et affichez un dictionnaire  
   *nom élève* → note
 

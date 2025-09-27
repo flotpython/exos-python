@@ -16,7 +16,7 @@ def read_sample(filename):
     with open(filename, 'rb') as feed:
         return pickle.loads(feed.read())
 
-SAMPLE = "tiny.pickle"
+SAMPLE = "data/tiny.pickle"
 
 def main():
     write_sample(SAMPLE)

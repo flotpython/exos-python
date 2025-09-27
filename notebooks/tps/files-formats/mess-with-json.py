@@ -16,7 +16,7 @@ def read_sample(filename):
     with open(filename, 'r') as feed:
         return json.loads(feed.read())
 
-SAMPLE = "tiny.json"
+SAMPLE = "data/tiny.json"
 
 def main():
     write_sample(SAMPLE)
