@@ -508,12 +508,16 @@ class Graph:
 maintenant on devrait pouvoir construire le graphe
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 metro = build_graph(stations, hops)
 
 print(f"notre graphe a {len(metro)} stations et {metro.nb_edges()} liens")
 ```
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # exercice: calculer le nombre de lignes
 nb_lines = ...
 
@@ -633,6 +637,8 @@ def build_map(metro, show_labels=True):
 à ce stade si votre code pour `Node` et `Graph` est correct vous pouvez voir ici la carte du réseau avec la station Chatelet numérotée `0`
 
 ```{code-cell} ipython3
+:tags: [raises-exception]
+
 # on met au moins un label pour voir l'effet
 metro.find_node_from_station_id(chatelet_station_id).label = '0'
 
