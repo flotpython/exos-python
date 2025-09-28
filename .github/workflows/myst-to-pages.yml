@@ -48,6 +48,8 @@ jobs:
         run: npm install -g mystmd
       - name: Install requirements.txt
         run: pip install -r requirements.txt
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
       - name: Build HTML Assets
         run: (cd notebooks; myst build --execute --html)
       - name: Setup Pages
