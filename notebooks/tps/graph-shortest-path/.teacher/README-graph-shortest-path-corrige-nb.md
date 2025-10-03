@@ -453,7 +453,6 @@ reach = parse_graph("data/reach.csv")
 
 ```{code-cell} ipython3
 :cell_style: center
-:tags: []
 
 # pour le visualiser:
 # installer graphviz avec 
@@ -656,12 +655,14 @@ en français :
   * on localise toutes les arêtes qui lient un noeud visité à un noeud non visité
   * pour chacune de ces arêtes $s ― (w) → d$, on calcule la somme  
     $marque(s) + w$
+
   * on sélectionne l'arête $s_0 ― (w_0) → d_0$ pour laquelle cette somme est la plus petite
   * on marque $d_0$ comme visité avec $marque(s_0) + w_0$
 
 * on arrête la boucle lorsque, soit
   * on atteint la destination (ici $d_0 == f$)  
     on a trouvé la distance la plus courte, qui est la marque de $f$
+
   * ou bien s'il n'y a plus d'arête qui satisfasse le critère  
     ça signifie que $f$ n'est pas atteignable depuis $a$
 
@@ -877,6 +878,7 @@ shortest_distance(G2, 'v1', 'v6')
 #### avec quelques graphes denses
 
 c'est l'occasion de parler un peu de l'instruction `assert`:  
+
 * sa fonction est **de ne rien faire** si l'expression associée est `True`
 * par contre si elle est fausse, une exception `AssertionError` est levée
 
@@ -900,8 +902,6 @@ assert shortest_distance(GD3, "1x1", "3x3") == 6
 GD4 = parse_graph("data/dense-4.csv")
 assert shortest_distance(GD4, "1x1", "4x4") == 8
 ```
-
-+++ {"tags": []}
 
 ## exo #5 : `shortest_path`
 
@@ -1017,7 +1017,7 @@ Aerys,Tyrion,5
 ...
 ```
 
-+++ {"cell_style": "split", "tags": []}
++++ {"cell_style": "split"}
 
 ````{admonition} pour voir le début d'un fichier
 :class: dropdown tip
@@ -1027,10 +1027,12 @@ Aerys,Tyrion,5
   ```bash
   head -5 data/thrones.csv
   ```
+
 * ou depuis IPython ou un notbook, on ajoute un `!` pour dire que c'est un travail pour le terminal
   ```python
   !head -5 data/thrones.csv
   ```
+
 * enfin on peut aussi écrire un petit bout de code en Python  
   sauriez-vous le faire ?  
   on verra bientôt `enumerate()` qui peut s'avérer utile pour faire ça
@@ -1150,6 +1152,7 @@ l'algorithme de plus court chemin que nous avons écrit jusqu'ici a surtout des 
 l'intérêt est d'écrire un code qui s'écrit et se lit facilement
 
 par contre, le lecteur affuté aura remarqué la chose suivante :  
+
 * à chaque itération de la boucle, on **recalcule de zéro** la frontière entre les sommets explorés et les autres  
 * or, d'un tour de boucle à l'autre, cette frontière **change très peu**, et uniquement autour du noeud que l'on vient d'explorer  
 
@@ -1167,8 +1170,10 @@ pour n=4:
 
 **exercice**: pour un entier $n$, écrire une fonction `planar(n)`  
 qui construit un graphe:
+
 * qui contient $n^2$ sommets  
   chacun étiqueté par un couple $(i, j), i\in[1..n], j\in[1..n]$
+
 * où chaque sommet est connecté à ses voisins immédiats  
   * $(i, j) \xrightarrow{i} (i+1, j)$ si $i<n$
   * $(i, j) \xrightarrow{j} (i, j+1)$ si $j<n$
@@ -1191,6 +1196,7 @@ planar(4)
 +++
 
 on va utiliser la *magic* `timeit`:
+
 * une *magic* est une instruction pour IPython (pas reconnu par Python standard)
 * qui commence par un ou deux `%`
   * un seul `%`: s'applique à cette ligne
@@ -1239,6 +1245,7 @@ P = planar(N)
 
 ce qui nous donne l'occasion de parler un peu de *profiling*  
 de quoi s'agit-il ? principalement:
+
 * on dispose d'un **outil automatique**
 * qui échantillonne régulièrement le code qui tourne
 * pour nous donner une idée de **où on passe le plus de temps**

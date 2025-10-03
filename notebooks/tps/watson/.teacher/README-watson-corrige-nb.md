@@ -69,6 +69,7 @@ on veut écrire un programme qui
 * puis:
   * selon que la réponse contient **le mot `bien`** ou **le mot `mal`**  
     on affiche un message positif ou négatif (par exemple `C'est super!` et `Ohhhh, c'est triste.`)
+
   * si la phrase est vide par contre, on affiche `Tu n'es pas bavard.`
   * enfin si rien de tout cela, on affiche `Je ne comprends pas`
 * dans tous les cas après la première réponse le programme s'arrête
@@ -223,6 +224,7 @@ C'est fini, au revoir !
 +++
 
 on décide de refactorer le code en créant des classes; par exemple
+
 * une classe `Feeling` correspondant à chacun des deux ensembles de mots
 * une classe `Sentence` qui sera crée pour chaque réponse
 * une classe `Watson` qui est l'application elle-même
@@ -248,6 +250,8 @@ une façon de faire la v7
 ## etc..
 
 c'est toujours améliorable... par exemple:
+
 * on pourrait imaginer mettre les réponses aussi dans le fichier de config
   dans ce cas un autre format serait sans doute mieux adapté; que pensez-vous de yaml dans ce contexte ?
+
 * ...

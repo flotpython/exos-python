@@ -1,9 +1,5 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -53,10 +49,6 @@ nbhosting:
 * ou lever l'exception AttributeError
 
 ```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
 class Echo:
     def __getattr__(self, attrname):
         if len(attrname) == 3:
@@ -71,10 +63,6 @@ class Echo:
 ```
 
 ```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
 echo = Echo()
 echo.foo()
 ```
@@ -89,8 +77,6 @@ try:
 except AttributeError as e:
     print("OOPS", e)
 ```
-
-+++ {"slideshow": {"slide_type": "slide"}}
 
 # Deuxième partie
 
@@ -125,10 +111,6 @@ except AttributeError as e:
 ```
 
 ```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
 class BlacklistEcho(Echo):
     def __init__(self, blacklist):
         super().__init__()
@@ -140,10 +122,6 @@ class BlacklistEcho(Echo):
 ```
 
 ```{code-cell} ipython3
----
-slideshow:
-  slide_type: slide
----
 blacklist = [ 'six', 'two', 'four']
 
 echo2 = BlacklistEcho(blacklist)

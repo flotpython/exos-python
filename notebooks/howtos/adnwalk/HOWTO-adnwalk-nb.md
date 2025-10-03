@@ -1,9 +1,5 @@
 ---
 jupytext:
-  cell_metadata_filter: all,-hidden,-heading_collapsed,-run_control,-trusted
-  notebook_metadata_filter: all, -jupytext.text_representation.jupytext_version, -jupytext.text_representation.format_version,
-    -language_info.version, -language_info.codemirror_mode.version, -language_info.codemirror_mode,
-    -language_info.file_extension, -language_info.mimetype, -toc
   text_representation:
     extension: .md
     format_name: myst
@@ -127,6 +123,7 @@ moves['C']
 ```
 
 Ce qui signifie pour nous que lorsqu'on rencontre un `C`, il faut&nbsp;:
+
  * faire `+1` en x, 
  * et ne rien faire (ajouter `0`) en y.
 
@@ -141,6 +138,7 @@ print("à ajouter en y: ", delta_y)
 ### Le parcours à proprement parler
 
 Nous avons à présent tous les éléments pour écrire une fonction, qui
+
 * prend en entrée un fragment d'ADN codé comme une chaine de caractères contenant les 4 abbréviations,
 * et qui retourne deux listes, correspondant aux X et aux Y respectivement, des points du chemin.
 

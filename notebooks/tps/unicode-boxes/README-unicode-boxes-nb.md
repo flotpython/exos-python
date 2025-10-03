@@ -182,10 +182,12 @@ print(b22)
 +++
 
 a few suggestions about how to improve
+
 * accept for the width and height: either an int (like before) or a **list of integers** 
   so we can build **grids** instead of boxes
   ```python
   b = Grid(10, [2, 2])
   ```
+
 * make it reconnectable ? needs some thinking though ;-)
 * etc...

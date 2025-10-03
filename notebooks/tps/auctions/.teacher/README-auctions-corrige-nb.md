@@ -142,6 +142,7 @@ et aux questions suivantes, répondez:
 
 * Q: `Select the directory containing the tests:`  
   A: `. Root directory`
+
 * Q: `Select the pattern to identify test files:`  
   A: `test_*.py` (vous devez avoir des fichiers de ce genre, comme `test_blind.py`)
 

@@ -16,7 +16,7 @@ language_info:
 
 # Le snake
 
-+++ {"tags": [], "slideshow": {"slide_type": ""}}
++++
 
 Licence CC BY-NC-ND, Thierry Parmentelat & Aurélien Noce
 
@@ -203,6 +203,7 @@ pour cela cliquer dans la bannière du bas la zone qui indique le Python courant
 depuis vs-code :
 
 - ouvrir la palette
+
   * `⇧ ⌘ P` Shift-Command-P (mac)
   * `⇧ ⌃ P` Shift-Control-P (windows)
 - chercher la fonction *Toggle Terminal*

@@ -30,6 +30,7 @@ pour faire cet exercice, {download}`commencez par télécharger le zip<./ARTEFAC
 +++
 
 dans ce petit exercice on va utiliser
+
 * le dict pour gérer des enregistrements (en C on dirait des *structs*)
 * le dict pour indexer un grand nombre de données pour accélérer les recherches
 * et l'ensemble pour détecter les collisions et calculer le nombre d'entrées uniques dans une collection
@@ -61,6 +62,7 @@ i.e. on n'est pas confronté au cas où deux personnes ont le même nom et le m�
 
 * `data/last-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_noms_de_famille_les_plus_courants_en_France>)
+
 * `data/first-names.txt`  
   (dérivé de <https://fr.wikipedia.org/wiki/Liste_des_pr%C3%A9noms_les_plus_donn%C3%A9s_en_France>)
 
@@ -68,6 +70,7 @@ ce qu'il faut faire:
 
 * fabriquez un jeu de données aléatoires contenant 10000 personnes  
   avec la contrainte qu'il y ait en sortie **unicité du nom x prénom**  
+
 * pour les dates de naissance tirez au sort une date entre le 01/01/2000 et le 31/12/2004
 * rangez cela dans le fichier `data/sample-big.txt`
 * vous devez produire ce fichier dans un temps de l'ordre de 50-100ms
@@ -78,8 +81,10 @@ ce qu'il faut faire:
 
 * utilisez `%%timeit` pour mesurer le temps moyen qu'il faut pour chercher
   une personne dans la liste à partir de son nom et prénom
+
 * on prévoit ue notre code aura besoin de faire cette recherche plusieurs millions de fois;
   comment pourrait-on faire pour accélérer cette recherche ? 
+
 * écrivez le code qui va bien et mesurez le gain de performance pour la recherche
 
 +++

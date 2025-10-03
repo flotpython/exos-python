@@ -44,6 +44,7 @@ Et ce qui est un peu étonnant, c'est que **pour tout couple de cartes** il y a 
 L'idée ici consiste donc à rétro-concevoir le mécanisme de fabrication des cartes:
 
 On se fixe un nombre **N** de symboles par carte:
+
 * quelle est la logique qui permet de construire un jeu de cartes qui vérifie la bonne propriété  ?
 * combien de cartes peut-on construire ?
 * combien de symboles faut-il utiliser ?

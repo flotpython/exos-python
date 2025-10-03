@@ -45,7 +45,7 @@ Dans le but de
 
 ## étape 1: générer une date
 
-+++ {"slideshow": {"slide_type": "slide"}}
++++
 
 ````{admonition} to do
 Écrivez une fonction qui se comporte comme `generate_random_date`
@@ -68,8 +68,6 @@ generate_random_date()
 # or like this
 generate_random_date("10/02/2020", "31/12/2021")
 ```
-
-+++ {"tags": []}
 
 ### indices
 
@@ -102,6 +100,7 @@ pour représenter :
 
 * les instants au cours du temps (dates, heures, ...): la classe `datetime`  
   que, juste pour être compatibles avec la PEP008, on va importer sous le nom de `DateTime`
+
 * les durées - i.e. la différence entre deux instants: la classe `timedelta`  
   et idem ici on va l'appeler `TimeDelta``
 
@@ -233,6 +232,7 @@ sort_data("randomdate.txt", "randomdate-sorted.txt")
   * le **méthode** `list.sort()` qui copie une liste en place
 
   du coup si on essaye d'optimiser l'utilisation de la mémoire, on va choisir laquelle ?
+
 * ces fonctions pour trier acceptent un paramètre `key=`, regardez bien comment ça marche ce truc-là
 * pas la peine d'essayer de finasser et de lire le fichier ligne par ligne, on n'a pas d'autre choix que de lire l'entrée en entier avant de trier
 

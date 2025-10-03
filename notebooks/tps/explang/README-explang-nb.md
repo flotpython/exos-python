@@ -45,6 +45,7 @@ Traditionnellement (l'implémentation d')un langage est vu comme une suite d'op�
 
 * analyse lexicale et syntaxique :  
   on manipule le code sous forme de texte, pour le transformer en une structure de données qui soit plus adaptée à toute la série de calculs qu'on doit faire dans les parties suivantes, puis
+
 * l'interprétation / compilation propremement dite.
 
 +++
@@ -107,6 +108,7 @@ et munis de ce vocabulaire on peut maintenant représenter
   a := 20
   a + 1
   ```  
+
 * par l'arbre  
   ```
   Expressions(
@@ -139,9 +141,11 @@ expression.eval()
 +++
 
 Parmi ce qui est attendu:
+
 * on s'efforcera de **factoriser au maximum le code**, et d'éviter dans toute la mesure du possible les répétitions fastidieuses  
   c'est tout l'objectif de cet exercice, on veut produire un code maintenable (pas de répétition),
   et dans lequel on puisse facilement ajouter des *features* (nouveaux opérateurs notamment).
+
 * on vous demande à la construction des objets de vérifier qu'on **appelle** le **constructeur** avec un **nombre d'arguments correct**,  
   et de lancer une **exception `TypeError` sinon** (comme le fait Python lorsqu'on appelle une fonction avec un mauvais nombre d'arguments)  
   voyez tout à la fin du notebook un tableau récapitulatif des nombres d'arguments
@@ -388,6 +392,7 @@ dans laquelle `env` est un dictionnaire qui associe le nom d'une variable avec s
 +++
 
 pour réaliser cette deuxième partie:
+
 * dupliquez votre code de la v1, et modifiez le a minima pour que `eval` puisse s'appeler avec la bonne signature
 * ajoutez les 3 nouvelles classes
   * `Variable`: qui correspond à l'utilisation d'une variable dans une formule

@@ -248,8 +248,6 @@ for p in queens(6):
     draw_position(p)
 ```
 
-+++ {"tags": []}
-
 ## fin de la partie obligatoire
 
 jusqu'ici c'est plutôt facile - ou court en tous cas; pour info ma correction tient en

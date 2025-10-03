@@ -37,6 +37,7 @@ c'est intéressant parce que
 * c'est une illustration du modèle de programmation "par acteurs"
   chaque entité dans l'univers adapte son comportement en fonction de ses
   voisins immédiats
+
 * on y découvre [arcade, une autre bibliothèque de jeux pour
   Python](https://api.arcade.academy/en/latest/)
   et c'est intéressant pour nous car cette librairie se programme exclusivement
@@ -157,9 +158,11 @@ dans ce code, on utilise - et ce n'est pas du tout explicite - le fait que
 
 * le module `arcade` vient avec une *mainloop* - `arcade.run()`  
   qui se charge de faire 'avancer' le jeu - par défaut à plusieurs dizaines de Hz
+
 * cette mainloop va appeler les méthodes `on_draw()` et `on_update()`  
   sur chaque instance de `Window` - c'est là que nous pouvons programmer  
   la logique de notre "*jeu*"
+
 * la classe `Sprite` permet d'ajouter des objets qui savent s'afficher  
   ici on a juste créé l'objet à partir d'un png, puis fixé `boid.center_x` et `boid.center_y`
   
@@ -184,11 +187,14 @@ mais je vous invite à utiliser plutôt la classe `SpriteList` que fournit `arca
 #### debugging
 
 en plus de ça, je vous recommande de:
+
 * prévoir le cas du debug, par exemple avec une variable globale DEBUG
 * et dans ce cas afficher un message à chaque fois que le boid est mis à jour  
   (surtout pour mettre en évidence la *mainloop* à ce stade)
+
 * et aussi de [regarder la méthode `set_update_rate()`](https://api.arcade.academy/en/latest/api/window.html?highlight=set_update_rate#arcade.Window.set_update_rate)  
   pour ralentir la cadence, ce qui sera sûrement utile à un moment donné pour débugger
+
 * pourquoi ne pas aussi imprimer un message pour voir à quel rythme sont faits les `draw()` et `update()`
 
 +++
@@ -208,6 +214,7 @@ et on va au contraire la **spécialiser** pour créer notre propre classe `Boid`
   * et sa méthode `on_draw()` pour les redessiner
     c'est pour cela que celle-ci commence par `start_render()` 
     qui efface tout, et remet simplement le fond d'écran
+
   * on peut donc **faire avancer le boid** simplement en **redéfinissant quelques méthodes** dans le code
 * par défaut les deux méthodes (`draw()` et `update()`) se produisent à la même fréquence (60Hz),  
   mais avec `set_update_rate()` on ralentit uniquement `update()`  
@@ -218,11 +225,14 @@ et aussi, mais moins crucial à ce stade:
 
 * on n'en a pas besoin tout de suite, mais dans la classe `Sprite`  
   il y a un attribut `angle` qui sert à dire de combien on veut tourner l'image 
+
 * et naturellement dans notre cas, on va vouloir que l'objet avance dans la direction de la flêche  
   (même si  ce stade on ne peut pas encore faire tourner le boid)
+
 * aussi il serait habile de considérer que la vitesse du boid  
   est un de ses attributs (et non pas une constante)  
   même si là encore on n'en a pas besoin tout de suite
+
 * pensez à exprimer les vitesses en pixels par seconde
 
 +++
@@ -258,6 +268,7 @@ def on_key_press(self, key, modifiers):
 def on_key_release(self, key, modifiers):
     pass
 ```
+
 * la librairie expose par exemple la constante `arcade.key.LEFT`
 
 #### attention
@@ -272,6 +283,7 @@ ajoutez un unique obstacle, immobile, par exemple au centre du jeu
 vous trouverez une image `media/obstacle-resized.png` pour le matérialiser
 
 **2 options**
+
 * on pourrait facilement s'en sortir avec juste la classe `Sprite`
 * mais je vous demande, pour vous exercer à la spécialisation de classes, de créer une classe `Obstacle`
 
@@ -296,10 +308,12 @@ pour ma part j'ai rendu le boid semi-transparent, en jouant sur l'attribut `alph
 #### discussion
 
 ici on a le choix d'utiliser 
+
 * soit une variable globale (la liste de tous les obstacles)
 * ou de rajouter dans la classe `Boid` une liste d'obstacles
 
 quels sont les avantages et les inconvénients des 2 approches ?
+
 * en termes de vitesse de programmation
 * en termes de réutilisabilité
 
@@ -321,6 +335,7 @@ on peut la résumer comme ceci:
 +++
 
 c'est-à-dire que quand on s'intéresse au boid b, on va
+
 * ignorer tous les objets qui se trouvent plus loin qu'un certain rayon 'r' 
 * et pour tous ceux qui sont proches, par exemple o, on calcule un vecteur $\overrightarrow{\delta}$ qui va permettre d'écarter l'objet b de o  
   je n'ai pas trouvé de formule dans la littérature pour calculer $\overrightarrow{\delta}$, j'ai sorti  de mon chapeau la formule suivante
@@ -328,12 +343,14 @@ c'est-à-dire que quand on s'intéresse au boid b, on va
   $\overrightarrow{\delta} = \overrightarrow{ob} * \frac{1}{2}(1-\frac{d}{r})$
 
   de façon à ce que: 
+
   * les objets sur le cercle ont une influence nulle, 
   * et si o est tout proche de b, il est repoussé à un rayon r/2
 
 on fait la somme de tous ces vecteurs, et on l'ajoute au déplacement de b
 
 i.e. dans l'exemple de la figure, lorsqu'on traite le boid en b:
+
 * on ignore les boids aux endroits en rouge
 * et on fait la somme des 3 vecteurs (en vert)
 * qu'on ajoute naturellement au déplacement dû à la vitesse du boid
@@ -385,12 +402,14 @@ assurez-vous que la séparation permet d'éviter tous les objets (obstacles et b
 ### en option...
 
 vous pouvez ensuite améliorer dans les directions suivantes :
+
 * implémenter les deux autres règles (alignement et cohésion)
 * faire en sorte qu'on puisse interactivement ajouter/enlever des obstacles
 * faire des raccourcis clavier pour activer/désactiver les 3 règles, et le bruit
 * bien tenir compte de la vitesse de rafraichissement du jeu  
   i.e., est-ce que la simulation continue de fonctionner si on ralentit la logique du jeu avec 
   `Window.set_update_rate()`
+
 * etc...  
   pour information voici une synthèse des 3 règles, à vous de chercher pour préciser comment interpréter ces figures
 

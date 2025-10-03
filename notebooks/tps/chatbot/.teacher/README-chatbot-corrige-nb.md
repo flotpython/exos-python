@@ -164,7 +164,7 @@ pour vous familiariser avec le modèle de lignes et colonnes de `flet`, **ajoute
 - et `flet.Text`
 - et à chaque fois les différents attributs disponibles pour contrôler le look et le comportement de l'UI
 
-+++ {"slideshow": {"slide_type": ""}, "tags": []}
++++
 
 ## v03: avec un peu de classe: `ChatbotApp`
 

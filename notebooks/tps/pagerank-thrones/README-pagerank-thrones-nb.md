@@ -115,7 +115,7 @@ here are the steps that we will take to this end :
    1. running the simulation **several times** with different lifespans - ranging from several hops to a few thousands -
    2. we can experimentally check if we indeed obtain consistent results, i.e. constant results for all characters
 
-+++ {"slideshow": {"slide_type": ""}, "tags": []}
++++
 
 *****
 

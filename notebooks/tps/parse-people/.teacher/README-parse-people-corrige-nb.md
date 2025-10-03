@@ -46,6 +46,7 @@ This activity is about parsing text files, and building structures using builtin
   fields are separated by any number (but at least one) of spaces/tabs, like e.g. in file `people-simple-03`
   ```{literalinclude} people-simple-03
   ```
+
 * **todo**: write a function for parsing this format; it should return a list of 4-tuples
   ```python
   def parse(filename) -> list[tuple[str, str, str, str]]:
@@ -122,6 +123,7 @@ discuss the pros and cons of each approach
     def index(list_of_tuples):
     ```
     that builds and returns that data structure
+
   * write a function
     ```python
     def initial(list_of_tuples):
@@ -280,11 +282,13 @@ dataframe(L)
   where the part between `[]` is **optional**, i.e there can be **0 or more** groupnames mentioned on each student line; like e.g. from `people-groups-10`:
   ```{literalinclude} people-groups-10
   ```
+
 * **todo** duplicate and tweak the `parse` function, so as to write
   ```python
   def group_parse(filename):
   ```
   so it now returns a 2-tuple with
+
   * the list of tuples as before
   * a dictionary of sets
     * the keys here will be the **group names**,
@@ -339,6 +343,7 @@ group_parse_bis("data/people-groups-10.txt")
   def check_values(L: list[tuple]) -> None:
   ```
   that expects as an input the output of `parse`, and that outlines ill-formed input
+
 * **note** on ASCII *vs* Unicode input: 
   * in a first approximation, use patterns like `a-z` to check for letters;  
   * how does this behave with respect to names with accents and cedillas

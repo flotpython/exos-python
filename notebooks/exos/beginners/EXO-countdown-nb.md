@@ -3,8 +3,6 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.16.4
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -66,7 +64,6 @@ time.sleep(0.5)
 
 +++
 
-
 ### une version v0 un peu naïve
 
 ça fonctionne, mais on ne contrôle pas l'entrée de l'utilisateur:
@@ -99,6 +96,7 @@ cette fois on continue de poser la question jusqu'à ce qu'on reçoive un entier
 * dans un premier temps on avait écrit la fonction `saisie_entier()` et le texte
   de la question était *cablé* à l'intérieur;  
   mais dans un exercice suivant, on a voulu réutiliser cette fonction, d'où le paramètre
+
 * il reste un défaut ici; pouvez-vous voir lequel ?
   ```{admonition} réponse
   :class: dropdown

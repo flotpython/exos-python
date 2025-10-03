@@ -17,15 +17,13 @@ nbhosting:
   title: TP - classes simples
 ---
 
-+++ {"slideshow": {"slide_type": ""}, "tags": []}
-
 # classes `Student` et `Class`
 
 +++
 
 Licence CC BY-NC-ND, Thierry Parmentelat & Laurent Lacourt
 
-+++ {"tags": [], "slideshow": {"slide_type": ""}}
++++
 
 ````{admonition} pas besoin de zip
 pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML
@@ -41,6 +39,7 @@ pour faire ce TP, vous avez seulement besoin de cet énoncé en HTML
 ou encore  
 `def foo(s: str) -> bool:` au lieu de simplement  
 `def foo(s):`
+
 * dans ce TP nous allons nous définir deux classes `Student` et `Class`. Comme vous l'avez vu en cours une classe est définie (entre autres) par une série d'attributs et de méthodes. Il faut voir les méthodes comme des fonctions écrites spécialement pour s'appliquer à une instance de la classe. Les méthodes sont des fonctions qui, vous avez l'habitude de voir maintenant, ont généralement `self` comme premier argument; cela permet une utilisation `instance.methode(autre, arguments)`  
   Ainsi, lorsqu'il vous est demandé d'implémenter la méthode `add_grade(topic: str, grade: float)` à la classe `Student`, n'oubliez pas que cela se traduit dans votre cellule par quelque chose comme :
 ```python

@@ -16,8 +16,6 @@ nbhosting:
   title: 'TP: le jeu de motus'
 ---
 
-+++
-
 # le jeu de motus
 
 +++
@@ -49,6 +47,7 @@ voici un exemple de session, le mot à deviner était `CITRON`
 ```
 
 ici on a 
+
 * d'abord essayé `CASTOR`; la 'correction' nous a appris que
   * le mot commence par un `C`,
   * qu'il contient un `O` en 5-ème position,
@@ -61,6 +60,7 @@ ici on a
   * etc...
 
 les codes de couleur sont donc
+
 * rouge: lettre bien placée
 * jaune: lettre mal placée
 * bleu (ou blanc, selon les supports): lettre absente
@@ -116,8 +116,6 @@ show_example("addition", "addendum")
 ```
 
 ```{code-cell} ipython3
-:tags: []
-
 # prune-cell
 
 from motus import show_example
@@ -142,6 +140,7 @@ print(Path("data/ods6.url").open().read())
 ## étape 1: l'ordi anime le jeu
 
 dans un premier temps:
+
 * lisez le module `motus.py`
 * utilisez le pour écrire un fichier `main.py` qui implémente un jeu dans lequel l'ordi se contente de vous faire jouer:
   * il demande un nombre de lettres

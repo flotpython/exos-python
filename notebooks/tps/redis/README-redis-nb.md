@@ -24,6 +24,7 @@ on se propose de réaliser un petit jeu multi joueur, et pour cela nous aurons b
   traditionnel, ici pas de SQL ni de stockage sur le disque; il existe bien sûr
   [une librairie Python](https://redis.readthedocs.io/en/latest/) pour
   communiquer avec redis depuis Python
+
 * [pygame](www.pygame.org), et plus accessoirement pour le graphisme et autres
   interactions avec le jeu (qu'on a déjà vu avec le snake)
 
@@ -50,6 +51,7 @@ théorie le choix entre
 * faire tourner tout le jeu, c'est-à-dire les deux joueurs, dans un seul
   process; mais ça impose de jouer tous les deux sur le même ordi, pas glop du
   tout
+
 * du coup ça n'est pas une solution en général, donc c'est beaucoup mieux que
   **chaque joueur lance son propre process**,  
   qui pourront même du coup tourner sur des ordinateurs différents pourvu qu'on s'y prenne correctement
@@ -126,6 +128,7 @@ voici aussi à tout hasard d'autres options, selon votre système d'exploitation
 
 `````{tab-set}
 ````{tab-item} Windows
+
 * autre option: memurai  
   dont l'installation se charge de créer un service microsoft
 ````
@@ -135,6 +138,7 @@ autre option: `brew install redis`
 ````
 
 ````{tab-item} Linux
+
 * redhat/fedora: autre option: `dnf install redis`
 * debain/ubuntu: `apt install redis`
 ````
@@ -217,16 +221,20 @@ quelques suggestions dans ce sens:
 
 * il va vous falloir créer une instance du serveur redis (un `redis.Redis()`)
   dans le programme principal
+
 * et passer cette instance à la classe `Player`
 * de façon à ce qu'elle puisse tenir le serveur redis au courant de toutes ses
   modifications de position et/ou de couleur (le raccourci clavier `c` permet de
   changer de couleur du joueur)
+
 * une fois que c'est fait, il convient que le programme principal interroge le
   serveur pour connaitre la position des autres joueurs, avant de rafraichir
   l'affichage
+
 * pour faire cela, une voie possible serait d'écrire une classe `Others` (dans un
   fichier `others.py`) dont le travail est d'interroger le serveur pour connaitre
   la position des autres joueurs
+
 * ce qui donnerait un flux de données dans le genre de ceci
 
   ```{image} media/dataflow.excalidraw.svg
@@ -318,6 +326,7 @@ en effet il est ultra fréquent que les ordinateurs soient derrière un routeur 
 :class: seealso
 
 plus de détails ici
+
 * <https://ipstack.com/classes-of-private-ip-address>
 * le RFC: <https://datatracker.ietf.org/doc/html/rfc1918>
 ```

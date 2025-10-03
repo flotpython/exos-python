@@ -17,15 +17,13 @@ nbhosting:
   title: "m\xE9tro parisien"
 ---
 
-+++ {"slideshow": {"slide_type": ""}, "tags": []}
-
 # le réseau du métro parisien
 
 +++
 
 Licence CC BY-NC-ND, Thierry Parmentelat
 
-+++ {"slideshow": {"slide_type": ""}, "tags": []}
++++
 
 ```{admonition} commencez par télécharger le zip
 {download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-metro.zip>`
@@ -97,6 +95,7 @@ hops.head()
 
 1. dessiner le réseau sur une carte
 1. s'en servir de support pour visualiser deux algorithmes de parcours de graphe
+
   * DFS : *depth-first-search*
   * BFS : *breadth-first-search*
 
@@ -105,6 +104,7 @@ hops.head()
 ### comment on se propose de le faire
 
 1. construire une structure de données pour
+
   * ranger le graphe,
   * pouvoir le parcourir rapidement/efficacement
 2. afficher la carte avec la librairie `folium`
@@ -204,6 +204,7 @@ c'est ce que nous visualiserons à la fin de ce TP
 +++
 
 on va représenter le graphe avec plusieurs classes d'objet :
+
 * `Station` : contient les détails de l'arrêt ; ici on n'a gardé, parmi tous les détails exposés par la RATP, que les coordonnées latitude et longitude, mais dans un exemple plus réaliste on pourrait avoir ici plein de détails...
 * `Node` : modélise un noeud (sommet) dans le graphe, et ses noeuds voisins ;
 * `Graph` : contient l'ensemble des noeuds du réseau.
