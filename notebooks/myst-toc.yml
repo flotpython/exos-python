@@ -77,6 +77,7 @@ project:
     - title: TPs visu & games
       children:
       - pattern: tps/snake/README*-nb.md
+      - pattern: tps/game-of-life/README*-nb.md
       # unfinished business
       # - "python-tps/flappybird-wip/README*.md"
       - pattern: tps/boids/README*-nb.md
@@ -84,6 +85,8 @@ project:
       - pattern: tps/redis/README*-nb.md
       - pattern: tps/motus/README*-nb.md
       - pattern: tps/dobble/README*-nb.md
+      - pattern: tps/*/.teacher/*-corrige-nb.md
+        hidden: true
 
     - title: lecture de code
       children:
