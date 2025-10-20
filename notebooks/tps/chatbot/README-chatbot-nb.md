@@ -504,11 +504,12 @@ un VPN) - et sans doute à plein d'autres endroits publics
 
 pour vous authentifier vous aurez également besoin d'une clé API - communiquée par un autre moyen
 
-le but du jeu consiste donc ici à 
+le but du jeu consiste donc ici à
 - implémenter une classe concrète `LitellmServer` qui hérite de `Server` et qui
 implémente les mêmes méthodes que `OllamaServer`, mais en s'appuyant sur l'API
 `litellm`
-- ajouter une entrée dans le dictionnaire `SERVERS` pour pouvoir choisir ce serveur dans l'interface
+- ajouter une entrée dans le dictionnaire `SERVERS` pour pouvoir choisir ce
+  serveur dans l'interface
 
 ## plein d'améliorations possibles
 
