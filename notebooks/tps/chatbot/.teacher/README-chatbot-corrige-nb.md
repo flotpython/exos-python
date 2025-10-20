@@ -472,7 +472,41 @@ plutôt que de proposer une liste de modèles "en dur" comme dans le *starter co
 
 dans mon implémentation j'ai choisi de "cacher" ce résultat, pour ne pas redemander plusieurs fois cette liste à un même serveur (cette liste bouge très très peu...); mais c'est optionnel; par contre ce serait sympa pour les utilisateurs de conserver, lorsque c'est possible, le modèle choisi lorsqu'on change de serveur...
 
-+++
+## v10 (optionnel): une classe `Server`
+
+dans cette version, je vous propose de **créer une classe `Server` abstraite**,
+qui définit une API commune pour interagir avec un serveur d'IA; puis une classe
+concrète **`OllamaServer`** qui hérite de `Server` et qui encapsule la logique
+d'interaction avec l'API ollama - puisque pour l'instant nos deux serveurs
+offrent la même API
+
+mais de cette façon dans le futur (étape suivante) on pourra plus simplement
+ajouter le code pour interagir avec d'autres types de serveurs, qui implémentent
+une API différente (par exemple `litellm` que nous avons aussi déployé à
+l'Inria)
+
+c'est pourquoi dans cette v10, je vous propose de rester à fonctionnalités
+constantes, mais de créer une classe `OllamaServer` qui hérite de
+`Server` et qui implémente les méthodes suivantes:
+
+```python
+class Server:
+    """
+    an abstract server class
+    """
+    def list_models(self) -> list[str]:
+        pass
+    def generate_blocking(self, prompt, model, streaming ) -> list[str]:
+        """
+        non-streaming generation - returns a list of text chunks
+        """
+        pass
+    def generate_streaming(self, prompt, model, streaming) -> Iterator[str]:
+        """
+        streaming generation - yields text chunks
+        """
+        pass
+```
 
 ## plein d'améliorations possibles
 
