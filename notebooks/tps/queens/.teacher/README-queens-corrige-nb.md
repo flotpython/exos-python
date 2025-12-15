@@ -89,7 +89,7 @@ il y a toutefois une précaution à prendre si vous travaillez comme ceci
 en effet l'import d'un module est **caché** par Python, ce qui fait que par défaut, les changements que vous faites dans fichier `rooks_and_queens.py` ne sont **plus rechargés après le premier import**
 
 pour vous installer confortablement, voyez ce lien:  
-https://ue12-p24-intro.readthedocs.io/en/main/1-01-installations-nb.html#configuration-de-l-autoreload
+https://intro.info-mines.paris/1-1-installations/#-configuration-de-lautoreload
 ````
 
 +++
