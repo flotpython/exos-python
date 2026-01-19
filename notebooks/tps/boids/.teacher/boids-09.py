@@ -33,12 +33,12 @@ class Boid(arcade.Sprite):
     def __init__(self, obstacles):
         super().__init__(IMAGE)
         self.center_x, self.center_y = 100, 100
-        self.angle = -135
+        self.angle = 135
         self.speed = 100  # in pixels / second
         self.steer = 0
         self.obstacles = obstacles
 
-    def on_update(self, delta_time):
+    def update(self, delta_time):
 
         for o in self.obstacles:
             if math.dist((self.center_x, self.center_y),
@@ -52,8 +52,8 @@ class Boid(arcade.Sprite):
 
         self.angle += (1 - 2*random.random()) * NOISE_ANGLE
 
-        self.center_x += self.speed * delta_time * math.cos(math.radians(self.angle))
-        self.center_y += self.speed * delta_time * math.sin(math.radians(self.angle))
+        self.center_x += self.speed * delta_time * math.cos(math.radians(-self.angle))
+        self.center_y += self.speed * delta_time * math.sin(math.radians(-self.angle))
 
         self.center_x %= WIDTH
         self.center_y %= HEIGHT
@@ -87,13 +87,13 @@ class Window(arcade.Window):
                 self.obstacles.append(Obstacle(ox, oy))
 
     def on_draw(self):
-        arcade.start_render()
+        self.clear()
         self.boids.draw()
         self.obstacles.draw()
 
     def on_update(self, delta_time):
-        self.boids.on_update(delta_time)
-        self.obstacles.on_update(delta_time)
+        self.boids.update(delta_time)
+        self.obstacles.update(delta_time)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.LEFT:

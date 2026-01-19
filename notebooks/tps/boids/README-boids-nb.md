@@ -57,7 +57,8 @@ dans ce TP nous allons
 
 ### notre sujet
 
-dans sa version originale chaque animal décide de sa trajectoire, **en fonction uniquement de ses voisins proches**, et cela en suivant trois règles:
+dans sa version originale chaque animal décide de sa trajectoire, **en fonction
+uniquement de ses voisins proches**, et cela en suivant trois règles:
 
 * séparation (typiquement pour éviter les obstacles)
 * alignement (tout le monde va, en gros, dans la même direction)
@@ -73,6 +74,15 @@ les élèves rapides et/ou motivés pourront poursuivre jusqu'à réaliser une s
 ### en vidéo
 
 voici d'abord une vidéo très courte pour vous montrer les différentes étapes du TP
+
+::::{admonition} arcade 3.x
+:class: danger
+
+comme la librairie `arcade` a récemment évolué vers la version 3.x, le code de
+démarrage a été mis à jour en conséquence, et c'est pourquoi avec le code de
+départ que je vous fournis **vous allez commencer directement à l'étape 2** de la
+vidéo
+::::
 
 ::::{figure}
 :align: center
@@ -95,14 +105,14 @@ boids
 
 le zip contient
 
-* le starter code dans `boids-01.py`
+* le starter code dans `boids-02.py`
 * les figures dans le dossier `media/`
 
 ---
 
 ## pas à pas
 
-### v01: starter code
+### v02: starter code
 
 * dans le zip vous trouverez le code suivant; n'hésitez pas à le renommer dans
   un fichier `boids.py` si vous préférez
@@ -110,7 +120,7 @@ le zip contient
 ::::{admonition} le code de départ
 :class: dropdown
 
-:::{literalinclude} boids-01.py
+:::{literalinclude} boids-02.py
 :::
 ::::
 
@@ -130,6 +140,10 @@ dans ce code, on utilise - et ce n'est pas du tout explicite - le fait que
 * cette mainloop va appeler les méthodes `on_draw()` et `on_update()`  
   sur chaque instance de `Window` - c'est là que nous pouvons programmer  
   la logique de notre "*jeu*"
+
+* notamment nous disons que pour mettre à jour le jeu (`on_update`),  
+  on doit mettre à jour tous les objets qui sont dans la `SpriteList`  
+  `self.boids`, ce que l'on fait par l'appel à `self.boids.update()`
 
 * la classe `Sprite` permet d'ajouter des objets qui savent s'afficher  
   ici on a juste créé l'objet à partir d'une image  `.png`, puis fixé
@@ -153,19 +167,9 @@ observez la différence de style de programmation par rapport à `pygame`
 comment aurait-on écrit la même chose en `pygame` ?
 ::::
 
----
+::::{admonition} à faire pour aider le debug
 
-### v02: de la place pour plusieurs boids
-
-on veut garder exactement le même comportement (un seul boid fixe pour l'instant)  
-mais on va modifier le code pour pouvoir (plus tard) en créer plusieurs 
-
-pour cela, on pourrait penser à utiliser une liste standard Python,  
-mais je vous invite à utiliser plutôt la classe `SpriteList` que fournit `arcade`
-
-::::{admonition} debugging
-
-en plus de ça, je vous recommande de:
+partant de là, je vous recommande de:
 
 * prévoir le cas du debug, par exemple avec une variable globale `DEBUG`
 * et dans ce cas afficher un message à chaque fois que le boid est mis à jour  
@@ -193,7 +197,7 @@ et on va au contraire la **spécialiser** pour créer notre propre classe `Boid`
 * pour chaque cycle de la *mainloop*, l'objet `Window` utilise
   * sa méthode `on_update()` pour mettre à jour l'état des objets (juste en mémoire)
   * et sa méthode `on_draw()` pour les redessiner  
-    c'est pour cela que celle-ci commence par `start_render()`  
+    c'est pour cela que celle-ci commence par `clear()`  
     qui efface tout, et remet simplement le fond d'écran
 * bref, le résultat c'est qu'on peut **faire avancer le boid**  
   simplement en **redéfinissant quelques méthodes** dans le code

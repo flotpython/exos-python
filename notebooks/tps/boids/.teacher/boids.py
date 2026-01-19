@@ -93,8 +93,8 @@ class Boid(arcade.Sprite):
         self.center_y = y if y is not None else random.random()*HEIGHT
         self.angle = angle if angle is not None else 360 * random.random()
         # the boid's speed, exposed to other boids for the alignment rule
-        self.move_x = BOID_SPEED*math.cos(math.radians(self.angle))
-        self.move_y = BOID_SPEED*math.sin(math.radians(self.angle))
+        self.move_x = BOID_SPEED*math.cos(math.radians(-self.angle))
+        self.move_y = BOID_SPEED*math.sin(math.radians(-self.angle))
         # a cache of the entities that are close-by
         # will be computed at each update
         self.close_flock = None
@@ -224,7 +224,7 @@ class Boid(arcade.Sprite):
             return speed * limit / norm
 
 
-    def update(self):
+    def update(self, delta_time):
         # compute the subset of the flock that is within CLOSE_RADIUS1
         # using norm_1 which is less cpu-consuming
         # using a list instead of a set could probably cut it too
@@ -247,7 +247,7 @@ class Boid(arcade.Sprite):
             move = self.noised_speed(move)
 
         # align icon with actual move
-        self.angle = move.degrees()
+        self.angle = -move.degrees()
         if DEBUG:
             print(f"SUMMARY {self}: {move=} {self.angle=}")
 
@@ -325,14 +325,14 @@ class Window(arcade.Window):
         self.obstacles = SpriteList()
 
     def on_draw(self):
-        arcade.start_render()
+        self.clear()
         self.boids.draw()
         self.obstacles.draw()
 
     def on_update(self, delta_time):
         if self.freeze:
             return
-        self.boids.update()
+        self.boids.update(delta_time)
 
 
     def display_current_settings(self):

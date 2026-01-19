@@ -18,15 +18,14 @@ class Boid(arcade.Sprite):
     def __init__(self):
         super().__init__(IMAGE)
         self.center_x, self.center_y = 100, 100
-        self.angle = -135
+        self.angle = 135
         self.speed = 100  # in pixels / second
-
-    def on_update(self, delta_time):
 
         self.angle += (1 - 2*random.random()) * NOISE_ANGLE
 
-        self.center_x += self.speed * delta_time * math.cos(math.radians(self.angle))
-        self.center_y += self.speed * delta_time * math.sin(math.radians(self.angle))
+    def update(self, delta_time):
+        self.center_x += self.speed * delta_time * math.cos(math.radians(-self.angle))
+        self.center_y += self.speed * delta_time * math.sin(math.radians(-self.angle))
 
         self.center_x %= WIDTH
         self.center_y %= HEIGHT
@@ -46,11 +45,11 @@ class Window(arcade.Window):
         self.boids.append(boid)
 
     def on_draw(self):
-        arcade.start_render()
+        self.clear()
         self.boids.draw()
 
     def on_update(self, delta_time):
-        self.boids.on_update(delta_time)
+        self.boids.update(delta_time)
 
 window = Window()
 window.setup()

@@ -37,7 +37,7 @@ class Boid(arcade.Sprite):
     def __init__(self, obstacles):
         super().__init__(IMAGE)
         self.center_x, self.center_y = 100, 100
-        self.angle = -135
+        self.angle = 135
         self.speed = 100  # in pixels / second
         self.steer = 0
         self.acceleration = 1
@@ -61,11 +61,11 @@ class Boid(arcade.Sprite):
                 move_y += alpha*(self.center_y-o.center_y)
         return move_x, move_y
 
-    def on_update(self, delta_time):
+    def update(self, delta_time):
         # convenience: do a atan2 but in degrees
         # and with args in the natural order X Y
         def angle_from_move(move_x, move_y):
-            return 180/math.pi*math.atan2(move_y, move_x)
+            return -180/math.pi*math.atan2(move_y, move_x)
 
         # accumulate the move
         move_x, move_y = 0., 0.
@@ -75,8 +75,8 @@ class Boid(arcade.Sprite):
         self.angle += (1 - 2*random.random()) * NOISE_ANGLE
 
         # add our own speed
-        move_x += self.speed * delta_time * math.cos(math.radians(self.angle))
-        move_y += self.speed * delta_time * math.sin(math.radians(self.angle))
+        move_x += self.speed * delta_time * math.cos(math.radians(-self.angle))
+        move_y += self.speed * delta_time * math.sin(math.radians(-self.angle))
 
         avoid_x, avoid_y = self.avoid_move()
         move_x += avoid_x
@@ -132,13 +132,13 @@ class Window(arcade.Window):
                 self.obstacles.append(Obstacle(ox, oy))
 
     def on_draw(self):
-        arcade.start_render()
+        self.clear()
         self.boids.draw()
         self.obstacles.draw()
 
     def on_update(self, delta_time):
-        self.boids.on_update(delta_time)
-        self.obstacles.on_update(delta_time)
+        self.boids.update(delta_time)
+        self.obstacles.update(delta_time)
 
     def on_key_press(self, symbol: int, modifiers: int):
         if symbol == arcade.key.LEFT:
