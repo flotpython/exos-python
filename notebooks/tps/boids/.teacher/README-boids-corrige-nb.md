@@ -15,13 +15,7 @@ nbhosting:
   title: 'TP: les boids'
 ---
 
-+++ {"tags": ["prune-cell"]}
-
 # TP - les boids avec `arcade`
-
-+++
-
-Licence CC BY-NC-ND, Thierry Parmentelat
 
 +++ {"tags": ["prune-cell"]}
 
@@ -38,7 +32,7 @@ but the notebook is duplicated in `.teacher` for consistency
 {download}`vous aurez besoin du zip qui se trouve ici<./ARTEFACTS-boids.zip>`
 ```
 
-+++
+---
 
 ## c'est quoi les *boids* ?
 
@@ -59,7 +53,7 @@ c'est intéressant parce que
   et c'est intéressant pour nous car cette librairie se programme exclusivement
   **par spécialisation de classes**
 
-+++
+---
 
 ## introduction
 
@@ -68,7 +62,7 @@ dans ce TP nous allons
 * découvrir (très superficiellement) la librairie `arcade`
 * et l'utiliser pour implémenter un début de simulation de *boids*
 
-+++
+---
 
 ### notre sujet
 
@@ -83,7 +77,7 @@ c'est-à-dire ce qui permet aux boids d'éviter de heurter les autres boids, et 
 
 les élèves rapides et/ou motivés pourront poursuivre jusqu'à réaliser une simulation complète s'ils le souhaitent
 
-+++
+---
 
 ### en vidéo
 
@@ -104,24 +98,23 @@ le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des
 boids** qui évoluent **spontanément** en **évitant** les obstacles et les autres
 boids
 
-+++
+---
 
-### contenu
+### contenu du zip
 
 le zip contient
 
 * le starter code dans `boids-01.py`
 * les figures dans le dossier `media/`
 
-+++
+---
 
 ## pas à pas
 
-+++
-
 ### v01: starter code
 
-* dans le zip vous trouverez le code suivant; n'hésitez pas à le renommer dans un fichier `boids.py`
+* dans le zip vous trouverez le code suivant; n'hésitez pas à le renommer dans
+  un fichier `boids.py` si vous préférez
 
 ::::{admonition} le code de départ
 :class: dropdown
@@ -136,27 +129,12 @@ le zip contient
 
 vous devez voir un seul boid immobile, dans le coin en bas à gauche
 
-+++
-
-installez la librairie, copiez le code ci-dessus dans par exemple `boid.py`, et lancez-le  
-vous devez voir un seul boid dans le coin en bas à gauche, il est immobile
-
-+++
-
-#### commentaire
-
-observez la différence de style de programmation par rapport à `pygame`  
-comment aurait-on écrit la même chose en `pygame` ?
-
-+++
-
-#### l'implicite
+::::{admonition} l'implicite
 
 dans ce code, on utilise - et ce n'est pas du tout explicite - le fait que
 
 * le module `arcade` vient avec une *mainloop* - `arcade.run()`  
-  qui se charge de faire 'avancer' le jeu - par défaut à plusieurs dizaines de Hz  
-  (même si avec cette version 01 on ne voit pas grand chose bouger :)
+  qui se charge de faire 'avancer' le jeu - par défaut à plusieurs dizaines de Hz - et cela même si avec cette version 01 on ne voit pas grand chose bouger ⏸️
 
 * cette mainloop va appeler les méthodes `on_draw()` et `on_update()`  
   sur chaque instance de `Window` - c'est là que nous pouvons programmer  
@@ -165,14 +143,26 @@ dans ce code, on utilise - et ce n'est pas du tout explicite - le fait que
 * la classe `Sprite` permet d'ajouter des objets qui savent s'afficher  
   ici on a juste créé l'objet à partir d'une image  `.png`, puis fixé
   `boid.center_x` et `boid.center_y`
-  
+
+:::{admonition} pour les forts
+:class: dropdown warning
 pour les forts: dans le même registre, mais plus subtil:
 
 * il a suffi qu'on crée une instance de `Window`  
   pour qu'elle soit prise en compte par cette boucle;  
   comment c'est possible d'après vous ?
+:::
 
-+++
+::::
+
+::::{admonition} vs pygame
+:class: admonition-small
+
+observez la différence de style de programmation par rapport à `pygame`  
+comment aurait-on écrit la même chose en `pygame` ?
+::::
+
+---
 
 ### v02: de la place pour plusieurs boids
 
@@ -182,9 +172,7 @@ mais on va modifier le code pour pouvoir (plus tard) en créer plusieurs
 pour cela, on pourrait penser à utiliser une liste standard Python,  
 mais je vous invite à utiliser plutôt la classe `SpriteList` que fournit `arcade`
 
-+++
-
-#### debugging
+::::{admonition} debugging
 
 en plus de ça, je vous recommande de:
 
@@ -197,18 +185,19 @@ en plus de ça, je vous recommande de:
   pour ralentir la cadence, ce qui sera sûrement utile à un moment donné pour débugger
 
 * pourquoi ne pas aussi imprimer un message pour voir à quel rythme sont faits les `draw()` et `update()`
+::::
 
-+++
+---
 
 ### v03: le boid avance
 
-maintenant on va faire bouger notre objet, et lui donner un mouvement rectiligne   
+maintenant on va faire bouger notre objet, et lui donner un mouvement rectiligne 
 
-et pour ça on va cesser d'utiliser directement la classe `Sprite`, 
+et pour ça on va cesser d'utiliser directement la classe `Sprite`,  
 et on va au contraire la **spécialiser** pour créer notre propre classe `Boid`  
 (c-à-d que la classe `Boid` hérite de la classe `Sprite`)
 
-#### à savoir
+::::{admonition} à savoir
 
 * pour chaque cycle de la *mainloop*, l'objet `Window` utilise
   * sa méthode `on_update()` pour mettre à jour l'état des objets (juste en mémoire)
@@ -222,10 +211,10 @@ et on va au contraire la **spécialiser** pour créer notre propre classe `Boid`
 * `on_update(time_delta)` reçoit le temps (en ms) qui s'est écoulé depuis le
   dernier update(), c'est pratique pour faire des mouvements si on connaît la
   vitesse de déplacement de l'objet
+::::
 
-#### et aussi
-
-mais moins crucial à ce stade:
+::::{admonition} et aussi, mais moins crucial
+:class: warning
 
 * on n'en a pas besoin tout de suite, mais dans la classe `Sprite`, il y a un
   attribut `angle` qui sert à dire de combien on veut tourner l'image lors de
@@ -237,8 +226,9 @@ mais moins crucial à ce stade:
   est un de ses attributs (et non pas une constante)  
   même si là encore on n'en a pas besoin tout de suite
 * pensez à exprimer les vitesses en pixels par seconde
+::::
 
-+++
+---
 
 ### v04: en circuit fermé
 
@@ -248,58 +238,61 @@ i.e. un objet sortant à gauche réapparait à droite, et idem dans tous les sen
 * et pour que ce soit plus facile à tester on va orienter le boid vers le coin en bas à gauche  
 si vous vous y êtes bien pris pour le faire avancer, c'est juste une question de changer son `.angle`
 
-+++
+---
 
 ### v05: du bruit sur le cap
 
 faites en sorte que le trajet du boid ne soit plus strictement rectiligne  
 en ajoutant à chaque pas un léger bruit sur la direction
 
-+++
+---
 
 ### v06: les touches `←` et `→`
 
 faites en sorte de pouvoir contrôler la direction du boid avec les touches du clavier
 
-#### à savoir
+::::{admonition} à savoir
 
-* pour intercepter les événements clavier, vous pouvez définir dans la classe `Window` les méthodes
-```python
-def on_key_press(self, key, modifiers):
-    pass
-def on_key_release(self, key, modifiers):
-    pass
-```
+* pour intercepter les événements clavier, vous pouvez définir dans la classe
+  `Window` les méthodes
+  ```python
+  def on_key_press(self, key, modifiers):
+      pass
+  def on_key_release(self, key, modifiers):
+      pass
+  ```
+* la librairie expose des constantes comme par exemple `arcade.key.LEFT`
+::::
 
-* la librairie expose par exemple la constante `arcade.key.LEFT`
-
-#### attention
+::::{admonition} *user-friendliness*
 
 soyez sympa avec vos utilisateurs: ceci est beaucoup plus facile à utiliser si
 le boid continue de tourner pendant **tout le temps où la touche est enfoncée** - plutôt que
 de devoir appuyer plein de fois sur la touche&hellip;
+::::
 
-+++
+---
 
 ### v07: ajouter un obstacle
 
 ajoutez un unique obstacle, immobile, par exemple au centre du jeu  
 vous trouverez une image `media/obstacle-resized.png` pour le matérialiser
 
-**2 options**
+::::{admonition} 2 options
 
 * on pourrait facilement s'en sortir avec juste la classe `Sprite`
 * mais je vous demande, pour vous exercer à la spécialisation de classes, de
   créer une classe `Obstacle`
+::::
 
-+++
+---
 
 ### v08: créez une grille d'obstacles
 
 remplacez l'unique obstacle par une grille d'obstacles  
 par exemple: mettez en 10 x 10, ils sont donc espacés de 80px
 
-+++
+---
 
 ### v09: détecter les voisins
 
@@ -308,9 +301,7 @@ prenez 20 pixels comme rayon de détection
 pour ma part j'ai rendu le boid semi-transparent, en jouant sur l'attribut `alpha` des `Sprite`  
 (255 = opaque, 0 = transparent)
 
-+++
-
-#### discussion
+::::{admonition} discussion
 
 ici on a le choix d'utiliser
 
@@ -323,48 +314,56 @@ quels sont les avantages et les inconvénients des 2 approches ?
 * en termes de réutilisabilité
 
 je vous recommande la deuxième option
+::::
 
-+++
+---
 
 ### v10: la règle de séparation
 
 implémentez la règle de séparation  
 on peut la résumer comme ceci:
 
-+++
-
 ```{image} media/separation.png
 :align: center
+:width: 80%
 ```
 
-+++
+---
 
 c'est-à-dire que quand on s'intéresse au boid b, on va
 
-* ignorer tous les objets qui se trouvent plus loin qu'un certain rayon 'r' 
-* et pour tous ceux qui sont proches, par exemple o, on calcule un vecteur $\overrightarrow{\delta}$ qui va permettre d'écarter l'objet b de o  
-  je n'ai pas trouvé de formule dans la littérature pour calculer $\overrightarrow{\delta}$, j'ai sorti  de mon chapeau la formule suivante
+* ignorer tous les objets (en rouge) qui se trouvent plus loin qu'un certain rayon 'r'
+* et pour tous ceux qui sont proches (en vert), par exemple o, on calcule un
+  vecteur $\overrightarrow{\delta}$ qui va permettre d'écarter l'objet b de o  
 
-  $\overrightarrow{\delta} = \overrightarrow{ob} * \frac{1}{2}(1-\frac{d}{r})$
+je n'ai pas trouvé de formule dans la littérature pour calculer
+$\overrightarrow{\delta}$, j'ai sorti  de mon chapeau la formule suivante
 
-  de façon à ce que: 
+::::{math}
+:align: center
+\overrightarrow{\delta} = \overrightarrow{ob} \times \frac{1}{2}(1-\frac{d}{r})
+::::
 
-  * les objets sur le cercle ont une influence nulle, 
-  * et si o est tout proche de b, il est repoussé à un rayon r/2
+de façon à ce que:
 
-on fait la somme de tous ces vecteurs, et on l'ajoute au déplacement de b
+* les objets sur le cercle ont une influence nulle,
+* et si o est tout proche de b, il est repoussé à un rayon r/2
 
-i.e. dans l'exemple de la figure, lorsqu'on traite le boid en b:
+on fait la somme de tous ces vecteurs, et on l'ajoute au déplacement de b  
+i.e., dans l'exemple de la figure, lorsqu'on traite le boid en b:
 
-* on ignore les boids aux endroits en rouge
-* et pour les 3 boids proches (en vert) on fait la somme des 3 vecteurs de "repoussement" (en vert aussi)
+* on ignore les boids éloignés - en rouge
+* et pour les 3 boids proches - en vert - on fait la somme des 3 vecteurs de
+  "repoussement" (en vert aussi)
 * qu'on ajoute naturellement au déplacement dû à la vitesse du boid
 
-#### à noter
+::::{admonition} à noter
 
-dans cette version, en cas de collision, on se contente de modifier la position du boid, et pas son orientation; on arrangera ca plus tard
+dans cette version, en cas de collision, on se contente de modifier la position
+du boid, et pas son orientation; on arrangera ca plus tard
+::::
 
-+++
+---
 
 ### v11: orienter correctement
 
@@ -376,38 +375,39 @@ dans cette version, en cas de collision, on se contente de modifier la position 
 
 l'effet n'est pas forcément très réussi, vous devez voir l'orientation sauter brutalement d'un angle à un autre
 
-#### à savoir**
+::::{admonition} à savoir
 
 voyez la fonction `math.atan2` qui est pratique ici
+::::
 
-+++
+---
 
 ### v12: tourner plus doucement
 
 pour lisser les changements d'orientation: comment pourrait-on obtenir quelque
 chose d'un peu plus élégant, en ce qui concerne les changements de direction ?
 
-+++
+---
 
 ### v13: les touches `↑` et `↓`
 
 faire en sorte qu'on puisse contrôler aussi la vitesse avec les touches `↑` et `↓`  
 essayez le comportement de l'évitement d'obstacles à plusieurs vitesses
 
-+++
+---
 
 ### v14: plusieurs boids
 
 remplacez l'unique boid par un ensemble de 20 boids  
 sans changer, pour l'instant, la séparation, qui est calculée seulement à partir des obstacles
 
-+++
+---
 
 ### v15: éviter aussi les autres boids
 
 assurez-vous que la séparation permet d'éviter tous les objets (obstacles et boids)
 
-+++
+---
 
 ### en option...
 
@@ -423,13 +423,11 @@ vous pouvez ensuite améliorer dans les directions suivantes :
 * etc...  
   pour information voici une synthèse des 3 règles, à vous de chercher pour préciser comment interpréter ces figures
 
-+++
-
 ```{image} media/boids-rules.png
 :align: center
 ```
 
-+++
+---
 
 ## pour aller plus loin
 
