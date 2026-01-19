@@ -28,7 +28,8 @@ Licence CC BY-NC-ND, Thierry Parmentelat
 ````{admonition} nothing to prune
 :class: warning
 
-there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
+there are no difference - apart from this very cell - between the teacher and the student version,
+but the notebook is duplicated in `.teacher` for consistency
 ````
 
 +++
@@ -42,7 +43,8 @@ there are no difference - apart from this very cell - between the teacher and th
 ## c'est quoi les *boids* ?
 
 une simulation ludique où on tente de reproduire le comportement d'animaux en
-groupes - typiquement oiseaux et poissons
+groupes  
+typiquement nuée d'oiseaux ou banc de poissons
 
 ### intérêts
 
@@ -87,12 +89,20 @@ les élèves rapides et/ou motivés pourront poursuivre jusqu'à réaliser une s
 
 voici d'abord une vidéo très courte pour vous montrer les différentes étapes du TP
 
-<https://www.youtube.com/watch?v=d4789cBD3Ek>
+::::{figure}
+:align: center
+```{iframe} https://www.youtube.com/embed/d4789cBD3Ek?rel=0&amp;controls=1
+```
+penser à la lire en plein écran
+::::
 
-l'enjeu principal ici est d'être exposé à ce style de **programmation par spécialisation de classes**  
-aussi ce chemin est uniquement **indicatif**, et surtout à destination des élèves qui en ressentiront le besoin  
-si vous vous sentez, vous pouvez très bien vous y prendre complètement autrement,  
-le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des boids** qui évoluent **spontanément** en **évitant** les autres objets
+l'enjeu principal ici est d'être exposé à la **programmation par spécialisation de classes**  
+aussi ce chemin par étapes est uniquement **indicatif**, et surtout à
+destination des élèves qui ressentent le besoin d'être guidés pas à pas  
+si vous vous sentez, vous pouvez très bien vous y prendre complètement autrement !  
+le contrat est rempli dès que vous avez: **des obstacles** fixes, et **des
+boids** qui évoluent **spontanément** en **évitant** les obstacles et les autres
+boids
 
 +++
 
@@ -111,44 +121,18 @@ le zip contient
 
 ### v01: starter code
 
-```python
-"""
-display a single object, inert, at (100, 100)
-"""
+* dans le zip vous trouverez le code suivant; n'hésitez pas à le renommer dans un fichier `boids.py`
 
-import arcade
+::::{admonition} le code de départ
+:class: dropdown
 
-BACKGROUND = arcade.color.ALMOND
-IMAGE = "media/arrow-resized.png"
+:::{literalinclude} boids-01.py
+:::
+::::
 
-class Window(arcade.Window):
-
-    def __init__(self):
-        super().__init__(800, 800, "My first boid")
-        arcade.set_background_color(BACKGROUND)
-        self.boid = None
-
-    def setup(self):
-        boid = arcade.Sprite(IMAGE)
-        boid.center_x = 100
-        boid.center_y = 100
-        self.boid = boid
-
-    def on_draw(self):
-        arcade.start_render()
-        self.boid.draw()
-
-    def on_update(self, delta_time):
-        self.boid.update()
-
-window = Window()
-window.setup()
-arcade.run()
-```
-
-* installez la librairie
+* installez la librairie (comment fait-on déjà ?)
 * vérifiez que vous avez le fichier `media/arrow-resized.png` (il est dans le zip)
-* copiez et lancez le code ci-dessus
+* lancez le code ci-dessus
 
 vous devez voir un seul boid immobile, dans le coin en bas à gauche
 
@@ -171,14 +155,16 @@ comment aurait-on écrit la même chose en `pygame` ?
 dans ce code, on utilise - et ce n'est pas du tout explicite - le fait que
 
 * le module `arcade` vient avec une *mainloop* - `arcade.run()`  
-  qui se charge de faire 'avancer' le jeu - par défaut à plusieurs dizaines de Hz
+  qui se charge de faire 'avancer' le jeu - par défaut à plusieurs dizaines de Hz  
+  (même si avec cette version 01 on ne voit pas grand chose bouger :)
 
 * cette mainloop va appeler les méthodes `on_draw()` et `on_update()`  
   sur chaque instance de `Window` - c'est là que nous pouvons programmer  
   la logique de notre "*jeu*"
 
 * la classe `Sprite` permet d'ajouter des objets qui savent s'afficher  
-  ici on a juste créé l'objet à partir d'un png, puis fixé `boid.center_x` et `boid.center_y`
+  ici on a juste créé l'objet à partir d'une image  `.png`, puis fixé
+  `boid.center_x` et `boid.center_y`
   
 pour les forts: dans le même registre, mais plus subtil:
 
@@ -202,11 +188,12 @@ mais je vous invite à utiliser plutôt la classe `SpriteList` que fournit `arca
 
 en plus de ça, je vous recommande de:
 
-* prévoir le cas du debug, par exemple avec une variable globale DEBUG
+* prévoir le cas du debug, par exemple avec une variable globale `DEBUG`
 * et dans ce cas afficher un message à chaque fois que le boid est mis à jour  
   (surtout pour mettre en évidence la *mainloop* à ce stade)
 
-* et aussi de [regarder la méthode `set_update_rate()`](https://api.arcade.academy/en/latest/api/window.html?highlight=set_update_rate#arcade.Window.set_update_rate)  
+* et aussi de [regarder la méthode 
+  `set_update_rate()`](https://api.arcade.academy/en/2.6.1/api/window.html#arcade.Window.set_update_rate)
   pour ralentir la cadence, ce qui sera sûrement utile à un moment donné pour débugger
 
 * pourquoi ne pas aussi imprimer un message pour voir à quel rythme sont faits les `draw()` et `update()`
@@ -224,40 +211,41 @@ et on va au contraire la **spécialiser** pour créer notre propre classe `Boid`
 #### à savoir
 
 * pour chaque cycle de la *mainloop*, l'objet `Window` utilise
-  * sa méthode `on_update()` pour mettre à jour l'état des objets
-  * et sa méthode `on_draw()` pour les redessiner
-    c'est pour cela que celle-ci commence par `start_render()` 
+  * sa méthode `on_update()` pour mettre à jour l'état des objets (juste en mémoire)
+  * et sa méthode `on_draw()` pour les redessiner  
+    c'est pour cela que celle-ci commence par `start_render()`  
     qui efface tout, et remet simplement le fond d'écran
+* bref, le résultat c'est qu'on peut **faire avancer le boid**  
+  simplement en **redéfinissant quelques méthodes** dans le code
+* par défaut les deux méthodes (`draw()` et `update()`) se produisent à la même fréquence (60Hz),
+  et avec `set_update_rate()` on ralentit uniquement `update()`
+* `on_update(time_delta)` reçoit le temps (en ms) qui s'est écoulé depuis le
+  dernier update(), c'est pratique pour faire des mouvements si on connaît la
+  vitesse de déplacement de l'objet
 
-  * on peut donc **faire avancer le boid** simplement en **redéfinissant quelques méthodes** dans le code
-* par défaut les deux méthodes (`draw()` et `update()`) se produisent à la même fréquence (60Hz),  
-  mais avec `set_update_rate()` on ralentit uniquement `update()`  
-  c'est pourquoi `on_update(time_delta)` reçoit le temps (en ms)  
-  qui s'est écoulé depuis le dernier appel
+#### et aussi
 
-et aussi, mais moins crucial à ce stade:
+mais moins crucial à ce stade:
 
-* on n'en a pas besoin tout de suite, mais dans la classe `Sprite`  
-  il y a un attribut `angle` qui sert à dire de combien on veut tourner l'image 
-
-* et naturellement dans notre cas, on va vouloir que l'objet avance dans la direction de la flêche  
-  (même si  ce stade on ne peut pas encore faire tourner le boid)
-
+* on n'en a pas besoin tout de suite, mais dans la classe `Sprite`, il y a un
+  attribut `angle` qui sert à dire de combien on veut tourner l'image lors de
+  l'affichage
+* et naturellement dans notre cas, on va vouloir que l'objet avance dans la
+  direction de la flêche (même si  ce stade on ne peut pas encore faire tourner
+  le boid)
 * aussi il serait habile de considérer que la vitesse du boid  
   est un de ses attributs (et non pas une constante)  
   même si là encore on n'en a pas besoin tout de suite
-
 * pensez à exprimer les vitesses en pixels par seconde
 
 +++
 
 ### v04: en circuit fermé
 
-on va faire en sorte que le plateau devienne infini en le refermant sur lui-même  
-un objet sortant à gauche réapparait à droite, et idem dans tous les sens  
-ça peut valoir le coup de "sortir" la taille du jeu pour en faire des constantes
-
-et pour que ce soit plus facile à tester on va orienter le boid vers le coin en bas à gauche  
+* on va faire en sorte que le plateau devienne infini en le refermant sur lui-même  
+i.e. un objet sortant à gauche réapparait à droite, et idem dans tous les sens&hellip;  
+* ça peut valoir le coup de "sortir" la taille du jeu pour en faire des constantes
+* et pour que ce soit plus facile à tester on va orienter le boid vers le coin en bas à gauche  
 si vous vous y êtes bien pris pour le faire avancer, c'est juste une question de changer son `.angle`
 
 +++
@@ -287,7 +275,9 @@ def on_key_release(self, key, modifiers):
 
 #### attention
 
-ceci est beaucoup plus facile à utiliser si le boid continue de tourner pendant **tout le temps où la touche est enfoncée** - plutôt que de devoir appuyer plein de fois sur la touche
+soyez sympa avec vos utilisateurs: ceci est beaucoup plus facile à utiliser si
+le boid continue de tourner pendant **tout le temps où la touche est enfoncée** - plutôt que
+de devoir appuyer plein de fois sur la touche&hellip;
 
 +++
 
@@ -299,14 +289,15 @@ vous trouverez une image `media/obstacle-resized.png` pour le matérialiser
 **2 options**
 
 * on pourrait facilement s'en sortir avec juste la classe `Sprite`
-* mais je vous demande, pour vous exercer à la spécialisation de classes, de créer une classe `Obstacle`
+* mais je vous demande, pour vous exercer à la spécialisation de classes, de
+  créer une classe `Obstacle`
 
 +++
 
 ### v08: créez une grille d'obstacles
 
 remplacez l'unique obstacle par une grille d'obstacles  
-mettez en 10 x 10, ils sont donc espacés de 80px
+par exemple: mettez en 10 x 10, ils sont donc espacés de 80px
 
 +++
 
@@ -321,7 +312,7 @@ pour ma part j'ai rendu le boid semi-transparent, en jouant sur l'attribut `alph
 
 #### discussion
 
-ici on a le choix d'utiliser 
+ici on a le choix d'utiliser
 
 * soit une variable globale (la liste de tous les obstacles)
 * ou de rajouter dans la classe `Boid` une liste d'obstacles
@@ -366,7 +357,7 @@ on fait la somme de tous ces vecteurs, et on l'ajoute au déplacement de b
 i.e. dans l'exemple de la figure, lorsqu'on traite le boid en b:
 
 * on ignore les boids aux endroits en rouge
-* et on fait la somme des 3 vecteurs (en vert)
+* et pour les 3 boids proches (en vert) on fait la somme des 3 vecteurs de "repoussement" (en vert aussi)
 * qu'on ajoute naturellement au déplacement dû à la vitesse du boid
 
 #### à noter
@@ -375,27 +366,32 @@ dans cette version, en cas de collision, on se contente de modifier la position 
 
 +++
 
-### v11: on essaie d'orienter correctement
+### v11: orienter correctement
 
-dans cette version, on va essayer de répercuter les collisions sur l'orientation du boid  
-et pour ça on va mettre à jour brutalement l'attribut `angle` uniquement sur le mouvement qui est fait à l'instant t  
-i.e, pour être clair, que si on passe de (x1, y1) à (x2, y2), on oriente le boid pour s'aligner sur le vecteur (x2-x1, y2-y1)  
-l'effet n'est pas forcément très réussi, vous devez voir l'orientation sauter brutalement d'un angle  un autre
+* dans cette version, on va essayer de répercuter les collisions sur l'orientation du boid
+* et pour ça on va mettre à jour brutalement l'attribut `angle`  
+* à ce stade, on se base uniquement sur le mouvement qui est fait à l'instant t:  
+* pour être explicite, si on passe de *(x1, y1)* à *(x2, y2)*, on oriente
+  le boid pour s'aligner sur le vecteur *(x2-x1, y2-y1)*
 
-**à savoir**  
+l'effet n'est pas forcément très réussi, vous devez voir l'orientation sauter brutalement d'un angle à un autre
+
+#### à savoir**
+
 voyez la fonction `math.atan2` qui est pratique ici
 
 +++
 
-### v12: on lisse les changements d'orientation
+### v12: tourner plus doucement
 
-comment pourrait-on obtenir quelque chose d'un peu plus élégant, en ce qui concerne les changements de direction ?
+pour lisser les changements d'orientation: comment pourrait-on obtenir quelque
+chose d'un peu plus élégant, en ce qui concerne les changements de direction ?
 
 +++
 
 ### v13: les touches `↑` et `↓`
 
-faire en sorte qu'on puisse contrôler aussi la vitesse avec les touches  
+faire en sorte qu'on puisse contrôler aussi la vitesse avec les touches `↑` et `↓`  
 essayez le comportement de l'évitement d'obstacles à plusieurs vitesses
 
 +++
@@ -403,11 +399,11 @@ essayez le comportement de l'évitement d'obstacles à plusieurs vitesses
 ### v14: plusieurs boids
 
 remplacez l'unique boid par un ensemble de 20 boids  
-sans changer la séparation, qui est calculée seulement à partir des obstacles
+sans changer, pour l'instant, la séparation, qui est calculée seulement à partir des obstacles
 
 +++
 
-### v15: éviter les obstacles **et** les autres boids
+### v15: éviter aussi les autres boids
 
 assurez-vous que la séparation permet d'éviter tous les objets (obstacles et boids)
 
@@ -437,13 +433,16 @@ vous pouvez ensuite améliorer dans les directions suivantes :
 
 ## pour aller plus loin
 
-* pour plus de détails sur les boids, 
+* pour plus de détails sur les boids,
   voir [la page de Craig Reynolds](http://www.red3d.com/cwr/boids/),
-  l'auteur original, et [la page wikipedia](https://en.wikipedia.org/wiki/Boids)
+  l'auteur original
+* et [la page wikipedia](https://en.wikipedia.org/wiki/Boids)
+* je vous signale [un tutoriel intéressant sur la librairie arcade](https://realpython.com/arcade-python-game-framework/) assez long / exhaustif
+* enfin d'autres vidéos qui peuvent vous inspirer également (parmi $10^n$ autres) :
 
-* je vous signale un tutoriel intéressant sur la librairie arcade:  
-  https://realpython.com/arcade-python-game-framework/
-  
-* enfin d'autres vidéos qui peuvent vous inspirer également  
-  <https://www.youtube.com/watch?v=QbUPfMXXQIY>  
-  <https://www.youtube.com/watch?v=bqtqltqcQhw>
+  ::::{grid} 2
+  ```{iframe} https://www.youtube.com/embed/QbUPfMXXQIY?rel=0&amp;controls=1
+  ```
+  ```{iframe} https://www.youtube.com/embed/bqtqltqcQhw?rel=0&amp;controls=1
+  ```
+  ::::
