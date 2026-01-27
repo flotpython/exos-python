@@ -16,6 +16,7 @@ language_info:
 # multi-joueur avec redis
 
 ```{admonition} ATTENTION
+:class: danger
 
 l'installation de redis sur Windows est **complexe**  
 l'installation par conda n'installe **que la librairie Python**, et pas le serveur  
