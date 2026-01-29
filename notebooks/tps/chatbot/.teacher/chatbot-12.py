@@ -302,7 +302,8 @@ class ChatbotApp(ft.Column):
         #  will be populated later
         self.model = ft.Dropdown(
             # options=[],
-            width=300,
+            # width=300,
+            expand=True,
         )
         self.server = ft.Dropdown(
             options=[ft.dropdown.Option(server)
