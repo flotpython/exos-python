@@ -356,12 +356,19 @@ class ChatbotApp(ft.Column):
         if current_model in available_models:
             self.model.value = current_model
         else:
-            # xxx somehow the first model on GPU - all-minilm:22m-l6-v2-fp16
+            # pick a mistral model by default
+            for model in available_models:
+                if model.startswith("mistral-"):
+                    self.model.value = model
+                    break
+            # otherwise, pick the first model that not a 'all-...'
+            # this is a workaround because somehow the first model on GPU
+            # namely - all-minilm:22m-l6-v2-fp16
             # returns an error saying the model does not support generate
-            # so, as a workaround, find the first model that does not start with all-
-            self.model.value = next(
-                model for model in available_models if not model.startswith("all-")
-            )
+            else:
+                self.model.value = next(
+                    model for model in available_models if not model.startswith("all-")
+                )
         # a subtle point here: because we call update_models in the constructor,
         # and because at that time the app is not yet in the page
         # we cannot call update() in that circumstance()
