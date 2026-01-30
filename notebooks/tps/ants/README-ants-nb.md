@@ -8,13 +8,16 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
-language_info:
-  name: python
-  nbconvert_exporter: python
-  pygments_lexer: ipython3
 ---
 
 # ants: a genetic algorithm
+
++++
+
+```{admonition} grab the zip for starters
+
+{download}`you will need the zipfile that you can find here<./ARTEFACTS-ants.zip>`
+```
 
 +++
 
@@ -96,38 +99,38 @@ here we provide the results found by our own implementation; this in particular 
 
 also provided in the zip, you can use `problem.py` like so:
 
-```{code-cell} ipython3
+```{code-cell}
 from problem import Problem2D
 
 problem = Problem2D("data/video-06.csv")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # how many nodes
 len(problem)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # to iterate over nodes
 
 for node in problem:
     print(node)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # or rather
 
 for index, node in enumerate(problem):
     print(f"{index}-th node is {node}")
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # get distance between 2 nodes
 
 problem.distance(0, 2)
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # what it says
 
 problem.distance_along_path([0, 1, 2, 3, 0])
@@ -141,13 +144,13 @@ we've also coded some display featured for your convenience
 
 1st off, **provided that you have `graphviz` installed**
 
-```{code-cell} ipython3
+```{code-cell}
 # you can do display it with graphviz like this
 
 problem.to_graphviz()
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 # or this if you prefer
 
 problem.to_graphviz(show_distances=False)
@@ -157,14 +160,14 @@ problem.to_graphviz(show_distances=False)
 
 and there again, **provided that you have `plotly` installed** you could do
 
-```{code-cell} ipython3
+```{code-cell}
 import plotly.io as pio
 
 # Try one of these depending on your setup:
 pio.renderers.default = "notebook"     # for classic Jupyter Notebook
 ```
 
-```{code-cell} ipython3
+```{code-cell}
 problem.to_plotly()
 ```
 

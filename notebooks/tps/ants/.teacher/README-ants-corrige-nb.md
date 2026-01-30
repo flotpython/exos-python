@@ -24,7 +24,7 @@ language_info:
 there are no difference - apart from this very cell - between the teacher and the student version, but the notebook is duplicated in .teacher for consistency
 ````
 
-+++ {"tags": ["prune-cell"]}
++++ {"editable": true, "slideshow": {"slide_type": ""}}
 
 ```{admonition} grab the zip for starters
 
