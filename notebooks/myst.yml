@@ -21,6 +21,8 @@ project:
     - matplotlib
     - Jupyter
   date: 2026-01-19
+  jupyter:
+    lite: true
   # bibliography: []
 
 site:
