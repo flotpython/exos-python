@@ -278,7 +278,7 @@ ce code peut s'exécuter par exemple directement dans ipython
 import requests
 import json
 
-url = "http://ollama.pl.sophia.inria.fr:8080/api/generate"
+url = "https://ollama.pl.sophia.inria.fr/api/generate"
 
 # c'est expliqué dans la doc ollama: l'API /api/generate
 # s'attend à ce qu'on lui passe ces deux paramètres:

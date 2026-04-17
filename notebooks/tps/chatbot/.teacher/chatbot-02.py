@@ -19,7 +19,7 @@ SERVERS = {
     # but it does not require a login / password
     'CPU': {
         "name": "CPU slow",
-        "url": "http://ollama.pl.sophia.inria.fr:8080",
+        "url": "https://ollama.pl.sophia.inria.fr",
     },
 }
 
