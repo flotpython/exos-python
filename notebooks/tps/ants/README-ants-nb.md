@@ -60,7 +60,7 @@ so it is a **highly recommended** resource to get started with the details of th
 
 [I found this one helpful too, in a totally different style](https://perso.liris.cnrs.fr/christine.solnon/publications/cpaior.pdf)
 
-and there's plenty others around as well, google for 'ACO algorithm'
+and there's plenty others around as well, google for 'ACO algorithm' ...
 ```
 
 +++
