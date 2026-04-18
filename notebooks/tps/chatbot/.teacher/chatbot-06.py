@@ -6,24 +6,27 @@ as it needs to add only pieces of the answer to the last message
 """
 
 import json
+import os
 
+# reads GPU_USERNAME, GPU_PASSWORD, CPU_USERNAME, CPU_PASSWORD from .env
+from dotenv import load_dotenv
 import requests
 import flet as ft
 
+load_dotenv()
+
 SERVERS = {
-    # this one is fast because it has GPUs,
-    # but it requires a login / password
     'GPU': {
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
-        "username": "Bob",
-        "password": "hiccup",
+        "username": os.getenv("GPU_USERNAME"),
+        "password": os.getenv("GPU_PASSWORD"),
     },
-    # this one is slow because it has no GPUs,
-    # but it does not require a login / password
     'CPU': {
         "name": "CPU slow",
         "url": "https://ollama.pl.sophia.inria.fr",
+        "username": os.getenv("CPU_USERNAME"),
+        "password": os.getenv("CPU_PASSWORD"),
     },
 }
 

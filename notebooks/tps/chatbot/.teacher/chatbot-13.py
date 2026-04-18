@@ -5,11 +5,16 @@ between the title and the dialog
 """
 
 import json
+import os
 from datetime import datetime
 from typing import Iterator
 
+# reads GPU_USERNAME, GPU_PASSWORD, CPU_USERNAME, CPU_PASSWORD, LITELLM_KEY from .env
+from dotenv import load_dotenv
 import requests
 import flet as ft
+
+load_dotenv()
 
 # in this version we create servers as INSTANCES of CLASSES
 # so we can encapsulate the logic to interact with them
@@ -20,33 +25,28 @@ import flet as ft
 # we keep the idea of specifying our available servers as this dictionary
 # but below we'll use this to create actual server INSTANCES
 
-# provided-by-another-channel
-from litellm_key import KEY as LITE_LLM_KEY
-
 DEFAULT_SERVER = "CPU"
 
 SERVER_SPECS = {
-    # this one is fast because it has GPUs,
-    # but it requires a login / password
     'GPU': {
         "type": "ollama",
         "name": "GPU fast",
         "url": "https://ollama-sam.inria.fr",
-        "username": "Bob",
-        "password": "hiccup",
+        "username": os.getenv("GPU_USERNAME"),
+        "password": os.getenv("GPU_PASSWORD"),
     },
-    # this one is slow because it has no GPUs,
-    # but it does not require a login / password
     'CPU': {
         "type": "ollama",
         "name": "CPU slow",
         "url": "https://ollama.pl.sophia.inria.fr",
+        "username": os.getenv("CPU_USERNAME"),
+        "password": os.getenv("CPU_PASSWORD"),
     },
     'LiteLLM': {
         "type": "litellm",
         "name": "LiteLLM (GPUs)",
         "url": "https://litellm-sam.inria.fr",
-        "key": LITE_LLM_KEY,
+        "key": os.getenv("LITELLM_KEY"),
     }
 }
 
@@ -172,7 +172,7 @@ class LitellmServer(Server):
     def _authenticate_headers(self) -> dict:
         if not self.key:
             return {}
-        return dict(headers={"X-API-KEY": LITE_LLM_KEY})
+        return dict(headers={"X-API-KEY": self.key})
 
     def list_model_names(self):
         url = f"{self.url}/models"
@@ -365,7 +365,9 @@ class ChatbotApp(ft.Column):
         # go fetch the relevant models for the selected server
         # as explained below, at this point we are not yet in the page
         # so we cannot yet call update() at this point
-        self.update_models(update=False)
+        # this is harmful when the default server is down or unreachable
+        # so let's turn off this auto-connect line
+        # self.update_models(update=False)
 
     def show_message(self, message):
         """display a message in the message area"""

@@ -7,12 +7,6 @@ kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
   name: python3
-language_info:
-  name: python
-  nbconvert_exporter: python
-  pygments_lexer: ipython3
-nbhosting:
-  title: 'TP: un chatbot'
 ---
 
 # TP - un chatbot avec `flet`
@@ -39,7 +33,7 @@ on met à votre disposition **deux serveurs** `ollama`:
 - chacun des deux sait mettre en oeuvre plusieurs modèles d'IA (notamment `mistral`, mais pas que...)
 - l'un des deux ne possède qu'un CPU; du coup il est relativement lent mais on peut y accéder sans login/password
 - par contre l'autre possède un GPU, il est plus rapide pour notre application, mais le code pour s'en servir est un peu plus compliqué car il faut lui fournir un login/password
-- les détails de ces deux serveurs sont dans le *starter code*
+- les détails de ces deux serveurs sont dans le *starter code* (à part les login/password qui vous seront communiqués par un autre moyen)
 
 - pour les utiliser, essentiellement on `POST` une requête http au serveur avec le chemin
   `/api/generate`
@@ -57,7 +51,7 @@ ce qu'on veut faire, c'est fabriquer une UI sommaire qui permet
 - de choisir le serveur,
 - de choisir le modèle,
 - et de poser ensuite des questions comme avec chatGPT
-- enfin sur cette implémentation on a également un bouton qui permet d'enabler le *streaming*
+- enfin sur cette implémentation on a également un bouton qui permet d'enabler le *streaming*  
   l'idée consiste à afficher les résultats "au fur et à mesure" plutôt qu'en une seule fois à la fin de l'échange avec le serveur, on en reparlera...
 
 
